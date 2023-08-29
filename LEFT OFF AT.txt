@@ -1,0 +1,8 @@
+Front-End 
+    *Add/Adjust the Contents for the Single Locations Page
+    *Style the Single Location Page to be similar with the single Job Application Page
+
+Back-End
+    *
+
+DataBase 
