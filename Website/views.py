@@ -1,0 +1,380 @@
+# Necessary Website creation Libraries
+from turtle import setundobuffer
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, FileResponse
+from django.shortcuts import render, redirect
+from django.core.paginator import Paginator    
+from django.contrib import messages
+from django.contrib.auth.models import User
+
+# For PDF support
+import csv, io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
+# Connecting from other code files in same Django project
+from .models import *
+from .forms import *
+
+def HomePage(request):
+    Images = Pictures.objects.all()
+    
+    return render(request, "Home_Page.html", {
+        "Images": Images
+    })
+
+def AboutUsPage(request):
+    return render(request, "About_Us_Page.html", {
+        
+    })
+
+def LocationsPage(request):
+    Location = StoreLocations.objects.all().order_by('?')
+    return render(request, "Locations_Index_Page.html", {
+        "Locations": Location
+    })
+
+
+def ShowLocation(request, Location_ID):
+    Location = StoreLocations.objects.get(pk=Location_ID)
+    return render(request, "Locations_Closer_View_Page.html", {
+        "Location": Location,
+        })
+
+
+def UpdateLocation(request, Location_ID):
+    Location = StoreLocations.objects.get(pk=Location_ID)
+    Form = LocationForm(request.POST or None, instance=Location)
+    if Form.is_valid():
+        Form.save()
+        return redirect('LocationPages')
+    
+    return render(request, "Admin_Update_Location_Page.html", {
+        "Location": Location,
+        "LocationForm": Form
+        })
+
+
+def DeleteLocation(request, Location_ID):
+    Location = StoreLocations.objects.get(pk=Location_ID)
+    Location.delete()
+    messages.success(request, 'Location deleted successfully!')
+    return redirect('LocationPages')
+
+def LocationsPDF(request):
+    # Generating a Bytesteam Buffer
+    Buf = io.BytesIO()
+    
+    # Creating a Canvas with the Buf var
+    Canvas = canvas.Canvas(Buf, pagesize=letter, bottomup=0)
+    
+    # Assigning the Beginning of the Canvas Variable to another Variable
+    TextObject = Canvas.beginText()
+    TextObject.setTextOrigin(inch, inch)
+    TextObject.setFont("Helvetica", 14)
+    
+    Locations = StoreLocations.objects.all()
+    
+    lines = []
+    
+    # Adding all the Product Model data into an empty list
+    for Location in Locations:
+        lines.append(str(Location.Street))
+        lines.append(f"{Location.City}, {Location.State} {Location.Zip}")
+        lines.append(f"Phone: {Location.Phone}")
+        lines.append(f"Opens @ {Location.Opens} am")
+        lines.append(f"Closes @ {Location.Closes} pm")
+        lines.append(f"")
+        
+    # Writing all the Data in the lines list onto the PDF canvas
+    for line in lines:
+        TextObject.textLine(line)
+    
+    # Drawing, showing, and Saving the Final PDF document
+    Canvas.drawText(TextObject)
+    Canvas.showPage()
+    Canvas.save()
+    Buf.seek(0)
+    
+    #Returning a FileResponse of the data filled PDF document
+    return FileResponse(Buf, as_attachment=True, filename="Locations.pdf")
+
+
+def ProductsPage(request):
+    # Creating Pagination for 12 products per page
+    Paginate = Paginator(StoreProducts.objects.all().order_by('Brand'), 12)
+    Page = request.GET.get("page")
+    Products = Paginate.get_page(Page)
+    
+    Numbers = "h" * Products.paginator.num_pages
+    
+    return render(request, "Product_Menu_Page.html", {
+        "PaginatedProducts": Products,
+        "Numbers": Numbers
+    })
+
+
+def ShowProduct(request, Product_ID):
+    SingleProduct = StoreProducts.objects.get(pk=Product_ID)
+    return render(request, "Product_Closer_View_Page.html", {
+        "SingleProduct": SingleProduct,
+        })
+    
+def ProductAddPage(request):
+    Product = StoreProducts.objects.all()
+    
+    # Logic for PROMO Pricing Calculation
+    # MLG360_Promo = StoreProducts.objects.get("Price")
+    
+    submitted = False
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            Product = form.save(commit=False)
+            Product.save()
+            messages.success(request, f'{Product.Name} Successfully Added!')
+            return redirect('ProductsPage')
+        
+        else:
+            form = ProductForm
+            if 'submitted' in request.GET:
+                submitted = True
+                
+    form = ProductForm
+    return render(request, "Admin_Product_Add_Page.html", 
+                {'ProductForm': form, 
+                'submitted': submitted,
+                })
+
+
+def UpdateProduct(request, Product_ID):
+    Product = StoreProducts.objects.get(pk=Product_ID)
+    Form = ProductForm(request.POST or None, request.FILES or None, instance=Product)
+    if Form.is_valid():
+        Form.save()
+        messages.success(request, f'{Product.Name} Updated successfully!')
+        return redirect('ProductsPage')
+    
+    return render(request, "Admin_Product_Update_Page.html", {
+        "Product": Product,
+        "ProductForm": Form
+        })
+
+def DeleteProduct(request, Product_ID):
+    Product = StoreProducts.objects.get(pk=Product_ID)
+    Product.delete()
+    messages.success(request, f'{Product.Name} Deleted Successfully!')
+    return redirect('ProductsPage')
+
+
+def ProductSearchPage(request):
+    #Product_Brand = StoreProducts.objects.query("Brand")
+    Product = StoreProducts.objects.all()
+    if request.method == "POST":
+        Searched = request.POST['Searched']
+        SearchedProducts = StoreProducts.objects.filter(Name__contains = Searched)
+        SearchedBrands = StoreProducts.objects.filter(Brand__contains = Searched)
+        return render(request, "Product_Search_Result.html", {
+            'Searched': Searched,
+            'SearchProducts': SearchedProducts,
+            'SearchedBrands': SearchedBrands,
+            'Product': Product,
+            })
+    else:
+        return render(request, "Product_Search_Result.html", {
+            'Product': Product,
+            })
+
+
+def SingleProduct(request, ProductKey):
+    Product_ID = StoreProducts.objects.get(pk=ProductKey)
+    return render(request, "0SingleProductPage.html", {"OneProduct": Product_ID})
+
+
+def ShoppingCart(request):
+    if request.user.is_authenticated:
+        User = request.user.id
+        # User_Products = StoreProducts.objects.filter(User)
+        return render(request, "Shopping_Cart_Page.html", {
+            "User": User,
+            })
+    else:
+        messages.success(request, f"You Must Have an Account To Access the Shopping Cart")
+        return render(request, "Home_Page.html", {
+            
+        })
+    
+    
+def Services_TechConsultation(request):
+    Testimonials = CustomerTestimonials.objects.all()
+    
+    return render(request, "Services_Tech_Consultation_Page.html", {
+        "Testi": Testimonials
+    })
+    
+def Services_Careers(request):
+    Jobs = Employment.objects.all().order_by("Title")
+    
+    return render(request, "Services_Careers_Page.html", {
+        "Jobs": Jobs
+    })
+    
+def Services_Careers_Applying(request, Job_ID):
+    Job = Employment.objects.get(pk=Job_ID)
+    
+    submitted = False
+    if request.method == "POST":
+        form = JobApplicatioNSubmissions(request.POST, request.FILES)
+        if form.is_valid():
+            Product = form.save(commit=False)
+            Product.save()
+            messages.success(request, f'You Have Successfully Submitted Your Application for the {Job.Title} Position!')
+            return (redirect("Careers"))
+        
+        else:
+            form = JobApplicatioNSubmissions
+            if 'submitted' in request.GET:
+                submitted = True
+                
+    form = JobApplicatioNSubmissions
+    
+    return render(request, "Services_Careers_User_Apply.html", 
+                {
+                "Job": Job,
+                'Form': form, 
+                'submitted': submitted,
+                })
+
+    
+def Services_Laboratory(request):
+    return render(request, "Services_Laboratory_Page.html", {
+        
+    })
+    
+def Services_TechSupport(request):
+    FAQs = FAQ.objects.all()
+
+    submitted = False
+    if request.method == "POST":
+        form = CustomerSubmissions(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('TechSupport?submitted=True')
+        
+    else:
+        form = CustomerSubmissions
+        if 'submitted' in request.GET:
+            submitted = True
+            
+    form = CustomerSubmissions
+    
+    return render(request, "Services_Tech_Support_Page.html", {
+        "FAQ" : FAQs,
+        'Form': form,
+        "submitted" : submitted
+        
+    })
+
+def AdminDashECommerce(request):
+    PromoCodes = CouponDiscount.objects.all()
+    ProductCount = StoreProducts.objects.all().count()
+    
+    Paginate = Paginator(StoreProducts.objects.all().order_by('Brand'), 21)
+    Page = request.GET.get("page")
+    Products = Paginate.get_page(Page)
+
+    Numbers = "h" * Products.paginator.num_pages
+    
+    return render(request, "Admin_Dashboard_ECommerce_Page.html", {
+        "PaginatedProducts": Products,
+        "Numbers": Numbers,
+        "Promo": PromoCodes,
+        "ProductCount": ProductCount
+    })
+    
+def AdminDashRetailStores(request):
+    Stores = StoreLocations.objects.all()
+    StoreCount = StoreLocations.objects.all().count()
+
+    return render(request, "Admin_Dashboard_Retail_Stores_Page.html", {
+        "Store": Stores,
+        "StoreCount": StoreCount
+    })
+    
+def AdminDashCustomerSupport(request):
+    CustomerTicketData = CustomerSupportTickets.objects.all()
+    
+    return render(request, "Admin_Dashboard_Customer_Support_Page.html", {
+        "CSR": CustomerTicketData
+    })
+
+
+
+def CustomerTechSupport(request):
+    Inquery = CustomerSupportTickets.objects.all()
+    
+    return render(request, "Admin_Tech_Support_Tickets_Page.html", {
+        "Inquery": Inquery
+    })
+    
+    
+def CustomerReviewFormPage(request):
+    submitted = False
+    if request.method == "POST":
+        form = ShoppingReview(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('ReviewForm?submitted=True')
+    else:
+        form = ShoppingReview
+        if 'submitted' in request.GET:
+            submitted = True
+
+    form = ShoppingReview
+    Reviews = CustomerReviews.objects.all()
+    
+    return render(request, "Shopping_Review_Input_Page.html", 
+                    {'form': form, 
+                    'submitted': submitted,
+                    'CustomerReviews': Reviews })
+
+
+def ReportsPage(request):
+    return render(request, "Admin_Website_Reports_Page.html", {})
+
+
+def ProductText(response):
+    # Initializing the response Variable for a .TXT file
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=EveryProduct.txt'
+    
+    Products = StoreProducts.objects.all()
+
+    lines = []
+    
+    # Pulling the Data from Models file to append each part of data onto the empty array above
+    for Product in Products:
+        lines.append(f'{Product.Name}\n{Product.Price}\n{Product.Stock}\n{Product.Description}\n{Product.Coupon}\n\n')
+
+    # Writting the orgainzed data onto the lines array
+    response.writelines(lines)
+    return response
+
+
+def ProductCSV(response):
+    # Initializing the response Variable for a .CSV file
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=EveryProduct.csv'
+    
+    Products = StoreProducts.objects.all()
+
+    # Creating a CSV Writer
+    writer = csv.writer(response)
+    
+    # Instructing the Writer on what to write for each row
+    writer.writerow(['Product Name', 'Selling Price', 'Total Stock', 'Product Description', 'Image URL Link', 'Applicable Coupon'])
+
+    # Pulling the Data from Models file to write each part in the writerow method
+    for Product in Products:
+        writer.writerow([Product.Name, Product.Price, Product.Stock, Product.Description, Product.Coupon])
+    return response
