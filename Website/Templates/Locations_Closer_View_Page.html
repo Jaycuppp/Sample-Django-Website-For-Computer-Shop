@@ -21,21 +21,21 @@
         <main>
             <div class="card" id="Single_Location_Card">
                 <img src="{{ Location.Store_Image }}" class="card-img-top" alt="...">
-                    <div class="card-body"> 
-                        <h3 class="card-title" id="Loc_Card_Title"> Quansh Tech {{ Location }} </h3> <br>
-                        <p class="card-text" id="Address"> Address: </p>
-                        <p class="card-text" id="Entire_Address"> {{ Location.Street }} <br> {{ Location.City }} {{ Location.State }} {{ Location.Zip }} </p>
-                    </div>
-{% comment %} 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                </ul> {% endcomment %}
-
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                <div class="card-body"> 
+                    <h3 class="card-title" id="Single_Location_Title"> Quansh Tech {{ Location }} </h3> <br>
+                    <p class="card-text"> <h5> &#127970 <span id="Store_Address"> Store Address <span> </h5> </p>
+                    <p class="card-text" id="Entire_Address"> {{ Location.Street }} <br> {{ Location.City_State_Zip}} </p>
+                    <p class="card-text" id="Phone_Number"> &#128222 &#8658 <a href="tel:{{ Location.Phone }}"> <strong> {{ Location.Phone }} </strong> </a> </p>
+                    <p class="card-text">  <h5> &#128340 <span id="Business_Hours"> Business Hours: </span> </h5> </p>
+                    <ul id="Business_Hours_List">
+                        <li id="Open_And_Close_Times"> <span id="Day"> Mon &#8658 </span> {{Location.Opens}} to {{Location.Closes}} </li>
+                        <li id="Open_And_Close_Times"> <span id="Day"> Tues &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
+                        <li id="Open_And_Close_Times"> <span id="Day"> Wed &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
+                        <li id="Open_And_Close_Times"> <span id="Day"> Thur &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
+                        <li id="Open_And_Close_Times"> <span id="Day"> Fri &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
+                        <li id="Open_And_Close_Times"> <span id="Day"> Sat &#8658 </span> <strong> CLOSED </strong> </li>
+                        <li id="Open_And_Close_Times"> <span id="Day"> Sun &#8658 </span> <strong> CLOSED </strong>  </li>
+                    <ul>
                 </div>
             </div>
 

@@ -366,9 +366,55 @@ th{
     height: 40px;
 }
 
+/* #More_Details_Button{
+    color: #f09c2e;
+    background-color: #1a6a83;
+}
+
+#Update_Location_Button{
+    color: #d3f02e;
+    background-color: #881d1d;
+} */
+
 /* Single Location Page */
 #Single_Location_Card{
-    
+    margin-left: 20%;
+    margin-right: 25%;
+}
+
+#Single_Location_Title{
+    color: #a73a98;
+}
+
+#Store_Address, #Business_Hours{
+    color: #530a0a;
+    font-weight: 700;
+}
+
+#Entire_Address{
+    color: #110f11;
+}
+
+#Entire_Address{
+    padding-left: 32px;
+    margin-bottom: 45px;
+}
+
+#Phone_Number{
+    margin-bottom: 45px;
+}
+
+#Business_Hours_List {
+    list-style: none;
+}
+
+#Day {
+    color: #CC313D;
+    font-weight: 700;
+}
+
+#Open_And_Close_Times{
+    color: #1e6d5c;
 }
 
 /* Customer Reviews Page */

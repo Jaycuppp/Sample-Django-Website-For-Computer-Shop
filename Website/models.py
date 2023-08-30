@@ -71,8 +71,8 @@ class StoreLocations(models.Model):
     Store_Manager = models.ForeignKey(StoreManager, null=True, blank=True, on_delete=models.CASCADE)
     
     @property
-    def Entire_Location(self):
-        return f"{self.Street} {self.City}, {self.State} {self.Zip}"
+    def City_State_Zip(self):
+        return f"{self.City}, {self.State} {self.Zip}"
 
     def __str__(self):
         return self.City + " Location"
