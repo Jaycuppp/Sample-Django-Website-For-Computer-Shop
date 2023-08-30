@@ -9,20 +9,14 @@ from django.forms import CharField
 def ImageResize(Height, Width):
     return 0
 
-class Pictures(models.Model):
-    Name = models.CharField("Name of the Image Being Used", max_length=255)
-    Image = models.ImageField("Picture For Slide Show", blank=True, upload_to="images")
-    
-    def __str__(self):
-        return self.Name
 
 class CouponDiscount(models.Model):
     CouponName = models.CharField("Coupon Code", max_length=69)
     Description = models.TextField("Coupon Description", null=True, blank=True, max_length=500)
     StartDate = models.DateTimeField("Start Date", null=True, blank=True)
     EndDate = models.DateTimeField("End Date", null=True, blank=True)
-    Discount = models.FloatField("Discount Amount")
-    Promo_Code_Image = models.ManyToManyField(Pictures, blank=True)
+    Discount = models.FloatField("Discount Amount", blank=True)
+    Promo_Code_Image = models.ImageField("Promo Code Picture", null=True, blank=True, upload_to='images')
 
     def __str__(self):
         return self.CouponName
@@ -73,7 +67,7 @@ class StoreLocations(models.Model):
     Phone = models.CharField("Location Phone Number", max_length=20)
     Opens = models.TimeField("Opening Time")
     Closes = models.TimeField("Closing Time")
-    Store_Image = models.ForeignKey(Pictures, null=True, blank=True, on_delete=models.CASCADE)
+    Store_Image = models.ImageField("Picture of the Computer Store", null=True, blank=True, upload_to='images')
     Store_Manager = models.ForeignKey(StoreManager, null=True, blank=True, on_delete=models.CASCADE)
     
     @property

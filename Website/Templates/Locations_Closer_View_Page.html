@@ -20,17 +20,18 @@
 
         <main>
             <div class="card" id="Single_Location_Card">
-                <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <img src="{{ Location.Store_Image }}" class="card-img-top" alt="...">
+                    <div class="card-body"> 
+                        <h3 class="card-title" id="Loc_Card_Title"> Quansh Tech {{ Location }} </h3> <br>
+                        <p class="card-text" id="Address"> Address: </p>
+                        <p class="card-text" id="Entire_Address"> {{ Location.Street }} <br> {{ Location.City }} {{ Location.State }} {{ Location.Zip }} </p>
                     </div>
-
+{% comment %} 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">An item</li>
                     <li class="list-group-item">A second item</li>
                     <li class="list-group-item">A third item</li>
-                </ul>
+                </ul> {% endcomment %}
 
                 <div class="card-body">
                     <a href="#" class="card-link">Card link</a>

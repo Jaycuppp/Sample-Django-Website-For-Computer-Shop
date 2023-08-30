@@ -17,10 +17,7 @@ from .models import *
 from .forms import *
 
 def HomePage(request):
-    Images = Pictures.objects.all()
-    
     return render(request, "Home_Page.html", {
-        "Images": Images
     })
 
 def AboutUsPage(request):
@@ -38,7 +35,7 @@ def LocationsPage(request):
 def ShowLocation(request, Location_ID):
     Location = StoreLocations.objects.get(pk=Location_ID)
     return render(request, "Locations_Closer_View_Page.html", {
-        "Location": Location,
+        "Location": Location
         })
 
 
