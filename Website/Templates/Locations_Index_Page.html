@@ -30,9 +30,6 @@
             <li class="list-group-item"> {{location}} </li>
             <span>
               <a href="{% url 'ShowLocationPage' location.id %}" class="btn btn-primary" id="More_Details_Button"> For More Details </a>
-              {% if user.is_authenticated %}
-              <a href="{% url 'UpdateLocation' location.id %}" class="btn btn-warning" id="Update_Location_Button"> Update Location </a>  
-              {% endif %}
             </span>
         </div>
         {% endfor %}

@@ -361,7 +361,7 @@ th{
     margin-top: 5%;
 }
 
-#More_Details_Button ,#Update_Location_Button{
+#More_Details_Button {
     margin-top: 2%;
     height: 40px;
 }
@@ -377,6 +377,10 @@ th{
 } */
 
 /* Single Location Page */
+#Update_Location_Button{
+    margin-left: 20%;
+}
+
 #Single_Location_Card{
     margin-left: 20%;
     margin-right: 25%;

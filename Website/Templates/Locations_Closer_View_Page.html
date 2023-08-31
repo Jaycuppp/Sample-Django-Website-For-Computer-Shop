@@ -19,6 +19,13 @@
         </header>
 
         <main>
+            
+            {% if user.is_authenticated %}
+            <span id="Update_Location_Button"> <a href="{% url 'UpdateLocation' Location.id %}" class="btn btn-warning"> Update Location </a> </span>
+            {% else %}
+
+            {% endif %}
+
             <div class="card" id="Single_Location_Card">
                 <img src="{{ Location.Store_Image }}" class="card-img-top" alt="...">
                 <div class="card-body"> 
@@ -38,7 +45,6 @@
                     <ul>
                 </div>
             </div>
-
         </main>
 
         <footer> 
