@@ -16,6 +16,7 @@ AddOns
 	*DataSets for both the FAQ Questions and for the Tech Mentorship Job Positions/Openings
 	*NEW Webpage Just for Admin Store Locations DashBoard
 	*NEW Webpage For Customer Account Management DashBoard / Page
+	*Create an HR WebPage for Peopl Who Applied to certain job(s)
 	
 Data:
 	*Product Data
