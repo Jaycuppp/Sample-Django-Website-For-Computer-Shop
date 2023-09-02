@@ -54,7 +54,7 @@ class AdminCustomerTestimonials(admin.ModelAdmin):
     
 @admin.register(ReusableData)
 class AdminConstEmploymentData(admin.ModelAdmin):
-    fields = ('Title', 'EEOS', 'Benefits')
+    fields = ('Title', 'EEOS', 'FirstBenefit', 'SecondtBenefit', 'ThirdBenefit')
     list_display = ('Title',)
     
 @admin.register(Key_Respons)

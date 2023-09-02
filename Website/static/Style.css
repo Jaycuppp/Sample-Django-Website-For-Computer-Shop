@@ -552,3 +552,24 @@ th{
 #Customer_Ticket {
     margin-top: 3%;
 }
+
+/* Human Resources Web Page HR Personal & Admins Only */
+#Stats_HR {
+    display: inline-flex;
+}
+
+#Job_Open_Title, #Quansh_Staff_Title{
+    text-align: center;
+    color: #c57812;
+}
+
+#HR_Stats_Data{
+    color: #8d1f37;
+    background-color: #cdceae;
+}
+
+#Job_Applicant_Table, #Staff_Table {
+    width: 500px;
+    margin-right: 10%;
+    margin-left: 7%
+}

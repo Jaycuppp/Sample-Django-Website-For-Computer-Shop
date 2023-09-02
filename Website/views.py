@@ -304,6 +304,17 @@ def AdminDashCustomerSupport(request):
     return render(request, "Admin_Dashboard_Customer_Support_Page.html", {
         "CSR": CustomerTicketData
     })
+    
+def AdminHumanResources(request):
+    Jobs = Employment.objects.all()
+    Human_Resources = JobApplications.objects.all()
+    Staff_Members = CurrentEmployees.objects.all()
+    
+    return render(request, "Admin_Dashboard_HR_Page.html", {
+        "HR" : Human_Resources,
+        "Jobs" : Jobs,
+        "Staff" : Staff_Members
+    })
 
 
 

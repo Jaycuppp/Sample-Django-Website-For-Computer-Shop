@@ -75,11 +75,12 @@
                         <br> <br>
 
                         {% if user.is_authenticated %}
-                        <a href="{% url 'UpdateProduct' product.id %}" class="btn btn-warning" id="Update_Button"> Update </a>
+                        <a href="{% url 'UdateProduct' product.id %}" class="btn btn-warning" id="Update_Button"> Update </a>
                           {% if user.username == 'admin' %}
                           <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger" id="Delete_Button"> Delete </a> 
                           {% endif %}
                         {% endif %} 
+                        
                       </div>
                     </div>
                   </div>
