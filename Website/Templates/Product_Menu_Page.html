@@ -15,7 +15,7 @@
 
     </header>
       <h1 id="Quansh_Tech_Products"> Quansh Tech Products </h1>
-      {% include "Navbar.html"%} <br> 
+      {% include "Navbar.html"%} <br>
     <header>
 
     <main>
@@ -37,16 +37,16 @@
               <div class="row">
                   {% for product in PaginatedProducts %}
                   <div class="col">
-                    <div class="card" style="width: 18rem;" id="Product_Card">
+                    <div class="card" id="All_Product_Card">
                       <div class="card-body">
-                        <img class="card-img-top" id="Product_Image" src="{{ product.Picture }}" alt=""> <br> <br>
-                        <h5 class="card-title" id="Product_Name_And_Brand"> {{product.Brand}} {{ product.Name }}</h5>
-                        <p class="card-text" id="Product_Description"> {{ product.Description}} </p>
+                        <a href="{% url 'ShowProductPage' product.id %}">  <img class="card-img-top" id="Product_Image" src="{{ product.Picture }}" alt=""> </a> <br> <br>
+                        <a href="{% url 'ShowProductPage' product.id %}"> <h5 class="card-title" id="Product_Name_And_Brand"> {{product.Brand}} {{ product.Name }}</h5> </a>
+                        {% comment %} <p class="card-text" id="Product_Description"> {{ product.Description}} </p> {% endcomment %}
 
                         {% comment %} Missing the Promo Calculation Logic for the HTML Page {% endcomment %}
                         {% if product.CouponName == "MLG360"%}
                         <p class="card-text" id="Product_Price"> <strong> Price: </strong> ${{ product.Promo_Product }} </p>
-                        
+
                         {% elif product.CouponName == "MKBundle"%}
                         <p class="card-text" id="Product_Price"> <strong> Price: </strong> ${{ product.Promo_Product }} </p>
 
@@ -70,17 +70,17 @@
 
                         {% endif %}
 
-                        <a href="{% url 'ShowProductPage' product.id %}" class="btn btn-info" id="Save_Item_Button"> View Item </a>
-                        <a href="ShoppingCart" class="btn btn-success" id="Add_To_Cart_Button"> Add to cart </a> 
+                        <a href="{% url 'ShowProductPage' product.id %}" class="btn btn-info" id="View_Item_Button"> View Item </a>
+                        <a href="ShoppingCart" class="btn btn-success" id="Add_To_Cart_Button"> Add to cart </a>
                         <br> <br>
 
                         {% if user.is_authenticated %}
-                        <a href="{% url 'UdateProduct' product.id %}" class="btn btn-warning" id="Update_Button"> Update </a>
+                        <a href="{% url 'UpdateProduct' product.id %}" class="btn btn-warning" id="Update_Button"> Update </a>
                           {% if user.username == 'admin' %}
-                          <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger" id="Delete_Button"> Delete </a> 
+                          <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger" id="Delete_Button"> Delete </a>
                           {% endif %}
-                        {% endif %} 
-                        
+                        {% endif %}
+
                       </div>
                     </div>
                   </div>

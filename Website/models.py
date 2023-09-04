@@ -143,9 +143,9 @@ class FAQ(models.Model):
 class ReusableData(models.Model):
     Title = models.CharField("Purpose of Data", max_length=255, blank=True, null=True)
     EEOS = models.TextField("Equal Employment Opportunity Statement", blank=True, null=True)
-    First_Benefit = models.TextField("Job Benefits", blank=True, null=True)
-    Second_Benefit = models.TextField("Job Benefits", blank=True, null=True)
-    Third_Benefit = models.TextField("Job Benefits", blank=True, null=True)
+    First_Benefit = models.TextField("Job Benefits # 1", blank=True, null=True)
+    Second_Benefit = models.TextField("Job Benefits # 2", blank=True, null=True)
+    Third_Benefit = models.TextField("Job Benefits # 3", blank=True, null=True)
     
     def __str__(self):
         return self.Title

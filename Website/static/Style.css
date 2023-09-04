@@ -107,11 +107,20 @@ th{
     text-align: center;
 }
 
+#All_Product_Card{
+    width: 300px;
+}
+
+#Product_Image{
+    
+}
+
 #Product_Name_And_Brand{
     color: #2645f1;
 }
 
 #Product_Description {
+    font-size: small;
     color: #756565;
 }
 
