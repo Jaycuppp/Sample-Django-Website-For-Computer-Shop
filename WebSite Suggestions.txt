@@ -5,11 +5,11 @@ BUGS
 
 	*On Single Product View Page
 		*The Static IMG Files are not being properly referenced due to either
-		*wrong Djnja code or not adding an additional dunder method in the 
+		*wrong Djnja code or not adding an additional dunder method in the
 		*models.py file for the Product.Picture DB Attrib
 
 	*When selecting only 1 FAQ from the accordion, all of the other FAQs open & collapse
-	
+
 AddOns
 	*An Online Pre-Ordering Page for Products that are Currently Out of Stock
 	*Make a Product DropDown with Different Product Categories
@@ -17,45 +17,45 @@ AddOns
 	*NEW Webpage Just for Admin Store Locations DashBoard
 	*NEW Webpage For Customer Account Management DashBoard / Page
 	*Create an HR WebPage for Peopl Who Applied to certain job(s)
-	
+
 Data:
 	*Product Data
 		*Add the add the Correct PROMO PRICING Data Row onto the applicable SKUs
 
     *Current Employees
-		*Add Random Data for the Current Employees & the Emergency Contact Data Tables  
+		*Add Random Data for the Current Employees & the Emergency Contact Data Tables
 
     *Add a ReUsable Data Table
-	
+
 	*Job Applications
-		*Add Paid Internships & Mentorships for the relevant positions that Quansh Tech can offer 
+		*Add Paid Internships & Mentorships for the relevant positions that Quansh Tech can offer
 
 	*FAQs
 		*Add an Answer for each FAQ
 
-	*(Later On) Online Customer Accounts 
+	*(Later On) Online Customer Accounts
 		*Add an Online Customers Data Table
 
 
-Back End Logic 
+Back End Logic
 	*Logic for Promo Calculation when item is under Promotion
 	*Develop a Shopping Cart feature as well as Customer Appended Items on a Cart
 	*Add a Column of an incremented COUNTER for All Customer Reviews
 	*Make the FAQs forloop only open and collapse the 1 selected row
-	*Implement all the Logic to display all relevant Dynamic Data Customers Dashboard Web Page 
+	*Implement all the Logic to display all relevant Dynamic Data Customers Dashboard Web Page
 	*Correctly Display the Dynamic Pictures Data on the HomePage SlideShow Carousel
 
-	
+
 
 Front End Logic
 	All Web Pages
-		*{% Include 'Footer.HTML' %} with each having a button that goes on top page of that 
+		*{% Include 'Footer.HTML' %} with each having a button that goes on top page of that
 		specific Web Page instead of going back to the Home Page
 		* Figure out a Way to Make the Website Look the Same with Smaller/Bigger Scale Resolutions
 
 	NavBar
 
-	Home Page 
+	Home Page
 		*Add more html elements on the HomePage
 
 	About Us Page
@@ -72,7 +72,7 @@ Front End Logic
 		*Add Bigger Margins/Padding For Each Individual Product Card
 
 		*Have A Dropdown Option to display more Products Per Page
-		
+
 		*Make All The Images Have The Same Height and Width Dimensions
 
 		*Recreate and Implement the Same Product EOL / Out of Stock Logic but for JS file
@@ -80,7 +80,7 @@ Front End Logic
 	Individual Product Page
 		*Make the Card Bigger and Center it
 		*Fill in the WhiteSpace with Marketing Elements?
-				
+
 	Account Registration Page
 		*Upgrade the Styling
 
@@ -92,7 +92,7 @@ Front End Logic
 	Tech Support Page
 		*(Optional) Add Advertisements to the left and right whitespaces
 		*Make each Carousel row only have 1 open and 1 close
-		
+
 	Lab Page
 		*Explanation of the Lab
 		*Logic for customers to create a hypothetical computer build with accessories
@@ -100,24 +100,24 @@ Front End Logic
 	Careers Page
 		*Job Posting with Salary or Hourly Wage
 		*Same EOS, Job Contact Email/Phone, And How to Apply
-	
+
 	Single Job Application Page
 		*Adjust the Margins/Padding
 
-	
-	User Registration Page
-		*Restyle everything Starting with the Color of the text 
 
-	Admin Tech Support Page 
+	User Registration Page
+		*Restyle everything Starting with the Color of the text
+
+	Admin Tech Support Page
 		*Sort the Ordering With Pending Tickets On Top of the Web Page
 		*Add a Complete (DELETE) Button for Inquiries that were completely handled and have
 			a metric counter to keep track of COMPLETED CSR Tickets
-	
+
 	Services Support Page
 		*
-	
+
 	Single Store Locations Page
 		*Redo the Positioning of the Store Locations Cards
 
-	Reviews Page 
+	Reviews Page
 		*Make Add Margins for the Leave a Review Page
