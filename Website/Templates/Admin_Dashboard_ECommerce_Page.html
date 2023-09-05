@@ -23,7 +23,7 @@
                 <ul class="list-group" id="Web_Stats_Table">
                     <h2 id="Web_Stats"> Website Statistics </h2> 
                     <li class="list-group-item d-flex justify-content-between align-items-center" id="Web_Stats_Table_Data"> 
-                        Total Web Prodcuts <span class="badge bg-primary rounded-pill"> {{ProductCount}}  </span>
+                        Total Web Prodcuts <span class="badge bg-primary rounded-pill"> {{AllProducts.count}}  </span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center" id="Web_Stats_Table_Data"> 
                         Today's Online Purchases <span class="badge bg-primary rounded-pill"> 77 </span>
@@ -68,8 +68,8 @@
                     <tr>
                         <th scope="col"> View Product </th>
                         <th scope="col"> Brand </th>
-                        <th scope="col"> Full Product Name  </th>
-                        <th scope="col"> Current Promo </th>
+                        <th scope="col"> Product </th>
+                        <th scope="col"> Current Promotion </th>
                         <th scope="col"> Product Life Status </th>
                     </tr>
                 </thead>
@@ -79,7 +79,7 @@
                     <tr>
                         <td> <a href="{% url 'ShowProductPage' Product.id %}"> Click Me </a> </td>
                         <td> {{Product.Brand}} </td>
-                        <td> {{Product.Brand}} {{Product.Name}} </td>
+                        <td> {{Product.Name}} </td>
 
                         {% if Product.Coupon %}
                         <td id="CouponCode"> {{Product.Coupon}} </td>

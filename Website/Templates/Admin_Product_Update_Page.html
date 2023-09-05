@@ -19,11 +19,13 @@
     <header>
 
     <main>
-      <form method=POST enctype="multipart/form-data">
+
+      <form method=POST enctype="multipart/form-data" id="Product_Update_Form">
         {% csrf_token %}
-        {{ ProductForm.as_p }} <br>
+        {{ ProductForm.as_p }}
         <input type="submit" value="Update" class="btn btn-primary">
       </form>
+
     </main>
 
     <footer>

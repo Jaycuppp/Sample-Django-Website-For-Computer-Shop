@@ -24,7 +24,7 @@
                 <div class="card-body">
                     <h5 class="card-title" id="Single_Salary"> <strong> Annual Salary </strong> {{ Job.Salary }} </h5> <br>
                     <p class="card-text" id="Single_Location_Type"> <strong> Work Type: </strong>  {{ Job.Location_Type }} </p>
-                    <p class="card-text" id="Single_Workplace"> <strong> Company Location: </strong> {{ Job.Store_Location.Entire_Location }} </p>
+                    <p class="card-text" id="Single_Workplace"> <strong> Company Location: </strong> {{ Job.Store_Location.Full_Location }} </p>
                     <p class="card-text" id="Single_Job_Description"> <strong> About the Role </strong> <br> {{ Job.Description }} </p>
                     <p class="card-text" id="Single_Job_Responsibilties"> <strong> Key Responsibilties </strong> <br>
                         &#8729 {{ Job.Key_Responsibilities.First }} <br> &#8729 {{ Job.Key_Responsibilities.Second }} <br> &#8729 {{ Job.Key_Responsibilities.Third }} <br> 
@@ -44,7 +44,7 @@
 
             <div id="Job_Application_Form">
                 <h3 id="Application_Title"> Fill Out The Job Application Below  </h3>
-                <form action="" method=POST>
+                <form method=POST enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mb-3">
                         {{Form.as_p}}                

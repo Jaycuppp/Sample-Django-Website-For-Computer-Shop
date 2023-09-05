@@ -24,22 +24,21 @@ class ProductForm(ModelForm):
         fields = ('Name', 'Brand', 'Price', 'Stock', 'Picture', 'Discontinued', 'Description', )
 
         labels = {
-            'Name': '',
-            'Brand': '',
-            'Price': '',
-            'Stock': '',
+            'Name': 'Product Name',
+            'Brand': 'Product Brand',
+            'Price': 'Regular Selling Price',
+            'Stock': 'Current Stock Amount',
             'Picture': 'Upload Product Image Here',
             'Discontinued': 'Mark if Product is Discontinued',
-            'Description': '',
+            'Description': 'Full Product Description',
         }
 
         widgets = {
-            'Name': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter NEW Product Name'}),
-            'Brand': forms.TextInput(attrs={"class":'form-control', 'placeholder': 'Enter NEW Product Brand'}),
-            'Price': forms.NumberInput(attrs={'class':'form-control', 'placeholder': 'Enter NEW Product Price'}),
-            'Stock': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter CURRENT Stock Amount'}),
-            'Image_URL': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter Image URL'}),
-            'Description': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'Enter NEW Product Description'}),
+            'Name': forms.TextInput(attrs={'class':'form-control', 'id': 'Product_Form_Name', 'placeholder': 'Enter NEW Product Name'}),
+            'Brand': forms.TextInput(attrs={"class":'form-control', 'id': 'Product_Form_Brand', 'placeholder': 'Enter NEW Product Brand'}),
+            'Price': forms.NumberInput(attrs={'class':'form-control', 'id': 'Product_Form_Price', 'placeholder': 'Enter NEW Product Price'}),
+            'Stock': forms.TextInput(attrs={'class':'form-control', 'id': 'Product_Form_Stock', 'placeholder': 'Enter CURRENT Stock Amount'}),
+            'Description': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Description'}),
             }
 
 class LocationForm(ModelForm):
@@ -59,13 +58,13 @@ class LocationForm(ModelForm):
         }
 
         widgets = {
-            'Street': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter Street'}),
-            'City': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter City'}),
-            'State': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter State'}),
-            'Zip': forms.NumberInput(attrs={'class':'form-control', 'placeholder': 'Enter Zip'}),
-            'Phone': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter Phone'}),
-            'Opens': forms.TimeInput(attrs={'class':'form-control', 'placeholder': 'Enter Opening Time'}),
-            'Closes': forms.TimeInput(attrs={'class':'form-control', 'placeholder': 'Enter Opening Time'}),
+            'Street': forms.TextInput(attrs={'class':'form-control', 'id': 'Store_Street', 'placeholder': 'Enter Street'}),
+            'City': forms.TextInput(attrs={'class':'form-control', 'id': 'Store_City', 'placeholder': 'Enter City'}),
+            'State': forms.TextInput(attrs={'class':'form-control', 'id': 'Store_State', 'placeholder': 'Enter State'}),
+            'Zip': forms.NumberInput(attrs={'class':'form-control', 'id': 'Store_Zip', 'placeholder': 'Enter Zip'}),
+            'Phone': forms.TextInput(attrs={'class':'form-control', 'id': 'Store_Phone', 'placeholder': 'Enter Phone'}),
+            'Opens': forms.TimeInput(attrs={'class':'form-control', 'id': 'Store_Opening_Time', 'placeholder': 'Enter Opening Time'}),
+            'Closes': forms.TimeInput(attrs={'class':'form-control', 'id': 'Store_Closing_Time', 'placeholder': 'Enter Opening Time'}),
         }
         
 class CustomerSubmissions(ModelForm):

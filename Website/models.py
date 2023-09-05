@@ -73,6 +73,10 @@ class StoreLocations(models.Model):
     @property
     def City_State_Zip(self):
         return f"{self.City}, {self.State} {self.Zip}"
+    
+    @property
+    def Full_Location(self):
+        return f"{self.Street}, {self.City}, {self.State}, {self.Zip}"
 
     def __str__(self):
         return self.City + " Location"

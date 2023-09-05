@@ -141,6 +141,17 @@ th{
     text-align: center;
 }
 
+/* Product Update Page, Only For Admins */
+#Product_Update_Form{
+    margin-left: 25%;
+}
+
+#Product_Form_Name, #Product_Form_Brand, #Product_Form_Price,
+#Product_Form_Stock, #Product_Form_Description{
+    width: 300px;
+}
+
+
 /* Tech Consultation Page */
 #Quansh_Tech_Consultation{
     text-align: center;
@@ -250,6 +261,7 @@ th{
     text-align: center;
     padding-top: 2%;
     margin-top: 2%;
+    font-weight: 700;
 }
 
 #Employment_Summary{
@@ -431,6 +443,19 @@ th{
     color: #1e6d5c;
 }
 
+/* Location Update Page for Admins Only */
+#Location_Update_Form{
+    margin-left: 25%;
+}
+
+#Store_Street, #Store_City, #Store_State, #Store_Zip,
+#Store_Phone, #Store_Opening_Time, #Store_Closing_Time {
+    width: 300px;
+    margin-top: 0.07%;
+}
+
+
+
 /* Customer Reviews Page */
 
 
@@ -480,7 +505,7 @@ th{
 
 #Web_Stats_Table{
     width: 500px;
-    margin-right: 10%;
+    margin-right: 5%;
     margin-left: 7%
 }
 
@@ -492,8 +517,8 @@ th{
 #Promotions_Table{
     color: #8d1f37;
     background-color: #cdceae;
-    width: 1500px;
-    margin-right: 20%;
+    text-align: left;
+    width: 1100px;
 }
 
 
@@ -501,7 +526,7 @@ th{
     color: #8d1f37;
     background-color: #cdceae;
     margin-left: 14%;
-    width: 1200px;
+    width: 1300px;
 }
 
 #EOL{
@@ -582,3 +607,5 @@ th{
     margin-right: 10%;
     margin-left: 7%
 }
+
+

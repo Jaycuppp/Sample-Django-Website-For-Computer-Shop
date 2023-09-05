@@ -20,14 +20,14 @@
 
     <main>
       {% comment %} Display Login / Logout Message {% endcomment %}
-      {% if messages %}
-          {% for message in messages %}
-            <span class="alert alert-warning" role="alert"> {{ message }} </span>
-          {% endfor %}
-      {% endif %}
-
       {% if user.is_authenticated %}
         <span> <a class="btn btn-success btn-lg" href="{% url 'AddProductPage' %}"> Add A New Product Here </a> </span>
+      {% endif %}
+
+      {% if messages %}
+        {% for message in messages %}
+          <span class="alert alert-warning" id="Product_Update_Notification" role="alert"> {{ message }} </span>
+        {% endfor %}
       {% endif %}
 
       <br><br>
@@ -74,11 +74,9 @@
                         <a href="ShoppingCart" class="btn btn-success" id="Add_To_Cart_Button"> Add to cart </a>
                         <br> <br>
 
-                        {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
                         <a href="{% url 'UpdateProduct' product.id %}" class="btn btn-warning" id="Update_Button"> Update </a>
-                          {% if user.username == 'admin' %}
-                          <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger" id="Delete_Button"> Delete </a>
-                          {% endif %}
+                        <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger" id="Delete_Button"> Delete </a>
                         {% endif %}
 
                       </div>

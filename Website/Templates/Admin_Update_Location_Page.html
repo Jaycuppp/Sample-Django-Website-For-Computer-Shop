@@ -21,10 +21,10 @@
 
     <main>
 
-      <form method=POST enctype="multipart/form-data">
+      <form method=POST enctype="multipart/form-data" id="Location_Update_Form">
         {% csrf_token %}
-        {{ LocationForm.as_p }} <br>
-        <input type="submit" value="update" class="btn btn-primary">
+        {{ LocationForm.as_p }}
+        <input type="submit" value="Update" class="btn btn-primary" id="Location_Update_Button">
       </form>
 
     </main>

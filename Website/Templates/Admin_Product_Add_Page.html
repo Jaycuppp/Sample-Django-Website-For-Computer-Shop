@@ -22,7 +22,7 @@
             {% if SubmitProduct %}
                 <h3 style="text-align: center;"> Your Review Was Submitted Successfully!!! </h3>
             {% else %}
-            <form  style="text-align: center;" action="" method=POST enctype="multipart/form-data">
+            <form style="text-align: center;" action="" method=POST enctype="multipart/form-data">
 
                 {% csrf_token %}
                 {{ ProductForm.as_p }}

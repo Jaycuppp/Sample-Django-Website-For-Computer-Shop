@@ -225,7 +225,8 @@ def Services_Careers_Applying(request, Job_ID):
         if form.is_valid():
             Product = form.save(commit=False)
             Product.save()
-            messages.success(request, f'You Have Successfully Submitted Your Application for the {Job.Title} Position!')
+            messages.success(request,
+                            f''' You Have Successfully Submitted Your Application for the Quansh Tech {Job.Title} Position! ''')
             return (redirect("Careers"))
         
         else:
@@ -274,7 +275,7 @@ def Services_TechSupport(request):
 
 def AdminDashECommerce(request):
     PromoCodes = CouponDiscount.objects.all()
-    ProductCount = StoreProducts.objects.all().count()
+    AllProducts = StoreProducts.objects.all()
     
     Paginate = Paginator(StoreProducts.objects.all().order_by('Brand'), 21)
     Page = request.GET.get("page")
@@ -286,16 +287,14 @@ def AdminDashECommerce(request):
         "PaginatedProducts": Products,
         "Numbers": Numbers,
         "Promo": PromoCodes,
-        "ProductCount": ProductCount
+        "AllProducts": AllProducts
     })
     
 def AdminDashRetailStores(request):
     Stores = StoreLocations.objects.all()
-    StoreCount = StoreLocations.objects.all().count()
 
     return render(request, "Admin_Dashboard_Retail_Stores_Page.html", {
         "Store": Stores,
-        "StoreCount": StoreCount
     })
     
 def AdminDashCustomerSupport(request):
@@ -316,16 +315,6 @@ def AdminHumanResources(request):
         "Staff" : Staff_Members
     })
 
-
-
-def CustomerTechSupport(request):
-    Inquery = CustomerSupportTickets.objects.all()
-    
-    return render(request, "Admin_Tech_Support_Tickets_Page.html", {
-        "Inquery": Inquery
-    })
-    
-    
 def CustomerReviewFormPage(request):
     submitted = False
     if request.method == "POST":

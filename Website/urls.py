@@ -29,5 +29,4 @@ urlpatterns = [
     path('AdminDash/RetailStores', views.AdminDashRetailStores, name="AdminDashRetailStores"),
     path('AdminDash/CustomerSupport', views.AdminDashCustomerSupport, name="AdminDashCustomerSupport"),
     path('AdminDash/HumanResources', views.AdminHumanResources, name="AdminHumanResources"),
-    path('CustomerSupport', views.CustomerTechSupport, name="CSRPage")
 ]
