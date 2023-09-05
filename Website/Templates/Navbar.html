@@ -53,7 +53,11 @@
                 <ul class="dropdown-menu dropdown-menu" id="Business_Products_Services_DropDown_Options">
                   <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'TechConsultationPage' %}" target="blank"> Consultation </a></li>
                   <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'TechSupportPage' %}" target="blank"> Tech Support </a></li>
-                  <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'LaboratoryPage' %}" target="blank"> Lab </a></li>
+
+                  {% if user.is_superuser or user.is_staff%}
+                  <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'LaboratoryPage' %}" target="blank"> &#11088 Lab (Work in Progress) </a></li>
+                  {% endif %}
+
                   <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'Careers' %}" target="blank"> Careers </a></li>
                 </ul>
               </li>
@@ -75,8 +79,17 @@
             <button class="btn dropdown-toggle" id="Main_NavBar_Button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Account </button>
             <ul class="dropdown-menu" id="Account_DropDown_Options">
-              <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="http://127.0.0.1:8000/admin/" target="blank"> BackEnd Admin Web Page </a></li>
+
+              <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="" target="blank"> My Account </a></li>
+
+              {% if user.is_superuser or user.is_staff %}
+                <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="http://127.0.0.1:8000/admin/" target="blank"> Website BackEnd </a></li>
+              {% endif %}
+
+              {% if user.is_superuser or user.is_staff or user.username == "QTMan" %}
               <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'Reports' %}" target="blank"> Report Generator </a></li>
+              {% endif %}
+
             </ul>
           </div>
 
@@ -87,6 +100,7 @@
               <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'AdminDashECommerce' %}" target="blank"> Website Statistics </a></li>
               <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'AdminDashRetailStores' %}" target="blank"> Retail Stores </a></li>
               <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'AdminDashCustomerSupport' %}" target="blank"> Customer Support </a></li>
+              <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'AdminCustomerReviews' %}" target="blank"> Quansh Tech Reviews </a></li>
               <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="{% url 'AdminHumanResources' %}" target="blank"> Human Resources </a></li>
             </ul>
           </div>

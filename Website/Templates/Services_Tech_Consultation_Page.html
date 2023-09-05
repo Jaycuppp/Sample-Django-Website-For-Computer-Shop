@@ -37,13 +37,13 @@
                 {% for T in Testi %}
                 <div class="card" id="Actual_Testimonial">
                     {% if T.First_Name %}
-                    <div class="card-header"> {{T.About}} For {{T.First_Name}} </div>
+                    <div class="card-header" id="Consult_Review_Title"> {{T.About}} For {{T.First_Name}} </div>
                     {% else %}
-                    <div class="card-header"> {{T.About}} For Anonymous </div>
+                    <div class="card-header" id="Consult_Review_Title"> {{T.About}} For Anonymous </div>
                     {% endif %}
                     <div class="card-body">
                         {% comment %} <h5 class="card-title">Special title treatment</h5> {% endcomment %}
-                        <p class="card-text"> {{T.Testimonial}}</p>
+                        <p class="card-text" id="Consult_Review_Body"> {{T.Testimonial}}</p>
                         {% comment %} <a href="#" class="btn btn-primary">Go somewhere</a> {% endcomment %}
                     </div>
                 </div>

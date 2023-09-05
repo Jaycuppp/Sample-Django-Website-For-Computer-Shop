@@ -21,12 +21,13 @@
             {% if submitted %}
                 <h3> Your Review Was Submitted Successfully!!! </h3>
             {% else %}
-            <form action="" method=POST>
+
+            <form action="" method=POST id="Customer_Shopping_Review_Form">
 
                 {% csrf_token %}
                 {{ form.as_p }}
 
-                <input type="submit" value="Submit" class="btn btn-secondary">
+                <input type="submit" value="Submit" class="btn btn-primary" id="Shopping_Review_Submit">
             </form>
             {% endif %}
             

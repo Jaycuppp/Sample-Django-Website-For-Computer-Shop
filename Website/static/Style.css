@@ -186,7 +186,17 @@ th{
 #Actual_Testimonial{
     margin-top: 2%;
     margin-bottom: 5%;
+    width: 1200px;
 }
+
+#Consult_Review_Title{
+    color: #530a0a;
+}
+
+#Consult_Review_Body{
+    color: #17803f;
+}
+
 /* Tech Support Page */
 #Quansh_Tech_Support{ 
     text-align: center;
@@ -222,12 +232,24 @@ th{
     padding-right: 20%;
 }
 
+#Submit_Question_Message{
+    font-weight: 700;
+}
+
 #EmailSubmission, #QuestionSubmission{
     
 }
 
+#Tech_Question_Submit_Button{
+    margin-left: 45%;
+    margin-bottom: 7%;
+}
+
+#FAQ_Message{
+    font-weight: 700;
+}
+
 #Tech_FAQs {
-    padding-top: 2%;
     padding-left: 14%;
     padding-right: 20%;
 }
@@ -455,8 +477,39 @@ th{
 }
 
 
+/* Customer Shopping Review Form Page */
+#Customer_Shopping_Review_Form{
+    margin-left: 14%;
+    margin-right: 15%;
+}
 
-/* Customer Reviews Page */
+#Shopping_Date, #Review_Score, #Entire_Review {
+    color: #2F3C7E;
+}
+
+#Shopping_Review_Submit {
+    margin-left: 43%;
+}
+
+/* Customer Reviews Page for Quansh Tech Staff Only */
+#Entire_Review_Card{
+    margin-left: 14%;
+    margin-right: 14%;
+    margin-bottom: 3%;
+}
+
+#Review_Card_Header{
+    font-weight: 700;
+    color: #530a0a;
+}
+
+#Review_Score{
+    color: #ff0000;
+}
+
+#Review_Message{
+    color: #8d1f37;
+}
 
 
 /* Account Registration Page */

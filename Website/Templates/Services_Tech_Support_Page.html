@@ -27,7 +27,7 @@
             </div>
 
             <div id="Support_Tickets">
-                <h4 id="Submit_Question_Message"> <strong> Submit a Question Below </strong> </h4>
+                <h4 id="Submit_Question_Message"> Submit a Question Below </h4>
                 
                 {% if submitted %}
                     <h3> Your Question Has Been Successfully Submitted! <h3>
@@ -35,13 +35,15 @@
                     <form action="" method=POST>
                         {% csrf_token %}
                         {{ Form.as_p }}
-                        <input type="submit" value="Submit" class="btn btn-primary" id="Submit_Button">
+                        <input type="submit" value="Submit" class="btn btn-primary" id="Tech_Question_Submit_Button">
                     </form>
                 {% endif %}
             </div>
 
+            {% if user.is_superuser %}
+
             <div id="Tech_FAQs">
-                <h4 id="FAQ_Message"> <strong> Frequently asked questions </strong> </h4>
+                <h4 id="FAQ_Message"> Frequently asked questions </h4>
                 <h3 style="color: red;"> &#11088 (Adjust the Logic to Where Only 1 gets Selected) </h3>
                 {% for FAQ in FAQ %}
                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -61,6 +63,7 @@
                 </div>
                 {% endfor %}
             </div>
+            {% endif %}
 
         </main>
 

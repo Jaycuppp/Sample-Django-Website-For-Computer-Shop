@@ -13,9 +13,9 @@ class ShoppingReview(ModelForm):
         }
 
         widgets = {
-            'ShoppingDate': forms.DateInput(attrs={'class':'form-control', 'placeholder': 'What Month/Day/Year did you make a purchase?'}),
-            'ReviewScore': forms.NumberInput(attrs={'class':'form-control', 'placeholder': 'Rate Shopping Experience Between 0 to 5'}),
-            'TotalReview': forms.Textarea(attrs={'class':'form-control', 'placeholder': '(Optional) Enter your shopping experience both the good and the bad'}),
+            'ShoppingDate': forms.DateInput(attrs={'class':'form-control', 'id': 'Shopping_Date', 'placeholder': 'What Month/Day/Year did you make a purchase?'}),
+            'ReviewScore': forms.NumberInput(attrs={'class':'form-control', 'id': 'Review_Score', 'placeholder': 'Rate Shopping Experience Between 0 to 5'}),
+            'TotalReview': forms.Textarea(attrs={'class':'form-control', 'id': 'Entire_Review', 'placeholder': '(Optional) Enter your shopping experience both the good and the bad'}),
         }
 
 class ProductForm(ModelForm):
