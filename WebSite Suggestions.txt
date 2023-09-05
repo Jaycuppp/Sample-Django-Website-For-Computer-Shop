@@ -1,12 +1,11 @@
 BUGS
 	*At 991px of width, the NavBar Options just Disappear
-	*When MASS POSTing EOL Status on the FrontEnd Admin Dashboard
-		*Error = "invalid literal for int() with base 10: ''"
+	*Applicants Can't Upload their Resume & Cover Letters when Applying for a job
 
 	*On Single Product View Page
 		*The Static IMG Files are not being properly referenced due to either
 		*wrong Djnja code or not adding an additional dunder method in the
-		*models.py file for the Product.Picture DB Attrib
+			models.py file for the Product.Picture DB Attrib
 
 	*When selecting only 1 FAQ from the accordion, all of the other FAQs open & collapse
 
@@ -16,7 +15,9 @@ AddOns
 	*DataSets for both the FAQ Questions and for the Tech Mentorship Job Positions/Openings
 	*NEW Webpage Just for Admin Store Locations DashBoard
 	*NEW Webpage For Customer Account Management DashBoard / Page
-	*Create an HR WebPage for Peopl Who Applied to certain job(s)
+	*Create an HR WebPage for People Who Applied to certain job(s)
+	*(Optional) Develop A Seperatre FAQs Web Page along with a Single FAQ WebPage
+	*Create an Account Web Page for General & Overall Account Information for Users
 
 Data:
 	*Product Data
@@ -54,9 +55,12 @@ Front End Logic
 		* Figure out a Way to Make the Website Look the Same with Smaller/Bigger Scale Resolutions
 
 	NavBar
+		*Re-Position the Company EMAIL & PHONE to the Far Right of the NavBar
+		*Change the Home Emoji to a Different one that does not have the Color RED in it
 
 	Home Page
 		*Add more html elements on the HomePage
+		*Add More Pictures to the Carousel SlideShow
 
 	About Us Page
 		*Fill in the Blank Space on both the Left and Right Margins with Pics or Advertisements
@@ -109,12 +113,11 @@ Front End Logic
 		*Restyle everything Starting with the Color of the text
 
 	Admin Tech Support Page
+		*Add more HTML Elements to this Page
 		*Sort the Ordering With Pending Tickets On Top of the Web Page
 		*Add a Complete (DELETE) Button for Inquiries that were completely handled and have
 			a metric counter to keep track of COMPLETED CSR Tickets
-
-	Services Support Page
-		*
+		
 
 	Single Store Locations Page
 		*Redo the Positioning of the Store Locations Cards
