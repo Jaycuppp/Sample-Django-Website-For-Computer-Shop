@@ -1,7 +1,0 @@
-Front-End 
-    *Styling the Single Location Page (Mainly Colors & Positioning)
-
-Back-End
-    *
-
-DataBase 
