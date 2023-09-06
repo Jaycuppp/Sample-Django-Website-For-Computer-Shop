@@ -155,10 +155,12 @@ th{
 /* Tech Consultation Page */
 #Quansh_Tech_Consultation{
     text-align: center;
+    font-weight: 700;
 }
 
 #ConsultMessage{
     padding-top: 4%;
+    font-weight: 700;
     text-align: center;
     color: #7c680b;
 }
@@ -200,6 +202,7 @@ th{
 /* Tech Support Page */
 #Quansh_Tech_Support{ 
     text-align: center;
+    font-weight: 700;
     
 }
 
@@ -207,8 +210,8 @@ th{
 #Tech_Support_Message{
     padding-top: 4%;
     text-align: center;
+    font-weight: 700;
     color: #7c680b;
-
 }
 
 #Direct_Support_Message{
@@ -236,6 +239,10 @@ th{
     font-weight: 700;
 }
 
+#Question_Submitted_Successfully{
+    
+}
+
 #EmailSubmission, #QuestionSubmission{
     
 }
@@ -257,11 +264,13 @@ th{
 /* Tech Lab Page */
 #Quansh_Tech_Lab{
     text-align: center;
+    font-weight: 700;
 }
 
 #Lab_Greetings{
     color: #7c680b;
     text-align: center;
+    font-weight: 700;
     padding-top: 2%;
     margin-top: 2%;
 }
@@ -495,7 +504,8 @@ th{
 #Entire_Review_Card{
     margin-left: 14%;
     margin-right: 14%;
-    margin-bottom: 3%;
+    margin-bottom: 100px;
+    width: 65%;
 }
 
 #Review_Card_Header{
@@ -515,6 +525,41 @@ th{
 /* Account Registration Page */
 #Account_Register{
     text-align: center;
+}
+
+#Account_Registration{
+    margin-top: 5%;
+    margin-left: 14%;
+    margin-right: 14%;
+    width: 65%;
+}
+
+#Registration_Email{
+    color: #000000;
+}
+
+#Registration_First_Name{
+    color: #000000;
+}
+
+#Registration_Last_Name{
+    color: #000000;
+}
+
+#Registration_Username{
+    color: #000000;
+}
+
+#Registration_Password1{
+    color: #000000;
+}
+
+#Registration_Password2{
+    color: #000000;
+}
+
+#Account_Registration_Submit_Button{
+    margin-left: 42%;
 }
 
 /* Generate Reports Page */
@@ -638,6 +683,38 @@ th{
 
 #Customer_Ticket {
     margin-top: 3%;
+    margin-left: 14%;
+    margin-right: 20%;
+    margin-bottom: 100px;
+    width: 65%;
+}
+
+#Pending_Ticket{
+    color: #b81010;
+    font-weight: 700;
+}
+
+#Answered_Ticket{
+    color: #1de716;
+    font-weight: 700;
+}
+
+#From_Email{
+    margin-bottom: 1.5%;
+    color: #2645f1;
+}
+
+#Customer_Inquiry{
+    color: #1d060b;
+}
+
+#Reply_To_Email{
+    color: #921f9c;
+    /* margin-left: 30%; */
+}
+
+#SomeDiv{
+    margin-bottom: 20%;
 }
 
 /* Human Resources Web Page HR Personal & Admins Only */

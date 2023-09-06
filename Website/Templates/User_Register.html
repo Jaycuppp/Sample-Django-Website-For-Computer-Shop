@@ -15,19 +15,19 @@
     <body>
         <header> 
             <h1 id="Account_Register"> Account Registration </h1>
-            {% include "Navbar.html"%} <br> <br>
+            {% include "Navbar.html"%}
         </header>
 
         <main> 
-            <div class= "shadow p-3 mb-5 bg-body-tertiary rounded">
+            <div class= "shadow p-3 mb-5 bg-body-tertiary rounded" id="Account_Registration">
                 {% if Form.errors %}
-                Sorry There was an error registering your Account. Please try again.
+                <h4> Sorry There was an error registering your Account. Please try again. </h4>
                 <form action="{% url 'CreateAccount'%}" method=POST>
                     <div>
                         {% csrf_token %}
                         {{ Form.as_p }}
                     </div>
-                    <button type="submit" value="Submit" class="btn btn-secondary" style="text-align: center;">Submit</button>
+                    <button type="submit" value="Submit" class="btn btn-primary" id="Account_Registration_Submit_Button"> Submit </button>
                 </form>
                 {% else %}         
 
@@ -36,7 +36,7 @@
                         {% csrf_token %}
                         {{ Form.as_p }}
                     </div>
-                    <button type="submit" value="Submit" class="btn btn-secondary"> Submit </button>
+                    <button type="submit" value="Submit" class="btn btn-primary" id="Account_Registration_Submit_Button"> Submit </button>
                 </form>
             </div>
             {% endif %}

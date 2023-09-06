@@ -30,7 +30,7 @@
                 <h4 id="Submit_Question_Message"> Submit a Question Below </h4>
                 
                 {% if submitted %}
-                    <h3> Your Question Has Been Successfully Submitted! <h3>
+                    <h3 id="Question_Submitted_Successfully"> Your Question Has Been Successfully Submitted! <h3>
                 {% else %}
                     <form action="" method=POST>
                         {% csrf_token %}

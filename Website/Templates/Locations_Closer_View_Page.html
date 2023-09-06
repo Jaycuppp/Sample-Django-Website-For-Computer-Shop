@@ -20,7 +20,7 @@
 
         <main>
             
-            {% if user.is_authenticated %}
+            {% if user.is_superuser or user.is_staff %}
             <span id="Update_Location_Button"> <a href="{% url 'UpdateLocation' Location.id %}" class="btn btn-warning"> Update Location </a> </span>
             {% else %}
 

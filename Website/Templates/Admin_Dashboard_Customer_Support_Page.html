@@ -22,16 +22,22 @@
             {% for Inq in CSR %}
             <div class="card" id="Customer_Ticket">
                 {% if Inq.Answered == False %}
-                <h5 class="card-header" id="Pending"> Pending Ticket # {{Inq.id}} </h5>
+                <h3 class="card-header" id="Pending_Ticket"> Pending Ticket </h3>
                 {% else  %}
-                <h5 class="card-header" id="Answered"> Answered Ticket </h5>
+                <h3 class="card-header" id="Answered_Ticket"> Answered Ticket </h3>
                 {% endif %}
                 <div class="card-body">
-                    <p class="card-text"> {{ Inq.Inquiry }} </p> 
-                    <span> Reply To: <a href="mailto:{{Inq.Email}}" class="btn btn-primary"> {{Inq.Email}} </a> </span>
+                    <h5 class="card-text" id="From_Email"> From: {{Inq.Email}} </h5>
+                    <p class="card-text" id="Customer_Inquiry"> {{ Inq.Inquiry }} </p> 
+                    <span id="Reply_To_Email"> Respond To: <a href="mailto:{{Inq.Email}}" class="btn btn-primary"> {{Inq.Email}} </a> </span>
                 </div>
             </div> 
             {% endfor %}
+
+            <div id="SomeDiv">
+
+            </div>
+
         </main>
 
         <footer> 
