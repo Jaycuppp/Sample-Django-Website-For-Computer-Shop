@@ -38,6 +38,7 @@
                         <tr>
                             <th scope="col" colspan=777> <h2 id="All_Store_Locations"> All Store Locations </h2> </th>
                         <tr>
+
                         <tr>
                             <th scope="col"> View Store </th>
                             <th scope="col"> Street Address </th>
@@ -47,14 +48,15 @@
                     </thead>
 
                     <tbody>
-                    <tr>
-                    {% for Store in Store %}
-                        <td> <a href="{% url 'ShowLocationPage' Store.id %}" > Click Me  <a> </td>
-                        <td> {{ Store.Street }} </td>
-                        <td> {{ Store.City }}, {{ Store.State }} </td>
-                        <td> {{ Store.Zip }} </td>
-                    </tr>
-                    {% endfor %}
+                        <tr>
+                        {% for Store in Store %}
+                            <td> <a href="{% url 'ShowLocationPage' Store.id %}" > Click Me  <a> </td>
+                            <td> {{ Store.Street }} </td>
+                            <td> {{ Store.City }}, {{ Store.State }} </td>
+                            <td> {{ Store.Zip }} </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
 

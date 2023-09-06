@@ -61,34 +61,33 @@
             <table class="table table-hover table-bordered border-dark" id="All_Products_Table">
                 <h2 id=""> All Company Products </h2>
                 <thead>
-                <tr>
-                    <th scope="col"> View Product </th>
-                    <th scope="col"> Brand </th>
-                    <th scope="col"> Full Product Name  </th>
-                    <th scope="col"> Current Promo </th>
-                    <th scope="col"> Product Life Status </th>
-                </tr>
+                    <tr>
+                        <th scope="col"> View Product </th>
+                        <th scope="col"> Brand </th>
+                        <th scope="col"> Full Product Name  </th>
+                        <th scope="col"> Current Promo </th>
+                        <th scope="col"> Product Life Status </th>
+                    </tr>
                 </thead>
                 {% for Product in PaginatedProducts%}
                 <tbody>
-                <tr>
-                    <td> <a href="{% url 'ShowProductPage' Product.id %}"> Click Me </a> </td>
-                    <td> {{Product.Brand}} </td>
-                    <td> {{Product.Brand}} {{Product.Name}} </td>
+                    <tr>
+                        <td> <a href="{% url 'ShowProductPage' Product.id %}"> Click Me </a> </td>
+                        <td> {{Product.Brand}} </td>
+                        <td> {{Product.Brand}} {{Product.Name}} </td>
 
-                    {% if Product.Coupon %}
-                    <td> {{Product.Coupon}} </td>
-                    {% else %}
-                    <td> N/A </td>
-                    {% endif %}
+                        {% if Product.Coupon %}
+                            <td> {{Product.Coupon}} </td>
+                        {% else %}
+                            <td> N/A </td>
+                        {% endif %}
 
-                    {% if Product.Discontinued %}
-                    <td id="EOL"> Discontined </td>
-                    {% else %}
-                    <td id="Available"> Available to Buy </td>
-                    {% endif %}
-
-                </tr>
+                        {% if Product.Discontinued %}
+                            <td id="EOL"> Discontined </td>
+                        {% else %}
+                            <td id="Available"> Available to Buy </td>
+                        {% endif %}
+                    </tr>
                 </tbody>
                 {% endfor %}
             </table>
@@ -97,17 +96,17 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         {% if PaginatedProducts.has_previous %}
-                        <li class="page-item"> <a class="page-link" href="?page=1">&laquo; first</a> </li>
-                        <li class="page-item"> <a class="page-link" href="?page={{ PaginatedProducts.previous_page_number }}"> Previous </a> </li>
+                            <li class="page-item"> <a class="page-link" href="?page=1">&laquo; first</a> </li>
+                            <li class="page-item"> <a class="page-link" href="?page={{ PaginatedProducts.previous_page_number }}"> Previous </a> </li>
                         {% endif %}
 
                         {% for iter in Numbers%}
-                        <li class="page-item"><a class="page-link" href="?page={{forloop.counter}}"> {{forloop.counter}} </a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{forloop.counter}}"> {{forloop.counter}} </a></li>
                         {% endfor %}
 
                         {% if PaginatedProducts.has_next %}
-                        <li class="page-item"> <a class="page-link" href="?page={{ PaginatedProducts.next_page_number }}"> Next </a> </li>
-                        <li class="page-item"> <a class="page-link" href="?page={{ PaginatedProducts.paginator.num_pages }} "> last &raquo; </a> </li>
+                            <li class="page-item"> <a class="page-link" href="?page={{ PaginatedProducts.next_page_number }}"> Next </a> </li>
+                            <li class="page-item"> <a class="page-link" href="?page={{ PaginatedProducts.paginator.num_pages }} "> last &raquo; </a> </li>
                         {% endif %}
                     </ul>
                 </nav>

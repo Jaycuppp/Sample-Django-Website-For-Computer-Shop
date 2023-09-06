@@ -318,7 +318,7 @@ def AdminHumanResources(request):
 def AdminCustomerReviews(request):
     Reviews = CustomerReviews.objects.all()
     
-    return render(request, "Admin_Shopping_Reviews_List.html", {
+    return render(request, "Admin_Dashboard_Shopping_Reviews_List.html", {
         "Reviews" : Reviews
     })
 

@@ -47,13 +47,14 @@
                     </thead>
 
                     <tbody>
-                    <tr>
-                    {% for Store in StoreList %}
-                        <td> <a href="{% url 'ShowLocationPage' Store.id %}" > {{ Store.Street }} </td> <a>
-                        <td> {{ Store.City }}, {{ Store.State }} </td>
-                        <td> {{ Store.Zip }} </td>
-                    </tr>
-                    {% endfor %}
+                        <tr>
+                        {% for Store in StoreList %}
+                            <td> <a href="{% url 'ShowLocationPage' Store.id %}" > {{ Store.Street }} </td> <a>
+                            <td> {{ Store.City }}, {{ Store.State }} </td>
+                            <td> {{ Store.Zip }} </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table> <br>
                 <input type="submit" value="Update Product(s) Status" class="btn btn-secondary">
             </form>
