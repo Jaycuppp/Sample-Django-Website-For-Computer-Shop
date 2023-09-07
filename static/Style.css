@@ -1,0 +1,826 @@
+/* All Pages Styling */
+body {
+    background-color: #FCEDDA;
+    color: #4eb62e;
+    font-family: Arial, Helvetica, sans-serif;
+
+    /* For Displaying on Smaller Resolution Devices */
+    /* position: absolute;
+    margin: 0%;
+    width: 100%; */
+}
+
+a {
+    text-decoration: none;
+}
+
+th{
+    text-align: center;
+}
+
+/* NavBar Extension Page */
+#Home_Image_Button{
+    padding-right: 500px;
+    padding-left: 100px;
+}
+
+#Search_NavBar{
+    background-color: #CC313D;
+}
+
+#Main_NavBar, #Account_DropDown_Options , #Business_Products_Services_DropDown_Options{
+    background-color: #ff9c77;
+}
+
+#Search_Button, #Product_Search_Input_Bar  {
+    background-color: #F7C5CC;
+    font-weight: 700;
+}
+
+#Shopping_Cart_Button {
+    color: #F7C5CC;
+    font-weight: 700;
+}
+
+#Main_NavBar_Button, #NavBar_DropDown_Menu_Button
+{
+    color: #2F3C7E;
+    font-weight: 700;
+}
+
+#Company_Email, #Company_Phone {
+    color: #1e6d5c;
+    font-weight: 700;
+}
+
+/* Home Page */
+#Business_Name_Quansh_Tech{
+    text-align: center;
+}
+
+#LogIn_LogOut_Alert{
+    display: table;
+    margin: auto;
+    margin-top: -2%;
+    margin-bottom: 1%;
+}
+
+#Picture_SlideShow{
+}
+
+#Computer_Store_Email_Home {
+    margin-right: 100px;
+}
+
+#Computer_Store_Contact_Info {
+    background-color: #cebfab;
+    padding-top: 7%;
+    padding-bottom: 20%;
+    padding-left: 14%;
+}
+
+#Back_To_Top_Page_Button{
+    display: block;
+}
+
+
+/* About Us Page */
+#About_Quansh_Tech, #About_Title{
+    text-align: center;
+}
+
+#About_Title{
+    padding-top: 2%;
+}
+
+#About_Introdution, #About_Commitment, #About_Product_Range, #About_Services, #About_Competetive_Pricing,
+#About_Community_And_Support, #About_Conclusion
+{
+    color: #204714;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 0.75%;
+}
+
+/* Product Menu Page */
+#Quansh_Tech_Products{
+    text-align: center;
+}
+
+#All_Product_Card{
+    width: 300px;
+}
+
+#Product_Image{
+    
+}
+
+#Product_Name_And_Brand{
+    color: #2645f1;
+}
+
+#Product_Description {
+    font-size: small;
+    color: #756565;
+}
+
+#Product_Price {
+    color: #3e3668;
+}
+
+#Product_Stock {
+    color: #C76868;
+}
+
+/* Single Product Page */
+
+#Product_Card{
+    margin-left: 14%;
+}
+
+#Single_Product_Card{
+    width: 70%
+}
+
+#Single_Product_Image{
+    /* display: table;
+    margin: auto; */
+    height: 50%;
+    width: 50%;
+    margin-top: 3%;
+    margin-left: 24%;
+}
+
+#Quansh_Tech_Product{
+    text-align: center;
+}
+
+#Single_Product_Common_Buttons{
+    display: flex;
+}
+
+#Single_Add_To_Cart_Button{
+    margin-left: 14%;
+    margin-right: 14%;
+}
+
+#Single_Save_Item_Button{
+    margin-left: 14%;
+    margin-right: 14%;
+
+}
+
+#Single_Product_Auth_Buttons{
+    display: flex;
+}
+
+#Single_Update_Button{
+
+}
+
+#Single_Delete_Button{
+}
+
+
+/* Product Update Page, Only For Admins */
+#Product_Update_Form{
+    margin-left: 25%;
+}
+
+#Product_Form_Name, #Product_Form_Brand, #Product_Form_Price,
+#Product_Form_Stock, #Product_Form_Description{
+    width: 300px;
+}
+
+
+/* Tech Consultation Page */
+#Quansh_Tech_Consultation{
+    text-align: center;
+    font-weight: 700;
+}
+
+#ConsultMessage{
+    padding-top: 4%;
+    font-weight: 700;
+    text-align: center;
+    color: #7c680b;
+}
+
+#Profesional_Consultation, #Personal_Consultation, #Consultation_Testimonials{
+    padding-top: 2%;
+    padding-left: 14%;
+    padding-right: 14%;
+}
+
+#Prof_Consult_Phone, #Prof_Consult_Email{
+    padding-right: 7%;
+}
+
+#Per_Consult_Phone, #Per_Consult_Email{
+    padding-right: 7%;
+}
+
+#Consult_Review{
+    color: #a7aa00;
+    font-weight: 700;
+    margin-top: 3%;
+}
+
+#Actual_Testimonial{
+    margin-top: 2%;
+    margin-bottom: 5%;
+    width: 1200px;
+}
+
+#Consult_Review_Title{
+    color: #530a0a;
+}
+
+#Consult_Review_Body{
+    color: #17803f;
+}
+
+/* Tech Support Page */
+#Quansh_Tech_Support{ 
+    text-align: center;
+    font-weight: 700;
+    
+}
+
+
+#Tech_Support_Message{
+    padding-top: 4%;
+    text-align: center;
+    font-weight: 700;
+    color: #7c680b;
+}
+
+#Direct_Support_Message{
+    font-weight: 700;
+}
+
+#Tech_Support_Contact{
+    padding-top: 2%;
+    padding-left: 14%;
+    padding-right: 14%;
+    font-weight: 700;
+}
+
+#Tech_Support_Phone{
+    padding-right: 7%;
+}
+
+#Support_Tickets{
+    padding-top: 2%;
+    padding-left: 14%;
+    padding-right: 20%;
+}
+
+#Submit_Question_Message{
+    font-weight: 700;
+}
+
+#Question_Submitted_Successfully{
+    
+}
+
+#EmailSubmission, #QuestionSubmission{
+    
+}
+
+#Tech_Question_Submit_Button{
+    margin-left: 45%;
+    margin-bottom: 7%;
+}
+
+#FAQ_Message{
+    font-weight: 700;
+}
+
+#Tech_FAQs {
+    padding-left: 14%;
+    padding-right: 20%;
+}
+
+/* Tech Lab Page */
+#Quansh_Tech_Lab{
+    text-align: center;
+    font-weight: 700;
+}
+
+#Lab_Greetings{
+    color: #7c680b;
+    text-align: center;
+    font-weight: 700;
+    padding-top: 2%;
+    margin-top: 2%;
+}
+
+#Lab_Summary{
+    padding-top: 2%;
+    padding-left: 14%;
+    padding-right: 14%;
+}
+
+
+/* Careers Page */
+#Quansh_Tech_Jobs{
+    text-align: center;
+}
+
+#Employment_Greetings{
+    color: #7c680b;
+    text-align: center;
+    padding-top: 2%;
+    margin-top: 2%;
+    font-weight: 700;
+}
+
+#Employment_Summary{
+    padding-top: 2%;
+    padding-left: 14%;
+    padding-right: 14%;
+}
+
+#Successful_Submit_Message{
+    padding-top: 2%;
+    padding-left: 30%;
+    padding-right: 20%;
+    padding-bottom: 5%;
+}
+
+#Employment_Positions{
+    margin-left: 27%;
+    margin-right: 35%;
+    
+}
+
+#Job_Title {
+    color: #2645f1;
+}
+
+#WorkPlace {
+    color: #b81010;
+}
+
+#Job_Key_Respons{
+    color: #921f9c;
+}
+
+#Responsibilties{
+    color: #530a0a;
+}
+
+#Salary {
+    color: #358606;
+}
+
+#One_Job_Display{
+    margin-bottom: 10%;
+}
+
+/* Single Job Appliaction Page */
+#Single_Job_Position, #Job_Application_Form{
+    margin-left: 20%;
+    margin-right: 30%;
+}
+
+#Single_Job_Title{
+    color: #2645f1;
+}
+
+#Single_Salary{
+    color: #358606;
+}
+
+#Single_Location_Type, #Single_Workplace{
+    color: #b81010;
+}
+
+#Single_Job_Description, #Single_Job_Responsibilties{
+    color: #921f9c;
+}
+
+#Single_Job_Benefits{
+    color: #8b822a;
+}
+
+#Single_Job_EEO{
+    color: #000000;
+}
+
+#HR_Phone {
+    padding-right: 5%;
+}
+
+#Application_Title{
+    font-weight: 700;
+    text-align: center;
+}
+
+#Job_Application_Form {
+    padding-top: 3%;
+}
+
+#Submit_Button{
+    display: table;
+    margin: auto;
+    margin-bottom: 20%;
+}
+
+/* Locations Page */
+#Locations_Greetings{
+    color: #7c680b;
+    text-align: center;
+    padding-top: 2%;
+    margin-top: 2%;
+}
+
+#Locations_Page{
+    text-align: center;
+}
+
+#All_Locations{
+    margin-left: 20%;
+    margin-right: 20%
+}
+
+#Location_Card{
+    text-align: center;
+    display: inline-block;
+    height: 100px;
+    width: 250px;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+#More_Details_Button {
+    margin-top: 2%;
+    height: 40px;
+}
+
+/* #More_Details_Button{
+    color: #f09c2e;
+    background-color: #1a6a83;
+}
+
+#Update_Location_Button{
+    color: #d3f02e;
+    background-color: #881d1d;
+} */
+
+/* Single Location Page */
+#Update_Location_Button{
+    margin-left: 20%;
+}
+
+#Single_Location_Card{
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 25%;
+}
+
+#Single_Location_Title{
+    color: #a73a98;
+}
+
+#Store_Address, #Business_Hours{
+    color: #530a0a;
+    font-weight: 700;
+}
+
+#Entire_Address{
+    color: #110f11;
+}
+
+#Entire_Address{
+    padding-left: 32px;
+    margin-bottom: 45px;
+}
+
+#Phone_Number{
+    margin-bottom: 45px;
+}
+
+#Business_Hours_List {
+    list-style: none;
+}
+
+#Day {
+    color: #CC313D;
+    font-weight: 700;
+}
+
+#Open_And_Close_Times{
+    color: #1e6d5c;
+}
+
+/* Location Update Page for Admins Only */
+#Location_Update_Form{
+    margin-left: 25%;
+}
+
+#Store_Street, #Store_City, #Store_State, #Store_Zip,
+#Store_Phone, #Store_Opening_Time, #Store_Closing_Time {
+    width: 300px;
+    margin-top: 0.07%;
+}
+
+
+/* Customer Shopping Review Form Page */
+#Customer_Shopping_Review_Form{
+    margin-left: 14%;
+    margin-right: 15%;
+}
+
+#Shopping_Date, #Review_Score, #Entire_Review {
+    color: #13196b;
+}
+
+#Shopping_Review_Submit {
+    margin-left: 43%;
+}
+
+/* Customer Reviews Page for Quansh Tech Staff Only */
+#Quansh_Tech_Reviews_Title{
+    color: #7c680b;
+    font-weight: 700;
+    text-align: center;
+    margin-left: 14%;
+    margin-right: 14%;
+    margin-bottom: 50px;
+}
+
+
+#Entire_Review_Card{
+    margin-left: 14%;
+    margin-right: 14%;
+    margin-bottom: 100px;
+    width: 65%;
+}
+
+#Review_Card_Header{
+    font-weight: 700;
+    color: #530a0a;
+}
+
+
+#Good_Review_Score{
+    color: #30ff29;
+}
+
+#Bad_Review_Score{
+    color: #ff0000;
+}
+
+#Decent_Review_Score{
+    color: #cfcd46;
+}
+
+#Review_Message{
+    color: #8d1f37;
+}
+
+
+/* Account Registration Page */
+#Account_Register{
+    text-align: center;
+}
+
+#Create_Account_Message{
+    color: #7c680b;
+    font-weight: 700;
+    text-align: center;
+    margin-left: 14%;
+    margin-right: 14%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#Account_Registration{
+    margin-left: 14%;
+    margin-right: 10%;
+    margin-bottom: 100px;
+    width: 70%;
+    color: #2e0000;
+}
+
+#Registration_Username, #Registration_First_Name, #Registration_Last_Name,
+#Registration_Email, #Registration_Password1, #Registration_Password2{
+    color: #011e2e;
+}
+
+
+#Account_Registration_Submit_Button{
+    margin-left: 45%;
+}
+
+/* Login Page */
+#User_Login{
+    display: flex;
+    margin-top: 5%;
+    margin-right: 15%;
+    margin-left: 35%;
+}
+
+#User_Login_Form{
+    width: 400px;
+}
+
+#Login_Button{
+    margin-right: 45%;
+}
+
+#Forgot_Pass_Button{
+
+}
+
+/* Generate Reports Page */
+#All_Reports{
+    display: inline-flex;
+    margin-top: 2.5%;
+    margin-left: 14%;
+    margin-bottom: 2.5%;
+}
+
+
+#Reports_Page{ 
+    text-align: center;
+}
+
+#Product_Reports{
+}
+
+#Location_Reports{
+}
+
+#TXT_Product_Report, #CSV_Product_Report, #PDF_Locations_Report{
+}
+
+/* ECommerce Dashboard Web Page Admins Only */
+#Products_Dashboard{
+    text-align: center;
+    font-weight: 700;
+}
+
+
+#Stats_Promos{
+    display: inline-flex;
+}
+
+
+#Web_Stats, #Promotions{
+    text-align: center;
+    color: #c57812;
+}
+
+#Web_Stats_Table{
+    width: 500px;
+    margin-right: 5%;
+    margin-left: 7%
+}
+
+#Web_Stats_Table_Data{
+    color: #8d1f37;
+    background-color: #cdceae;
+}
+
+#Promotions_Table{
+    color: #8d1f37;
+    background-color: #cdceae;
+    text-align: left;
+    width: 1100px;
+}
+
+
+#All_Products_Table{
+    color: #8d1f37;
+    background-color: #cdceae;
+    margin-left: 14%;
+    width: 1300px;
+}
+
+#EOL{
+    color: #ff0000;
+    font-weight: 700;
+}
+
+#Available, #CouponCode{
+    color: #2e7917;
+    font-weight: 700;
+}
+
+#Paggination{
+    display: table;
+    margin: auto;
+}
+
+/* Retail Stores Dashboard Web Page Admins Only */
+#Retail_Stores_Dashboard{
+    text-align: center;
+    font-weight: 700;
+}
+
+#Stats_Stores{
+    display: flex;
+}
+
+#Retail_Store_Stats{
+    width: 300px;
+    margin-right: 10%;
+    margin-left: 7%
+}
+
+#Retail_Stores_Table{
+    color: #8d1f37;
+    background-color: #cdceae;
+    width: 700px;
+}
+
+#All_Store_Locations{
+    text-align: center;
+    color: #c57812;
+}
+
+/* Customers Dashbored Web Page Admins Only  */
+#QTCustomers{
+    text-align: center;
+    font-weight: 700;
+}
+
+#Pending_Tickets{
+    color: #5c0606;
+    font-weight: 700;
+    margin-left: 38%;
+    margin-right: 20%;
+    margin-top: 3%;
+}
+
+#Answered_Tickets{
+    color: #0e610b;
+    font-weight: 700;
+    margin-left: 38%;
+    margin-right: 20%;
+    margin-top: 5%;
+}
+
+
+#Customer_Ticket {
+    margin-top: 3%;
+    margin-left: 14%;
+    margin-right: 20%;
+    margin-bottom: 100px;
+    width: 65%;
+}
+
+#Pending_Ticket{
+    color: #b81010;
+    font-weight: 700;
+}
+
+#Answered_Ticket{
+    color: #1de716;
+    font-weight: 700;
+}
+
+#From_Email{
+    margin-bottom: 1.5%;
+    color: #2645f1;
+}
+
+#Customer_Inquiry{
+    color: #1d060b;
+}
+
+#Reply_To_Email{
+    color: #921f9c;
+    /* margin-left: 30%; */
+}
+
+#SomeDiv{
+    margin-bottom: 20%;
+}
+
+
+/* Human Resources Web Page HR Personal & Admins Only */
+#Stats_HR {
+    display: inline-flex;
+}
+
+#Job_Open_Title, #Quansh_Staff_Title{
+    text-align: center;
+    color: #c57812;
+}
+
+#HR_Stats_Data{
+    color: #8d1f37;
+    background-color: #cdceae;
+}
+
+#Job_Applicant_Table, #Staff_Table {
+    width: 500px;
+    margin-right: 10%;
+    margin-left: 7%
+}
+
+
