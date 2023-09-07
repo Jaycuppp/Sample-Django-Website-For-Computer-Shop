@@ -19,59 +19,60 @@
 
         <main>
             <div id="Product_Card">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card" style="width: 24rem;">
-                                <div class="card-body"> Need to Dynamically Reference Static DB Files Here 
-                                <img class="card-img-top" id="Product_Image" src="{% static SingleProduct.Picture %}" alt="">
-                                <h5 class="card-title" id="Product_Name_And_Brand"> {{ SingleProduct.Brand }} {{ SingleProduct.Name }} </h5>
-                                <p class="card-text" id="Product_Description"> {{ SingleProduct.Description }} </p>
+                <div class="row">
+                    <div class="col">
+                        <div class="card" id="Single_Product_Card">
+                            <img class="card-img-top" id="Single_Product_Image" src="{% static SingleProduct.Picture %}" alt="">
+                            <h5 class="card-title" id="Product_Name_And_Brand"> {{ SingleProduct.Brand }} {{ SingleProduct.Name }} </h5>
+                            <p class="card-text" id="Product_Description"> {{ SingleProduct.Description }} </p>
 
-                                {% comment %} Missing the Promo Calculation Logic for the HTML Page {% endcomment %}
-                                {% if SingleProduct.CouponName == "MLG360"%}
-                                <p class="card-text" id="Product_Price"> <strong> Price: </strong> ${{ SingleProduct.Price}} </p>
-                                
-                                {% elif SingleProduct.CouponName == "MKBundle"%}
-                                <p class="card-text" id="Product_Price"> <strong> Price: </strong> ${{ SingleProduct.Price }} </p>
+                            {% comment %} Missing the Promo Calculation Logic for the HTML Page {% endcomment %}
+                            {% if SingleProduct.CouponName == "MLG360"%}
+                            <p class="card-text" id="Product_Price"> <strong> Price: </strong> ${{ SingleProduct.Price}} </p>
+                            
+                            {% elif SingleProduct.CouponName == "MKBundle"%}
+                            <p class="card-text" id="Product_Price"> <strong> Price: </strong> ${{ SingleProduct.Price }} </p>
 
-                                {% else %}
-                                <p class="card-text" id="Product_Price"> <strong> Price: </strong> ${{ SingleProduct.Price }} </p>
-                                {% endif %}
+                            {% else %}
+                            <p class="card-text" id="Product_Price"> <strong> Price: </strong> ${{ SingleProduct.Price }} </p>
+                            {% endif %}
 
-                                {% comment %} Logic for When a Product is either Out of Stock and/or Discontinued {% endcomment %}
+                            {% comment %} Logic for When a Product is either Out of Stock and/or Discontinued {% endcomment %}
 
-                                {% if SingleProduct.Discontinued == False and SingleProduct.Stock > 0 %}
-                                <p class="stock-status" id="Product_Stock"> <strong> Available: </strong> {{ SingleProduct.Stock }} </p>
+                            {% if SingleProduct.Discontinued == False and SingleProduct.Stock > 0 %}
+                            <p class="stock-status" id="Product_Stock"> <strong> Available: </strong> {{ SingleProduct.Stock }} </p>
 
-                                {% elif SingleProduct.Discontinued == False and SingleProduct.Stock == 0 or SingleProduct.Stock < 0 %}
-                                <p class="stock-status" id="Product_Stock"> <strong> Currently Out Of Stock </strong> </p>
+                            {% elif SingleProduct.Discontinued == False and SingleProduct.Stock == 0 or SingleProduct.Stock < 0 %}
+                            <p class="stock-status" id="Product_Stock"> <strong> Currently Out Of Stock </strong> </p>
 
-                                {% elif SingleProduct.Discontinued == True and SingleProduct.Stock > 0%}
-                                <p class="stock-status" id="Product_Stock"> <strong> Discontinued, Only {{ SingleProduct.Stock }} Available </strong> </p>
+                            {% elif SingleProduct.Discontinued == True and SingleProduct.Stock > 0%}
+                            <p class="stock-status" id="Product_Stock"> <strong> Discontinued, Only {{ SingleProduct.Stock }} Available </strong> </p>
 
-                                {% elif SingleProduct.Discontinued == True and SingleProduct.Stock == 0 or SingleProduct.Stock < 0 %}
-                                <p class="stock-status" id="Product_Stock"> <strong> Discontinued / EOL </strong> </p>
+                            {% elif SingleProduct.Discontinued == True and SingleProduct.Stock == 0 or SingleProduct.Stock < 0 %}
+                            <p class="stock-status" id="Product_Stock"> <strong> Discontinued / EOL </strong> </p>
 
-                                {% endif %}
-                                
-                                <a href="{% url 'ShoppingCart' %}" class="btn btn-success" id="Add_To_Cart_Button"> Add to cart </a> 
-                                <a href="#" class="btn btn-info" id="Save_Item_Button"> Saved Item </a> 
-                                <br> <br>
+                            {% endif %}
+                            
+                            <div>
+                                <span id="Single_Product_Common_Buttons">
+                                    <a href="{% url 'ShoppingCart' %}" class="btn btn-success" id="Single_Add_To_Cart_Button"> Add to cart </a> 
+                                    <a href="#" class="btn btn-info" id="Single_Save_Item_Button"> Saved Item </a> 
+                                </span>
 
-
+                                <span id="Single_Product_Auth_Buttons">
                                 {% if user.is_authenticated %}
-                                <a href="{% url 'UpdateProduct' SingleProduct.id %}" class="btn btn-secondary" id="Update_Button"> Update </a>
-                                    {% if user.superuser %}
-                                    <a href="{% url 'DeleteProduct' SingleProduct.id %}" class="btn btn-danger" id="Delete_Button"> Delete </a>
+                                <a href="{% url 'UpdateProduct' SingleProduct.id %}" class="btn btn-secondary" id="Single_Update_Button"> Update </a>
+                                    {% if user.is_superuser %}
+                                    <a href="{% url 'DeleteProduct' SingleProduct.id %}" class="btn btn-danger" id="Single_Delete_Button"> Delete </a>
                                     {% endif %}
                                 {% endif %}
-                                </div>
-                            </div>
+                                </span>
+                            </div> 
                         </div>
                     </div>
                 </div>
             </div>
+        
         </main>
 
         <footer> 
