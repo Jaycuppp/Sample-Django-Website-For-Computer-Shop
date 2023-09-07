@@ -1,0 +1,19 @@
+Writing Symbols Used
+&#40 == Beginning Parenthesis
+&#41 == Ending Parenthesis
+
+
+Emojis Used 
+&#127968 == Red Roofed Home 
+&#127970 == Office Building
+&#128222 == Red Telephone
+&#128231 == Sealed Email
+&#128340 == Clock with Set Hands
+&#8658 == Double Lined Right Arrow
+&#11088 == Gold Star
+
+
+
+For More Desired Symbols, visit the link below
+
+https://www.w3schools.com/charsets/ref_utf_symbols.asp
