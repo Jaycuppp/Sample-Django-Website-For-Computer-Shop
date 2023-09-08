@@ -20,6 +20,8 @@ th{
 
 /* NavBar Extension Page */
 #Home_Image_Button{
+    /* color: #000000;
+    background-color: #000000; */
     padding-right: 500px;
     padding-left: 100px;
 }
@@ -33,11 +35,13 @@ th{
 }
 
 #Search_Button, #Product_Search_Input_Bar  {
+    /* color: #000000; */
     background-color: #F7C5CC;
     font-weight: 700;
 }
 
 #Shopping_Cart_Button {
+    /* color: #000000; */
     color: #F7C5CC;
     font-weight: 700;
 }
@@ -45,6 +49,7 @@ th{
 #Main_NavBar_Button, #NavBar_DropDown_Menu_Button
 {
     color: #2F3C7E;
+    /* background-color: #000000; */
     font-weight: 700;
 }
 
@@ -81,6 +86,8 @@ th{
 
 #Back_To_Top_Page_Button{
     display: block;
+    /* color: #000000;
+    background-color: #000000; */
 }
 
 
@@ -157,28 +164,38 @@ th{
 
 #Single_Product_Common_Buttons{
     display: flex;
+    /* color: #000000;
+    background-color: #000000; */
 }
 
 #Single_Add_To_Cart_Button{
+    /* color: #000000;
+    background-color: #000000; */
     margin-left: 14%;
     margin-right: 14%;
 }
 
 #Single_Save_Item_Button{
+    /* color: #000000;
+    background-color: #000000; */
     margin-left: 14%;
     margin-right: 14%;
-
 }
 
 #Single_Product_Auth_Buttons{
     display: flex;
+    /* color: #000000;
+    background-color: #000000; */
 }
 
 #Single_Update_Button{
-
-}
+    /* color: #000000;
+    background-color: #000000; */
+}   
 
 #Single_Delete_Button{
+    /* color: #000000;
+    background-color: #000000; */
 }
 
 
@@ -289,6 +306,8 @@ th{
 }
 
 #Tech_Question_Submit_Button{
+    /* color: #000000;
+    background-color: #000000; */
     margin-left: 45%;
     margin-bottom: 7%;
 }
@@ -425,20 +444,25 @@ th{
 #Submit_Button{
     display: table;
     margin: auto;
+    /* color: #000000;
+    background-color: #000000; */
     margin-bottom: 20%;
 }
 
 /* Locations Page */
+#Locations_Page{
+    text-align: center;
+    font-weight: 700;
+}
+
 #Locations_Greetings{
     color: #7c680b;
     text-align: center;
+    font-weight: 700;
     padding-top: 2%;
     margin-top: 2%;
 }
 
-#Locations_Page{
-    text-align: center;
-}
 
 #All_Locations{
     margin-left: 20%;
@@ -448,29 +472,31 @@ th{
 #Location_Card{
     text-align: center;
     display: inline-block;
-    height: 100px;
-    width: 250px;
+    width: 300px;
     margin-left: 5%;
     margin-top: 5%;
 }
 
-#More_Details_Button {
-    margin-top: 2%;
-    height: 40px;
+#Store_Location{
+    color: #771800;
 }
 
-/* #More_Details_Button{
-    color: #f09c2e;
-    background-color: #1a6a83;
+#More_Details_Button {
+    /* color: #000000;
+    background-color: #000000; */
+    margin: 3.5%;
 }
+
 
 #Update_Location_Button{
-    color: #d3f02e;
-    background-color: #881d1d;
-} */
+    /* color: #000000;
+    background-color: #000000; */
+}
 
 /* Single Location Page */
 #Update_Location_Button{
+    /* color: #000000;
+    background-color: #000000; */
     margin-left: 20%;
 }
 
@@ -612,6 +638,8 @@ th{
 
 
 #Account_Registration_Submit_Button{
+    /* color: #000000;
+    background-color: #000000; */
     margin-left: 45%;
 }
 
@@ -620,19 +648,31 @@ th{
     display: flex;
     margin-top: 5%;
     margin-right: 15%;
-    margin-left: 35%;
+    margin-left: 25%;
 }
 
 #User_Login_Form{
-    width: 400px;
+    width: 700px;
 }
 
 #Login_Button{
-    margin-right: 45%;
+    /* color: #000000;
+    background-color: #000000; */
+    margin-bottom: 5%;
+    margin-right: 10%;
+}
+
+#Create_Account_Button{
+    /* color: #000000;
+    background-color: #000000; */
+    margin-bottom: 5%;
+    margin-right: 10%;
 }
 
 #Forgot_Pass_Button{
-
+    /* color: #000000;
+    background-color: #000000; */
+    margin-bottom: 5%;
 }
 
 /* Generate Reports Page */
