@@ -1,8 +1,0 @@
-Front-End 
-    * Styling the Single Product Page (Alot Needs to be ReWorked)
-
-Back-End
-    *
-
-DataBase
-    *
