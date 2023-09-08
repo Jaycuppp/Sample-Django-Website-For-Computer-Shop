@@ -27,7 +27,7 @@
         {% for location in Locations %}
         <div class="card" id="Location_Card">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item"> {{location}} </li>
+            <li class="list-group-item"> <h4 id="Store_Location"> {{location}} </h4> </li>
             <span>
               <a href="{% url 'ShowLocationPage' location.id %}" class="btn btn-primary" id="More_Details_Button"> For More Details </a>
             </span>

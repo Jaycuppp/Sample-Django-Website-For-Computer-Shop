@@ -14,15 +14,9 @@ class AdminProducts(admin.ModelAdmin):
 
 @admin.register(StoreLocations)
 class AdminLocations(admin.ModelAdmin):
-    fields = ('Street', 'City', 'State', 'Zip', 'Phone', 'Opens', 'Closes', 'Store_Manager', 'Store_Image')
+    fields = ('Street', 'City', 'State', 'Zip', 'Phone', 'Opens', 'Closes', 'Store_Image')
     list_display = ('Street', 'City', 'State', 'Zip')
     ordering = ('Street', )
-    
-@admin.register(StoreManager)
-class AdminManager(admin.ModelAdmin):
-    fields = ('First_Name', 'Last_Name', 'Phone_Number', 'Email_Address', 'Employee_ID',)
-    list_display = ('First_Name', 'Last_Name', 'Employee_ID')
-    ordering = ('First_Name', )
 
 @admin.register(CouponDiscount)
 class AdminCouponDiscount(admin.ModelAdmin):

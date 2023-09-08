@@ -46,19 +46,8 @@ class StoreProducts(models.Model):
     
     def __str__(self):
         return f"{self.Brand} {self.Name}"
-
-
-class StoreManager(models.Model):
-    First_Name = models.CharField("First Name", max_length=100)
-    Last_Name = models.CharField("Last Name", max_length=200)
-    Phone_Number = models.CharField("Phone Number", max_length=100, null=True, blank=True)
-    Email_Address = models.EmailField("Email Address", max_length=100, null=True, blank=True)
-    Employee_ID = models.IntegerField("Employee ID", null=True, blank=True)
     
-    def __str__(self):
-        return self.First_Name
-
-
+    
 class StoreLocations(models.Model):
     Street = models.CharField("Location Street Address", max_length=500)
     City = models.CharField("Location City", max_length=100)
@@ -67,8 +56,7 @@ class StoreLocations(models.Model):
     Phone = models.CharField("Location Phone Number", max_length=20)
     Opens = models.TimeField("Opening Time")
     Closes = models.TimeField("Closing Time")
-    Store_Image = models.ImageField("Picture of the Computer Store", null=True, blank=True, upload_to='images')
-    Store_Manager = models.ForeignKey(StoreManager, null=True, blank=True, on_delete=models.CASCADE)
+    Store_Image = models.ImageField("Picture of the Computer Store", null=True, blank=True, upload_to='images')    
     
     @property
     def City_State_Zip(self):
