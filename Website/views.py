@@ -41,7 +41,7 @@ def ShowLocation(request, Location_ID):
 
 def UpdateLocation(request, Location_ID):
     Location = StoreLocations.objects.get(pk=Location_ID)
-    Form = LocationForm(request.POST or None, instance=Location)
+    Form = LocationForm(request.POST or None, request.FILES or None, instance=Location)
     if Form.is_valid():
         Form.save()
         return redirect('LocationPages')
@@ -292,18 +292,32 @@ def AdminDashECommerce(request):
     
 def AdminDashRetailStores(request):
     Stores = StoreLocations.objects.all()
-
+    
     return render(request, "Admin_Dashboard_Retail_Stores_Page.html", {
         "Store": Stores,
     })
     
 def AdminDashCustomerSupport(request):
-    CustomerTicketData = CustomerSupportTickets.objects.all()
+    Customer_Support_Ticket = CustomerSupportTickets.objects.all()
     
     return render(request, "Admin_Dashboard_Customer_Support_Page.html", {
-        "CSR": CustomerTicketData
+        "CSR": Customer_Support_Ticket,
     })
     
+def AdminCustomerSupportUpdate(request, Ticket_ID):
+    Customer_Support_Single_Ticket = CustomerSupportTickets.objects.get(pk=Ticket_ID)
+    Form = CustomerSubmissions(request.POST or None, instance=Customer_Support_Single_Ticket)
+    
+    if Form.is_valid():
+        Form.save()
+        return redirect('AdminDashCustomerSupport')
+        
+
+    return render(request, "Admin_Customer_Support_Update_Page.html", {
+        "CSR": Customer_Support_Single_Ticket,
+        "Support_Form": Form
+    })
+
 def AdminHumanResources(request):
     Jobs = Employment.objects.all()
     Human_Resources = JobApplications.objects.all()

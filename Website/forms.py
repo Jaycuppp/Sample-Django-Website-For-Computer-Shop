@@ -74,7 +74,8 @@ class CustomerSubmissions(ModelForm):
         
         labels = {
             'Email': '',
-            'Inquiry': ''
+            'Inquiry': '',
+            'Answered': 'Mark If this Support Ticket Has been answered',
         }
         
         widgets = {

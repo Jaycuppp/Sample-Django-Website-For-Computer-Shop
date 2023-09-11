@@ -27,6 +27,7 @@ urlpatterns = [
     path('ShoppingCart', views.ShoppingCart, name="ShoppingCart"),
     path('AdminDash/ECommerce', views.AdminDashECommerce, name="AdminDashECommerce"),
     path('AdminDash/RetailStores', views.AdminDashRetailStores, name="AdminDashRetailStores"),
+    path('AdminDash/CustomerSupport/Update/<Ticket_ID>', views.AdminCustomerSupportUpdate, name="AdminCustomerSupportUpdate"),
     path('AdminDash/CustomerSupport', views.AdminDashCustomerSupport, name="AdminDashCustomerSupport"),
     path('AdminDash/HumanResources', views.AdminHumanResources, name="AdminHumanResources"),
     path('AdminDash/CustomerReviews', views.AdminCustomerReviews, name="AdminCustomerReviews"),
