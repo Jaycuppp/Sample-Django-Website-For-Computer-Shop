@@ -27,22 +27,31 @@
             {% endif %}
 
             <div class="card" id="Single_Location_Card">
-                <img src="{% static Location.Store_Image %}" class="card-img-top" alt="...">
-                <div class="card-body"> 
-                    <h3 class="card-title" id="Single_Location_Title"> Quansh Tech {{ Location }} </h3> <br>
-                    <p class="card-text"> <h5> &#127970 <span id="Store_Address"> Store Address <span> </h5> </p>
-                    <p class="card-text" id="Entire_Address"> {{ Location.Street }} <br> {{ Location.City_State_Zip}} </p>
-                    <p class="card-text" id="Phone_Number"> &#128222 &#8658 <a href="tel:{{ Location.Phone }}"> <strong> {{ Location.Phone }} </strong> </a> </p>
-                    <p class="card-text">  <h5> &#128340 <span id="Business_Hours"> Business Hours: </span> </h5> </p>
-                    <ul id="Business_Hours_List">
-                        <li id="Open_And_Close_Times"> <span id="Day"> Mon &#8658 </span> {{Location.Opens}} to {{Location.Closes}} </li>
-                        <li id="Open_And_Close_Times"> <span id="Day"> Tues &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
-                        <li id="Open_And_Close_Times"> <span id="Day"> Wed &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
-                        <li id="Open_And_Close_Times"> <span id="Day"> Thur &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
-                        <li id="Open_And_Close_Times"> <span id="Day"> Fri &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
-                        <li id="Open_And_Close_Times"> <span id="Day"> Sat &#8658 </span> <strong> CLOSED </strong> </li>
-                        <li id="Open_And_Close_Times"> <span id="Day"> Sun &#8658 </span> <strong> CLOSED </strong>  </li>
-                    <ul>
+                <img src="{% static Location.Store_Image %}" alt="" class="card-img-top" id="Single_Location_Image">
+                <div class="card-body" id="Single_Location_Body"> 
+                    <h3 class="card-title" id="Single_Location_Title"> Quansh Tech {{ Location }} </h3>
+
+                    <div id="Single_Location_Titles"> 
+                        <p class="card-text" id="Store_Address_Title"> <h5> &#127970 <span id="Store_Address"> Store Address <span> </h5> </p>
+                        <p class="card-text" id="Business_Hours_Title"> <h5> &#128340 <span id="Business_Hours"> Business Hours </span> </h5> </p>
+                    </div>
+
+                    <div id="Single_Location_Body_Text">
+                        <p class="card-text" id="Entire_Address"> {{ Location.Street }} <br> {{ Location.City_State_Zip}} </p>
+                        <ul id="Business_Hours_List">
+                            <li id="Open_And_Close_Times" id="Mon"> <span id="Day"> Mon &#8658 </span> {{Location.Opens}} to {{Location.Closes}} </li>
+                            <li id="Open_And_Close_Times" id="Tues"> <span id="Day"> Tues &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
+                            <li id="Open_And_Close_Times" id="Wed"> <span id="Day"> Wed &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
+                            <li id="Open_And_Close_Times" id="Thur"> <span id="Day"> Thur &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
+                            <li id="Open_And_Close_Times" id="Fri"> <span id="Day"> Fri &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>
+                            <li id="Open_And_Close_Times" id="Sat"> <span id="Day"> Sat &#8658 </span> <strong> CLOSED </strong> </li>
+                            <li id="Open_And_Close_Times" id="Sun"> <span id="Day"> Sun &#8658 </span> <strong> CLOSED </strong>  </li>
+                        <ul>
+                    </div>
+
+                    <span id="Single_Location_Contact_Info"> 
+                        <p class="card-text" id="Phone_Number"> &#128222 &#8658 <a href="tel:{{ Location.Phone }}"> <strong> {{ Location.Phone }} </strong> </a> </p> 
+                    </span>
                 </div>
             </div>
         </main>
