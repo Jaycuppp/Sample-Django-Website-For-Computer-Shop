@@ -504,6 +504,7 @@ th{
     margin-top: 20px;
     margin-left: 20%;
     margin-right: 25%;
+    margin-bottom: 100px;
 }
 
 #Single_Location_Title{
@@ -793,7 +794,7 @@ th{
     font-weight: 700;
     margin-left: 38%;
     margin-right: 20%;
-    margin-top: 3%;
+    margin-top: 20px;
 }
 
 #Answered_Tickets{
@@ -837,9 +838,11 @@ th{
     /* margin-left: 30%; */
 }
 
-#SomeDiv{
-    margin-bottom: 20%;
+#Customer_Email{
+    margin-right: 10%;
 }
+
+
 
 
 /* Human Resources Web Page HR Personal & Admins Only */
