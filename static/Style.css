@@ -1,3 +1,5 @@
+/* All Styles For When The Resolution > width 991px*/
+
 /* All Pages Styling */
 body {
     background-color: #FCEDDA;
@@ -19,31 +21,53 @@ th{
 }
 
 /* NavBar Extension Page */
+
+/* Search NavBar */
+#Search_NavBar{
+    background-color: #CC313D;
+    overflow: auto;
+    overflow: hidden;
+    overflow: scroll;
+    overflow: visible;
+}
+
+#Search_Nav_Bar_Content{
+    display: flex;
+    margin-right: 100px;
+}
+
 #Home_Image_Button{
     /* color: #000000;
     background-color: #000000; */
-    padding-right: 500px;
-    padding-left: 100px;
+    margin-right: 500px;
 }
 
-#Search_NavBar{
-    background-color: #CC313D;
+#Search_Bar_Button{
+    
 }
 
-#Main_NavBar, #Account_DropDown_Options , #Business_Products_Services_DropDown_Options{
-    background-color: #ff9c77;
+#Search_Button{ 
+    background-color: #F7C5CC;
+    font-weight: 700;
 }
 
-#Search_Button, #Product_Search_Input_Bar  {
+#Product_Search_Input_Bar  {
     /* color: #000000; */
     background-color: #F7C5CC;
     font-weight: 700;
+    width: 500px;
 }
 
 #Shopping_Cart_Button {
     /* color: #000000; */
     color: #F7C5CC;
     font-weight: 700;
+}
+
+
+/* Main NavBar */
+#Main_NavBar, #Account_DropDown_Options, #Business_Products_Services_DropDown_Options{
+    background-color: #ff9c77;
 }
 
 #Main_NavBar_Button, #NavBar_DropDown_Menu_Button
@@ -97,16 +121,134 @@ th{
 }
 
 #About_Title{
-    padding-top: 2%;
+    padding-top: 75px;
+    font-weight: 700;
 }
 
-#About_Introdution, #About_Commitment, #About_Product_Range, #About_Services, #About_Competetive_Pricing,
-#About_Community_And_Support, #About_Conclusion
-{
-    color: #204714;
+#About_Us_Article{
     padding-left: 20%;
     padding-right: 20%;
-    padding-top: 0.75%;
+    padding-top: 33px;
+    padding-bottom: 250px;
+}
+
+#About_Introduction{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#Introduction_Title{
+    color: #aa3e13;
+    font-weight: 700;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Introduction_Body{
+    color: #e4541b;
+    text-shadow: 0.25px 0.25px;
+    padding-left: 3%;
+}
+
+#About_Commitment{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#Commitment_Title{
+    color: #927413;
+    font-weight: 700;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Commitment_Body{
+    color: #c5a22d;
+    text-shadow: 0.25px 0.25px;
+    padding-left: 3%;
+}
+
+#About_Products{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#Products_Title{
+    color: #053a80;
+    font-weight: 700;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Products_Body{
+    color: #0c62d3;
+    text-shadow: 0.25px 0.25px;
+    padding-left: 3%;
+}
+
+#About_Services{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#Services_Title{
+    color: #078596;
+    font-weight: 700;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Services_Body{
+    color: #16bed4;
+    text-shadow: 0.25px 0.25px;
+    padding-left: 3%;
+}
+
+#About_Pricing{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#Pricing_Title{
+    color: #088623;
+    font-weight: 700;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Pricing_Body{
+    color: #14c039;
+    text-shadow: 0.25px 0.25px;
+    padding-left: 3%;
+}
+
+#About_Community{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#Community_Title{
+    color: #600883;
+    font-weight: 700;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Community_Body{
+    color: #9212c5;
+    text-shadow: 0.25px 0.25px;
+    padding-left: 3%;
+}
+
+#About_Conclusion {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#Conclusion_Title{
+    color: #790707;
+    font-weight: 700;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Conclusion_Body{
+    color: #d31212;
+    text-shadow: 0.25px 0.25px;
+    padding-left: 3%;
 }
 
 /* Product Menu Page */
@@ -140,7 +282,6 @@ th{
 }
 
 /* Single Product Page */
-
 #Product_Card{
     margin-left: 14%;
 }
@@ -198,6 +339,8 @@ th{
     background-color: #000000; */
 }
 
+/* Product Add Page, Only for Admins */
+#New_Product_Submission_Message
 
 /* Product Update Page, Only For Admins */
 #Product_Update_Form{
@@ -866,4 +1009,7 @@ th{
     margin-left: 7%
 }
 
+/* Styles For When The Resolution <= width 991px*/
+@media screen and (min-width: 991px) {
 
+}
