@@ -2,13 +2,13 @@
 <link rel="stylesheet" type="text/css" href= "{% static 'Style.css' %}">
 
 <nav class="navbar navbar-expand-lg" id="Search_NavBar">
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="Search_Nav_Bar_Content">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item" id="Home_Image_Button">
         <a href="{% url 'HomePage' %}"> <h3> &#127968 <h3> </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item" id="Search_Bar_Button">
         <form class="d-flex" method=POST action="{% url 'ProductSearchResultPage' %}">
           {% csrf_token %}
           <input class="form-control me-2" id="Product_Search_Input_Bar" type="search" placeholder="Search Product" name="Searched" aria-label="Search">
