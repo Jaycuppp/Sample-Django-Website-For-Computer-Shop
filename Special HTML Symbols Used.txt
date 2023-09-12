@@ -11,6 +11,7 @@ Emojis Used
 &#128340 == Clock with Set Hands
 &#8658 == Double Lined Right Arrow
 &#11088 == Gold Star
+&#128075 == Waving Hand
 
 
 
