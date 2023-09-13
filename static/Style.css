@@ -407,7 +407,6 @@ th{
     
 }
 
-
 #Tech_Support_Message{
     padding-top: 4%;
     text-align: center;
@@ -926,7 +925,7 @@ th{
     color: #c57812;
 }
 
-/* Customers Dashbored Web Page Admins Only  */
+/* Customer Support Dashboard, Admins Only  */
 #QTCustomers{
     text-align: center;
     font-weight: 700;
@@ -962,14 +961,16 @@ th{
     font-weight: 700;
 }
 
+#From_Email{
+}
+
 #Answered_Ticket{
     color: #1de716;
     font-weight: 700;
 }
 
-#From_Email{
-    margin-bottom: 1.5%;
-    color: #2645f1;
+#For_Email{
+
 }
 
 #Customer_Inquiry{
@@ -982,10 +983,51 @@ th{
 }
 
 #Customer_Email{
-    margin-right: 10%;
+    margin-right: 5%;
 }
 
+#Update_Ticket_Button{
+    background-color: #3ba044;
+    color: #1f0549;
+}
 
+/* Customer Support Status Update Change, Admins Only */
+#Ticket_Status_Update_Page{
+    text-align: center;
+    font-weight: 700;
+}
+
+#Single_CSR_Ticket{
+    display: table;
+    margin: auto;
+    padding-right: 10%;
+    padding-top: 5%;
+}
+
+#Ticket_Update_Form{
+    margin-top: 30px;
+    margin-left: 20%;
+}
+
+#Check_Box{
+    color: #277c00;
+    font-weight: 700;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Empty_Box{
+    color: #bd0600;
+    font-weight: 700;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Support_Status_Change_Form{
+    margin-left: 14%;
+}
+
+#Update_Ticket_Status_Button{
+    margin-top: 20px;
+}
 
 
 /* Human Resources Web Page HR Personal & Admins Only */
@@ -1008,6 +1050,15 @@ th{
     margin-right: 10%;
     margin-left: 7%
 }
+
+/* Error Page 404 For People Who Don't Have Credentials to Certian Web Pages */
+#Page_404_Error_Image{
+    display: block;
+    margin: auto;
+    width: 1200px;
+    padding: 5%;
+}
+
 
 /* Styles For When The Resolution <= width 991px*/
 @media screen and (min-width: 991px) {
