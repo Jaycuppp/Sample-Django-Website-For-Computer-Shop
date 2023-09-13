@@ -70,18 +70,22 @@ class LocationForm(ModelForm):
 class CustomerSubmissions(ModelForm):
     class Meta:
         model = CustomerSupportTickets
-        fields = ('Email', 'Inquiry')
+        fields = ('Email', 'Inquiry',)
         
         labels = {
             'Email': '',
             'Inquiry': '',
-            'Answered': 'Mark If this Support Ticket Has been answered',
         }
         
         widgets = {
             'Email': forms.EmailInput(attrs={'class':'form-control', 'id':'EmailSubmission', 'placeholder': 'Enter Email'}),
             'Inquiry': forms.Textarea(attrs={'class':'form-control', 'id':'QuestionSubmission', 'placeholder': 'Enter Question(s)'}),
         }
+        
+class CSRUpdateForm(ModelForm):
+    class Meta:
+        model = CustomerSupportTickets
+        fields = ('Answered',)
         
 class JobApplicatioNSubmissions(ModelForm):
     class Meta:

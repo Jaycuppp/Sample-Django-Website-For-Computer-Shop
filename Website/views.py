@@ -298,22 +298,28 @@ def AdminDashRetailStores(request):
     })
     
 def AdminDashCustomerSupport(request):
-    Customer_Support_Ticket = CustomerSupportTickets.objects.all()
+    Customer_Support_Tickets = CustomerSupportTickets.objects.all()
+    # Form = CSRUpdateForm(request.POST or None, all=Customer_Support_Tickets)
+    
+    # if Form.is_valid():
+    #     Form.save()
+    #     return redirect('AdminDashCustomerSupport')
     
     return render(request, "Admin_Dashboard_Customer_Support_Page.html", {
-        "CSR": Customer_Support_Ticket,
+        "CSR": Customer_Support_Tickets,
+        # "Status_Update": Form
     })
     
 def AdminCustomerSupportUpdate(request, Ticket_ID):
     Customer_Support_Single_Ticket = CustomerSupportTickets.objects.get(pk=Ticket_ID)
-    Form = CustomerSubmissions(request.POST or None, instance=Customer_Support_Single_Ticket)
+    Form = CSRUpdateForm(request.POST or None, instance=Customer_Support_Single_Ticket)
     
     if Form.is_valid():
         Form.save()
         return redirect('AdminDashCustomerSupport')
     
-    return render(request, "Admin_Customer_Support_Update_Page.html", {
-        "CSR": Customer_Support_Single_Ticket,
+    return render(request, "Admin_Update_Support_Ticket_Page.html", {
+        "Single_CSR_Ticket": Customer_Support_Single_Ticket,
         "Support_Form": Form
     })
 
