@@ -311,8 +311,7 @@ def AdminCustomerSupportUpdate(request, Ticket_ID):
     if Form.is_valid():
         Form.save()
         return redirect('AdminDashCustomerSupport')
-        
-
+    
     return render(request, "Admin_Customer_Support_Update_Page.html", {
         "CSR": Customer_Support_Single_Ticket,
         "Support_Form": Form

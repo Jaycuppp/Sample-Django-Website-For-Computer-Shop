@@ -27,9 +27,9 @@
             <div class="card" id="Customer_Ticket">
                 <h3 class="card-header" id="Pending_Ticket"> Pending Ticket </h3>
                 <div class="card-body">
-                    <h5 class="card-text" id="From_Email"> From: {{Inq.Email}} <a href="{% url 'AdminCustomerSupportUpdate' Inq.id}" class="btn btn-warning" id="Update_Ticket_Button"> Update Support Ticket </a> </h5>
+                    <h5 class="card-text" id="From_Email"> From: {{Inq.Email}} <a href="{% url 'UpdateCSRTicket' Inq.id %}" class="btn btn-warning" id="Update_Ticket_Button"> Update Support Ticket </a> </h5>
                     <p class="card-text" id="Customer_Inquiry"> {{Inq.Inquiry}} </p> 
-                    <span id="Reply_To_Email"> Reply To: <a href="mailto:{{Inq.Email}}" class="btn btn-primary" id="Customer_Email"> {{Inq.Email}} </a> </span>
+                    <span id="Reply_To_Email"> Reply To: <a href="mailto:{{Inquery.Email}}" class="btn btn-primary" id="Customer_Email"> {{Inq.Email}} </a> </span>
                 </div>
             </div> 
                 {% endif %}
@@ -43,14 +43,14 @@
             <div class="card" id="Customer_Ticket">
                 <h3 class="card-header" id="Answered_Ticket"> Answered Ticket </h3>
                 <div class="card-body">
-                    <h5 class="card-text" id="From_Email"> From: {{Inq.Email}} <a href="{% url 'AdminCustomerSupportUpdate' Inq.id}" class="btn btn-warning" id="Update_Ticket_Button"> Update Support Ticket </a> </h5>
+                    <h5 class="card-text" id="From_Email"> From: {{Inq.Email}} <a href="{% url 'UpdateCSRTicket' Inq.id %}" class="btn btn-warning" id="Update_Ticket_Button"> Update Support Ticket </a> </h5>
                     <p class="card-text" id="Customer_Inquiry"> {{ Inq.Inquiry }} </p>
                     <span id="Reply_To_Email"> Check In On: <a href="mailto:{{Inq.Email}}" class="btn btn-primary" id="Customer_Email"> {{Inq.Email}} </a> </span>
                 </div>
             </div> 
                 {% endif %}
             {% endfor %}
-            
+
         </main>
 
         <footer> 
