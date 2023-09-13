@@ -23,10 +23,16 @@ def Login_Auth(request):
     else:
         return render(request, "Login.html", {})
     
+    
 def User_Logout(request):
     logout(request)
     messages.success(request, ("You have logged out!"))
     return redirect("HomePage")
+
+
+def User_Forgot_Password(request):
+    return render(request, "User_Forgot_Password_Page.html")
+
 
 def User_Register(request):
     if request.method == "POST":
