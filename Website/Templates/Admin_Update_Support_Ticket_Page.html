@@ -1,4 +1,6 @@
 {% load static %}
+
+{% if user.is_superuser or user.username == "QTCsr"%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,3 +37,8 @@
         </footer>
     </body>
 </html>
+{% else %}
+
+    {% include '404_Error_Page.html'%}
+
+{% endif %}
