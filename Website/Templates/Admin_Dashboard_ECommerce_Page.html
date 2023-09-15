@@ -19,7 +19,6 @@
         <h1 id="Products_Dashboard"> ECommerce Dashboard </h1>
         {% include "Navbar.html"%} <br>
         </header>
-
         <main>
             <div id="Stats_Promos">                          
                 <ul class="list-group" id="Web_Stats_Table">
@@ -80,7 +79,7 @@
                 {% for Product in PaginatedProducts%}
                 <tbody>
                     <tr>
-                        <td> <a href="{% url 'ShowProductPage' Product.id %}"> Click Me </a> </td>
+                        <td> <a href="{% url 'ShowProductPage' Product.id %}" id="View_Product_Link"> Click Me </a> </td>
                         <td> {{Product.Brand}} </td>
                         <td> {{Product.Name}} </td>
 

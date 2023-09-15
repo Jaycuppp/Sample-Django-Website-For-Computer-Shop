@@ -25,13 +25,13 @@
             <div id="Stats_Stores">
                 <ul class="list-group" id="Retail_Store_Stats">
                     <h2 id="Web_Stats"> Physical Store Statistics </h2> 
-                    <li class="list-group-item d-flex justify-content-between align-items-center" id="Web_Stats_Table_Data"> 
+                    <li class="list-group-item d-flex justify-content-between align-items-center" id="Retail_Stats_Table_Data"> 
                         Total In-Store Purchases <span class="badge bg-primary rounded-pill"> 77 </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center" id="Web_Stats_Table_Data"> 
+                    <li class="list-group-item d-flex justify-content-between align-items-center" id="Retail_Stats_Table_Data"> 
                         Total Retail Stores <span class="badge bg-primary rounded-pill"> {{Store.count}}  </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center" id="Web_Stats_Table_Data"> 
+                    <li class="list-group-item d-flex justify-content-between align-items-center" id="Retail_Stats_Table_Data"> 
                         Total In-Store Returns <span class="badge bg-primary rounded-pill"> 4 </span>
                     </li>
                 </ul>
@@ -53,7 +53,7 @@
                     <tbody>
                         <tr>
                         {% for Store in Store %}
-                            <td> <a href="{% url 'ShowLocationPage' Store.id %}" > Click Me  <a> </td>
+                            <td> <a href="{% url 'ShowLocationPage' Store.id %}" id="View_Store_Link"> Click Me  <a> </td>
                             <td> {{ Store.Street }} </td>
                             <td> {{ Store.City }}, {{ Store.State }} </td>
                             <td> {{ Store.Zip }} </td>

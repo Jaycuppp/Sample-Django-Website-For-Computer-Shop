@@ -32,14 +32,18 @@
                 <div class="card-body" id="Review_Card_Body">
 
                     {% if Review.ReviewScore >= 3.5 %} 
-                    <h4 class="card-title" id="Good_Review_Score"> {{ Review.ReviewScore }} / 5.0 &#11088 &#40Good&#41 Review</h4>
-                    {% elif Review.ReviewScore <= 2.5 %}
-                    <h4 class="card-title" id="Bad_Review_Score"> {{ Review.ReviewScore }} / 5.0 &#11088 &#40Bad&#41 Review</h4>
-                    {% else %}
-                    <h4 class="card-title" id="Decent_Review_Score"> {{ Review.ReviewScore }} / 5.0 &#11088 &#40Decent&#41 Review</h4>
-                    {% endif %}
+                    <h4 class="card-title" id="Good_Review_Score"> {{ Review.ReviewScore }} / 5.0 &#11088s &#40Good&#41 Review</h4>
+                    <p class="card-text" id="Good_Review_Message"> {{ Review.TotalReview }} </p>
 
-                    <p class="card-text" id="Review_Message"> {{ Review.TotalReview }} </p>
+                    {% elif Review.ReviewScore <= 2.5 %}
+                    <h4 class="card-title" id="Bad_Review_Score"> {{ Review.ReviewScore }} / 5.0 &#11088s &#40Bad&#41 Review</h4>
+                    <p class="card-text" id="Bad_Review_Message"> {{ Review.TotalReview }} </p>
+
+                    {% else %}
+                    <h4 class="card-title" id="Average_Review_Score"> {{ Review.ReviewScore }} / 5.0 &#11088s &#40Decent&#41 Review</h4>
+                    <p class="card-text" id="Average_Review_Message"> {{ Review.TotalReview }} </p>
+
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

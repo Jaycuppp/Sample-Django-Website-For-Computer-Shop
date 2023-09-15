@@ -826,14 +826,29 @@ th{
 
 #Good_Review_Score{
     color: #30ff29;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Good_Review_Message{
+    color: #11500e;
 }
 
 #Bad_Review_Score{
     color: #ff0000;
+    text-shadow: 0.25px 0.25px;
 }
 
-#Decent_Review_Score{
+#Bad_Review_Message{
+    color: #6d0808;
+}
+
+#Average_Review_Score{
     color: #cfcd46;
+    text-shadow: 0.25px 0.25px;
+}
+
+#Average_Review_Message{
+    color: #757427;
 }
 
 #Review_Message{
@@ -942,9 +957,9 @@ th{
 }
 
 
-#Web_Stats, #Promotions{
+#Web_Stats, #Promotions, #All_Comp_Products{
     text-align: center;
-    color: #c57812;
+    color: #3a0629;
 }
 
 #Web_Stats_Table{
@@ -954,23 +969,27 @@ th{
 }
 
 #Web_Stats_Table_Data{
-    color: #8d1f37;
-    background-color: #cdceae;
+    color: #201E20;
+    background-color: #E0A96D;
 }
 
 #Promotions_Table{
-    color: #8d1f37;
-    background-color: #cdceae;
+    color: #201E20;
+    background-color: #E0A96D;
     text-align: left;
     width: 1100px;
 }
 
 
 #All_Products_Table{
-    color: #8d1f37;
-    background-color: #cdceae;
+    color: #201E20;
+    background-color: #E0A96D;
     margin-left: 14%;
     width: 1300px;
+}
+
+#View_Product_Link{
+    color: #201E20;
 }
 
 #EOL{
@@ -1004,16 +1023,26 @@ th{
     margin-left: 7%
 }
 
+#Retail_Stats_Table_Data{
+    color: #201E20;
+    background-color: #E0A96D;
+}
+
 #Retail_Stores_Table{
-    color: #8d1f37;
-    background-color: #cdceae;
+    color: #201E20;
+    background-color: #E0A96D;
     width: 700px;
 }
 
 #All_Store_Locations{
     text-align: center;
-    color: #c57812;
+    color: #3a0629;
 }
+
+#View_Store_Link{
+    color: #201E20;
+}
+
 
 /* Customer Support Dashboard, Admins Only  */
 #QTCustomers{
