@@ -25,10 +25,6 @@ th{
 /* Search NavBar */
 #Search_NavBar{
     background-color: #CC313D;
-    overflow: auto;
-    overflow: hidden;
-    overflow: scroll;
-    overflow: visible;
 }
 
 #Search_Nav_Bar_Content{
@@ -39,7 +35,8 @@ th{
 #Home_Image_Button{
     /* color: #000000;
     background-color: #000000; */
-    margin-right: 500px;
+    margin-right: 100px;
+    margin-left: 200px
 }
 
 #Search_Bar_Button{
@@ -55,13 +52,85 @@ th{
     /* color: #000000; */
     background-color: #F7C5CC;
     font-weight: 700;
-    width: 500px;
+    width: 1000px;
 }
 
 #Shopping_Cart_Button {
     /* color: #000000; */
     color: #F7C5CC;
     font-weight: 700;
+}
+
+
+/* New Styling for Search NavBar Extension on Smaller Resolutions */
+@media screen and (max-width: 1752px) {
+    #Shopping_Cart_Button{
+        height: 40px;
+        margin-top: -5px;
+    }
+}
+
+@media screen and (max-width: 1625px) {
+    #Home_Image_Button{
+        margin-right: 50px;
+        margin-left: 150px;
+    }
+
+    #Shopping_Cart_Button{
+        margin-top: 0.5px;
+    }
+}
+
+@media screen and (max-width: 1569px){
+    #Shopping_Cart_Button{
+        margin-top: -5px;
+    }
+}
+
+@media screen and (max-width: 1425px){
+    #Home_Image_Button{
+        margin-right: 50px;
+        margin-left: 100px;
+    }
+}
+
+
+@media screen and (max-width: 1375px){
+    #Shopping_Cart_Button{
+        margin-top: 0px;
+    }
+
+    #Product_Search_Input_Bar  {
+        width: 700px;
+    }
+}
+
+@media screen and (max-width: 1219px){
+    #Shopping_Cart_Button{
+        margin-top: -5px;
+    }
+
+}
+
+@media screen and (max-width: 1075px){
+    #Shopping_Cart_Button{
+        margin-top: 0px;
+    }
+
+    #Product_Search_Input_Bar  {
+        width: 500px;
+    }
+
+}
+
+@media screen and (max-width: 1075px){
+    #Shopping_Cart_Button{
+        margin-top: -5px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+
 }
 
 
@@ -112,6 +181,27 @@ th{
     display: block;
     /* color: #000000;
     background-color: #000000; */
+}
+
+/* New Styling for HomePage on Smaller Resolutions */
+@media screen and (max-width: 560px) {
+    #Business_Name_Quansh_Tech{
+    }
+    
+    #LogIn_LogOut_Alert{
+    }
+    
+    #Picture_SlideShow{
+    }
+    
+    #Computer_Store_Email_Home {
+    }
+    
+    #Computer_Store_Contact_Info {
+    }
+    
+    #Back_To_Top_Page_Button{
+    }
 }
 
 
@@ -1057,16 +1147,4 @@ th{
     margin: auto;
     width: 100%;
     height: 100%;
-}
-
-
-/* Styles For When The Resolution <= width 991px*/
-@media screen and (min-width: 991px) {
-    #Home_Image_Button{
-        margin-right: 0px;
-    }
-    
-    #Product_Search_Input_Bar{
-        width: 10px;
-    }
 }
