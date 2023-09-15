@@ -12,7 +12,11 @@ Emojis Used
 &#8658 == Double Lined Right Arrow
 &#11088 == Gold Star
 &#128075 == Waving Hand
-
+&#128141 == Wedding Ring
+&#128187 == Computer Labtop
+&#129309 == Hand Shake
+&#128184 == Money Bills
+&#127758 == Global Sphere
 
 
 For More Desired Symbols, visit the link below
