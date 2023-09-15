@@ -21,8 +21,8 @@
 
         <main>
             <div id="Single_CSR_Ticket"> 
-                <h4 id="Check_Box"> Check Box == Answered Ticket </h4>
-                <h4 id="Empty_Box"> Empty Box == UnAnswered Ticket </h4>
+                <h4 id="Check_Box"> Check Box == Answered Ticket for {{ Single_CSR_Ticket.Email }} </h4>
+                <h4 id="Empty_Box"> Empty Box == UnAnswered Ticket from {{ Single_CSR_Ticket.Email }}</h4>
                 <form method=POST id="Ticket_Update_Form">
                     {% csrf_token %}
                     <span id="Support_Status_Change_Form"> <label> Click Me <label> {{ Support_Form.Answered }} </span> <br>

@@ -20,6 +20,8 @@
         </header>
 
         <main>
+
+
             <span> <h2 id="Pending_Tickets"> All Pending Tickets </h2> <span>
             {% for Inq in CSR %}
                 {% if Inq.Answered == False %}
@@ -44,7 +46,7 @@
             {% endfor %}
 
 
-            <span> <h2 id="Answered_Tickets"> All Answered Tickets </h2> </span>
+            <span> <h2 id="Answered_Tickets"> All {{Answered.count}} Answered Tickets </h2> </span>
             {% for Inq in CSR %}
                 {% if Inq.Answered == True %}
             <div class="card" id="Customer_Ticket">

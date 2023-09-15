@@ -299,6 +299,8 @@ def AdminDashRetailStores(request):
     
 def AdminDashCustomerSupport(request):
     Customer_Support_Tickets = CustomerSupportTickets.objects.all()
+    # Answered = CustomerSupportTickets.objects.get(Answered=True)
+    # Pending = CustomerSupportTickets.objects.get(Answered=False)
     # Form = CSRUpdateForm(request.POST or None, all=Customer_Support_Tickets)
     
     # if Form.is_valid():
@@ -307,6 +309,8 @@ def AdminDashCustomerSupport(request):
     
     return render(request, "Admin_Dashboard_Customer_Support_Page.html", {
         "CSR": Customer_Support_Tickets,
+        # "Answered": Answered,
+        # "Pending": Pending,
         # "Status_Update": Form
     })
     
