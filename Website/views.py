@@ -1,7 +1,7 @@
 # Necessary Website creation Libraries
 from turtle import setundobuffer
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, FileResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, FileResponse, Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator    
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -17,7 +17,15 @@ from .models import *
 from .forms import *
 
 def HomePage(request):
+    
+    SS1 = get_object_or_404(Pictures, pk=1)
+    SS2 = get_object_or_404(Pictures, pk=2)
+    SS3 = get_object_or_404(Pictures, pk=3)
+        
     return render(request, "Home_Page.html", {
+        'SS1': SS1,
+        'SS2': SS2,
+        'SS3': SS3,
     })
 
 def AboutUsPage(request):

@@ -4,6 +4,12 @@ from .models import *
 from django.contrib.auth.models import Group
 
 #admin.site.unregister(Group)
+@admin.register(Pictures)
+class AdminPictures(admin.ModelAdmin):
+    fields = ('Name', 'Image', 'Custom_File')
+    list_display = ('Name',)
+    
+
 @admin.register(StoreProducts)
 class AdminProducts(admin.ModelAdmin):
     fields = ('Name', 'Brand', 'Price', 'UPC', 'SKU', 'Stock', 'Description', 'Picture', 'Coupon', 'Discontinued')

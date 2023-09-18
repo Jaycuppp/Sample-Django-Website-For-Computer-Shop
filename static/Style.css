@@ -1043,6 +1043,44 @@ th{
     color: #201E20;
 }
 
+/* Leaving a Review Page */
+
+#Add_A_Review_Header{
+    text-align: center; 
+    font-weight: 700;
+}
+
+#Review_Form{
+    display: block;
+    margin: auto;
+    padding-top: 5%;
+    width: 75%;
+}
+
+#Review_Form_Title{
+    text-align: center; 
+    font-weight: 700;
+    color: #19172e;
+    margin-bottom: 30px;
+}
+
+#Good_Title{
+    color: #088623;
+}
+
+#Bad_Title{
+    color: #bdad1c;
+}
+
+#Ugly_Title{
+    color: #ff0000;
+}
+
+#Review_Form_Survey_Submit{
+    margin-left: 42%;
+    margin-right: 40%;
+}
+
 
 /* Customer Support Dashboard, Admins Only  */
 #QTCustomers{

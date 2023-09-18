@@ -14,7 +14,7 @@
 
     <body>
         <header> 
-            <h1 style="text-align: center; font-weight: 700"> Add a Review From Your Shopping Expereince </h1>
+            <h1 id="Add_A_Review_Header"> Add a Review From Your Shopping Expereince </h1>
             {% include "Navbar.html"%}
         </header>
 
@@ -23,7 +23,7 @@
             {% else %}
 
             <div id="Review_Form"> 
-                <h2 id="Review_Form_Title"> Feel Free to Leave a Review of the Good, Bad, or Ugly Kind</h2>
+                <h2 id="Review_Form_Title"> Feel Free to Leave a Review of the <span id="Good_Title"> Nice,</span> <span id="Bad_Title"> Not So Nice,</span> or <span id="Ugly_Title"> Ugly</span> Kind</h2>
                 <form action="" method=POST id="Review_Form_Survey">
                     {% csrf_token %}
                     {{ form.as_p }}

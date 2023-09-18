@@ -9,6 +9,15 @@ def ImageResize(Height, Width):
     return 0
 
 
+class Pictures(models.Model):
+    Name = models.CharField("Name of the Image Being Used", max_length=255)
+    Image = models.ImageField("The Image", null=True, blank=True, upload_to='images')
+    Custom_File = models.FileField("Any File", null=True, blank=True)
+    
+    def __str__(self):
+        return self.Name
+
+
 class CouponDiscount(models.Model):
     CouponName = models.CharField("Coupon Code", max_length=69)
     Description = models.TextField("Coupon Description", null=True, blank=True, max_length=500)
