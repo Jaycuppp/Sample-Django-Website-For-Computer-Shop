@@ -372,6 +372,10 @@ def CustomerReviewFormPage(request):
                     {'form': form, 
                     'submitted': submitted,
                     'CustomerReviews': Reviews })
+    
+
+def AccountPage(request):
+    return render(request, "Account_My_Account_Page.html", {})
 
 
 def ReportsPage(request):

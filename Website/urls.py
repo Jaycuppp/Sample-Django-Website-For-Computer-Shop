@@ -24,6 +24,7 @@ urlpatterns = [
     path('DeleteProduct/<Product_ID>', views.DeleteProduct, name="DeleteProduct"),
     path('ProductSearch', views.ProductSearchPage, name="ProductSearchResultPage"),
     path('ProductAdd', views.ProductAddPage, name="AddProductPage"),
+    path('Account/MyAccount', views.AccountPage, name="MyAccountPage"),
     path('ShoppingCart', views.ShoppingCart, name="ShoppingCart"),
     path('AdminDash/ECommerce', views.AdminDashECommerce, name="AdminDashECommerce"),
     path('AdminDash/RetailStores', views.AdminDashRetailStores, name="AdminDashRetailStores"),
