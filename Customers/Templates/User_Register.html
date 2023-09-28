@@ -20,10 +20,11 @@
 
         <main> 
             <h3 id="Create_Account_Message"> Create Your Quansh Tech Account Below </h3>
+            
             <div class= "shadow p-3 mb-5 bg-body-tertiary rounded" id="Account_Registration">
                 {% if Form.errors %}
                 <h4> Sorry There was an error registering your Account. Please try again. </h4>
-                <form action="{% url 'CreateAccount'%}" method=POST>
+                <form action="{% url 'CreateAccount'%}" method=POST id="Registration_Form">
                     <div>
                         {% csrf_token %}
                         {{ Form.as_p }}
@@ -32,7 +33,7 @@
                 </form>
                 {% else %}         
 
-                <form action="{% url 'CreateAccount'%}" method=POST>
+                <form action="{% url 'CreateAccount'%}" method=POST id="Registration_Form">
                     <div>
                         {% csrf_token %}
                         {{ Form.as_p }}
@@ -40,7 +41,7 @@
                     <button type="submit" value="Submit" class="btn btn-primary" id="Account_Registration_Submit_Button"> Submit </button>
                 </form>
                 {% endif %}
-            </div>
+            </div> <br> <br> <br> <br> <br> <br> <br> <br>
         </main>
 
 

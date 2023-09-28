@@ -42,6 +42,9 @@ def LocationsPage(request):
 
 def ShowLocation(request, Location_ID):
     Location = StoreLocations.objects.get(pk=Location_ID)
+    
+    Map_Access_Token = 1 
+    
     return render(request, "Locations_Closer_View_Page.html", {
         "Location": Location
         })
@@ -377,6 +380,12 @@ def CustomerReviewFormPage(request):
 def AccountPage(request):
     return render(request, "Account_My_Account_Page.html", {})
 
+def MyShoppingCart(request):
+    return render(request, "Account_My_Shopping_Cart_Page.html", {})
+
+def MySupport(request):
+    return render(request, "Account_My_Support_Page.html", {})
+
 
 def ReportsPage(request):
     return render(request, "Admin_Website_Reports_Page.html", {})
@@ -393,7 +402,7 @@ def ProductText(response):
     
     # Pulling the Data from Models file to append each part of data onto the empty array above
     for Product in Products:
-        lines.append(f'{Product.Name}\n{Product.Price}\n{Product.Stock}\n{Product.Description}\n{Product.Coupon}\n\n')
+        lines.append(f'{Product.Name}\n{Product.Price}\n{Product.Stock}\n{Product.Summary}\n{Product.Coupon}\n\n')
 
     # Writting the orgainzed data onto the lines array
     response.writelines(lines)
@@ -411,9 +420,9 @@ def ProductCSV(response):
     writer = csv.writer(response)
     
     # Instructing the Writer on what to write for each row
-    writer.writerow(['Product Name', 'Selling Price', 'Total Stock', 'Product Description', 'Image URL Link', 'Applicable Coupon'])
+    writer.writerow(['Product Name', 'Selling Price', 'Total Stock', 'Product Summary', 'Image URL Link', 'Applicable Coupon'])
 
     # Pulling the Data from Models file to write each part in the writerow method
     for Product in Products:
-        writer.writerow([Product.Name, Product.Price, Product.Stock, Product.Description, Product.Coupon])
+        writer.writerow([Product.Name, Product.Price, Product.Stock, Product.Summary, Product.Coupon])
     return response

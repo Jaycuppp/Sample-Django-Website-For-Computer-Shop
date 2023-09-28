@@ -31,13 +31,16 @@
                 <div class="card-body" id="Single_Location_Body"> 
                     <h3 class="card-title" id="Single_Location_Title"> Quansh Tech {{ Location }} </h3>
 
-                    <div id="Single_Location_Titles"> 
-                        <p class="card-text" id="Store_Address_Title"> <h5> &#127970 <span id="Store_Address"> Store Address <span> </h5> </p>
-                        <p class="card-text" id="Business_Hours_Title"> <h5> &#128340 <span id="Business_Hours"> Business Hours </span> </h5> </p>
+                    <div id="Single_Location_Address_Section"> 
+                        <p class="card-text" id="Store_Address_Title"> <h5> &#127970 <span id="Store_Address"> Store Address </h5> </p>
+                        <p class="card-text"> <address id="Entire_Address"> {{ Location.Street }} <br> {{ Location.City_State_Zip}} </address> </p>
+                        {% if user.is_superuser or user.is_staff %}
+                        <p class="card-text"> <h3 id="Lab_Summary" style="color: red;"> &#11088 Interactive Map Logic Goes Here </h3> </p>
+                        {% endif %}
                     </div>
 
                     <div id="Single_Location_Body_Text">
-                        <p class="card-text" id="Entire_Address"> {{ Location.Street }} <br> {{ Location.City_State_Zip}} </p>
+                        <p class="card-text" id="Business_Hours_Title"> <h5> &#128340 <span id="Business_Hours"> Business Hours </span> </h5> </p>
                         <ul id="Business_Hours_List">
                             <li id="Open_And_Close_Times" id="Mon"> <span id="Day"> Mon &#8658 </span> {{Location.Opens}} to {{Location.Closes}} </li>
                             <li id="Open_And_Close_Times" id="Tues"> <span id="Day"> Tues &#8658 </span> {{Location.Opens}} to {{Location.Closes}}</li>

@@ -37,7 +37,17 @@ class StoreProducts(models.Model):
     SKU = models.CharField("Product SKU", max_length=255, null=True, blank=True)
     UPC = models.CharField("Product UPC", max_length=255, null=True, blank=True)
     Stock = models.IntegerField("Product Stock", null=True, blank=True)
-    Description = models.TextField("Product Description", max_length=500, null=True, blank=True)
+    Summary = models.TextField("Product Summary", max_length=1000, null=True, blank=True)
+    Key_Feat_1 = models.CharField("Key Prod Feat # 1", max_length=255, null=True, blank=True)
+    Key_Feat_2 = models.CharField("Key Prod Feat # 2", max_length=255, null=True, blank=True)
+    Key_Feat_3 = models.CharField("Key Prod Feat # 3", max_length=255, null=True, blank=True)
+    Key_Feat_4 = models.CharField("Key Prod Feat # 4", max_length=255, null=True, blank=True)
+    Key_Feat_5 = models.CharField("Key Prod Feat # 5", max_length=255, null=True, blank=True)
+    Key_Feat_6 = models.CharField("Key Prod Feat # 6", max_length=255, null=True, blank=True)
+    Key_Feat_7 = models.CharField("Key Prod Feat # 7", max_length=255, null=True, blank=True)
+    Key_Feat_8 = models.CharField("Key Prod Feat # 5", max_length=255, null=True, blank=True)
+    Key_Feat_9 = models.CharField("Key Prod Feat # 6", max_length=255, null=True, blank=True)
+    Key_Feat_10 = models.CharField("Key Prod Feat # 7", max_length=255, null=True, blank=True)
     Picture = models.ImageField("Product Picture", null=True, blank=True, upload_to='images')
     Coupon = models.ForeignKey(CouponDiscount, null=True, blank=True, on_delete=models.CASCADE)
     Discontinued = models.BooleanField("EOL Product", default=False)
@@ -46,11 +56,6 @@ class StoreProducts(models.Model):
     def Product_Image_ReSize(self):
         ImageResize(200, 200)
         return 0
-    
-    @property
-    def Promo_Product(self):
-
-        return self.Discontinued
     
     def __str__(self):
         return f"{self.Brand} {self.Name}"
@@ -217,7 +222,7 @@ class CurrentEmployees(models.Model):
 class JobApplications(models.Model):
     First_Name = models.CharField("Applicant's First Name", max_length=255)
     Last_Name = models.CharField("Applicant's Last Name", max_length=255)
-    DesiredJob = models.ForeignKey(Employment, blank=True, on_delete=models.CASCADE)
+    DesiredJob = models.CharField("Applicant's Desired Job", max_length=255)
     Phone_Number = models.CharField("Applicant's Phone Number", max_length=255)
     Email_Address = models.EmailField("Applicant's Email Address", max_length=255)
     Resume = models.FileField("Applicant's Resume", blank=True)

@@ -22,13 +22,13 @@
             <div id="User_Login">
                 <form action="" method=POST id="User_Login_Form">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label"> Username </label>
+                        <label for="exampleInputEmail1" class="form-label" id="Login_Username"> Username </label>
                         {% csrf_token %}
                         <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label"> Password </label>
+                        <label for="exampleInputPassword1" class="form-label" id="Login_Password"> Password </label>
                         {% csrf_token %}
                         <input type="password" class="form-control" name="password">
                     </div>

@@ -12,7 +12,9 @@ class AdminPictures(admin.ModelAdmin):
 
 @admin.register(StoreProducts)
 class AdminProducts(admin.ModelAdmin):
-    fields = ('Name', 'Brand', 'Price', 'UPC', 'SKU', 'Stock', 'Description', 'Picture', 'Coupon', 'Discontinued')
+    fields = ('Name', 'Brand', 'Price', 'UPC', 'SKU', 'Stock', 'Summary', 'Key_Feat_1',
+            'Key_Feat_2', 'Key_Feat_3', 'Key_Feat_4', 'Key_Feat_5', 'Key_Feat_6', 'Key_Feat_7',
+            'Key_Feat_8', 'Key_Feat_9', 'Key_Feat_10', 'Picture', 'Coupon', 'Discontinued')
     list_filter = ('Brand', 'Name', 'Stock', 'Coupon',)
     list_display = ('Brand', 'Name', 'Price', 'Stock')
     ordering = ('Name',)

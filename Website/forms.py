@@ -21,16 +21,27 @@ class ShoppingReview(ModelForm):
 class ProductForm(ModelForm):
     class Meta:
         model = StoreProducts
-        fields = ('Name', 'Brand', 'Price', 'Stock', 'Picture', 'Discontinued', 'Description', )
+        fields = ('Name', 'Brand', 'Price', 'Stock', 'Picture', 'Discontinued', 'Summary', 'Key_Feat_1', 'Key_Feat_2', 'Key_Feat_3', 'Key_Feat_4',
+                'Key_Feat_5', 'Key_Feat_6', 'Key_Feat_7', 'Key_Feat_8', 'Key_Feat_9', 'Key_Feat_10')
 
         labels = {
-            'Name': 'Product Name',
-            'Brand': 'Product Brand',
-            'Price': 'Regular Selling Price',
-            'Stock': 'Current Stock Amount',
+            'Name': '',
+            'Brand': '',
+            'Price': '',
+            'Stock': '',
             'Picture': 'Upload Product Image Here',
             'Discontinued': 'Mark if Product is Discontinued',
-            'Description': 'Full Product Description',
+            'Summary': '',
+            'Key_Feat_1': '',
+            'Key_Feat_2': '',
+            'Key_Feat_3': '',
+            'Key_Feat_4': '',
+            'Key_Feat_5': '',
+            'Key_Feat_6': '',
+            'Key_Feat_7': '',
+            'Key_Feat_8': '',
+            'Key_Feat_9': '',
+            'Key_Feat_10': '',
         }
 
         widgets = {
@@ -38,7 +49,17 @@ class ProductForm(ModelForm):
             'Brand': forms.TextInput(attrs={"class":'form-control', 'id': 'Product_Form_Brand', 'placeholder': 'Enter NEW Product Brand'}),
             'Price': forms.NumberInput(attrs={'class':'form-control', 'id': 'Product_Form_Price', 'placeholder': 'Enter NEW Product Price'}),
             'Stock': forms.TextInput(attrs={'class':'form-control', 'id': 'Product_Form_Stock', 'placeholder': 'Enter CURRENT Stock Amount'}),
-            'Description': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Description'}),
+            'Summary': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Summary'}),
+            'Key_Feat_1': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 1'}),
+            'Key_Feat_2': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 2'}),
+            'Key_Feat_3': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 3'}),
+            'Key_Feat_4': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 4'}),
+            'Key_Feat_5': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 5'}),
+            'Key_Feat_6': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 6'}),
+            'Key_Feat_7': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 7'}),
+            'Key_Feat_8': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 8'}),
+            'Key_Feat_9': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 9'}),
+            'Key_Feat_10': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 10'}),
             }
 
 class LocationForm(ModelForm):
@@ -90,11 +111,12 @@ class CSRUpdateForm(ModelForm):
 class JobApplicatioNSubmissions(ModelForm):
     class Meta:
         model = JobApplications
-        fields = ('First_Name', 'Last_Name', 'Phone_Number', 'Email_Address', 'Resume', 'Cover_Letter')
+        fields = ('First_Name', 'Last_Name', 'DesiredJob', 'Phone_Number', 'Email_Address', 'Resume', 'Cover_Letter')
         
         labels = {
             'First_Name': '',
             'Last_Name': '',
+            'DesiredJob': '',
             'Phone_Number': '',
             'Email_Address': '',
             'Resume': 'Upload Resume',
@@ -102,10 +124,11 @@ class JobApplicatioNSubmissions(ModelForm):
         }
         
         widgets = {
-            'First_Name': forms.TextInput(attrs={"class":"form-control", 'id':'First_NameSubmission', 'placeholder': 'Enter Your First Name'}), 
-            'Last_Name': forms.TextInput(attrs={"class":"form-control", 'id':'Last_NameSubmission', 'placeholder': 'Enter Your Last Name'}), 
-            'Phone_Number': forms.TextInput(attrs={"class":"form-control", 'id':'Phone_NumberSubmission', 'placeholder': 'Enter Your Phone Number'}), 
-            'Email_Address': forms.EmailInput(attrs={"class":"form-control", 'id':'Email_AddressSubmission', 'placeholder': 'Enter Your Email Address'}), 
-            'Resume': forms.FileInput(attrs={"class":"form-control", 'id':'ResumeSubmission' }), 
-            'Cover_Letter': forms.FileInput(attrs={"class":"form-control", 'id':'Cover_LetterSubmission'}), 
+            'First_Name': forms.TextInput(attrs={"class":"form-control", 'id':'First_Name_Submission', 'placeholder': 'Enter Your First Name'}), 
+            'Last_Name': forms.TextInput(attrs={"class":"form-control", 'id':'Last_Name_Submission', 'placeholder': 'Enter Your Last Name'}), 
+            'DesiredJob': forms.TextInput(attrs={"class":"form-control", 'id':'Desired_Job_Submission', 'placeholder': 'Enter the Position You Are Applying For (Copy Paste the Blue Text Above the Annual Salary)'}), 
+            'Phone_Number': forms.TextInput(attrs={"class":"form-control", 'id':'Phone_Number_Submission', 'placeholder': 'Enter Your Phone Number'}), 
+            'Email_Address': forms.EmailInput(attrs={"class":"form-control", 'id':'Email_Address_Submission', 'placeholder': 'Enter Your Email Address'}), 
+            'Resume': forms.FileInput(attrs={"class":"form-control", 'id':'Resume_Submission' }), 
+            'Cover_Letter': forms.FileInput(attrs={"class":"form-control", 'id':'Cover_Letter_Submission'}), 
         }
