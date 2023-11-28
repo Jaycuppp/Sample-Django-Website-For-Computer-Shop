@@ -1,10 +1,8 @@
 # Necessary Website creation Libraries
-from turtle import setundobuffer
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, FileResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator    
 from django.contrib import messages
-from django.contrib.auth.models import User
 
 # For PDF support
 import csv, io
@@ -17,34 +15,42 @@ from .models import *
 from .forms import *
 
 def HomePage(request):
-    
-    SS1 = get_object_or_404(Pictures, pk=1)
-    SS2 = get_object_or_404(Pictures, pk=2)
-    SS3 = get_object_or_404(Pictures, pk=3)
-        
+    # Slide Show Images Being Pulled From the AWS S3 QT Bucket
+    SS1 = "https://qt-bucket.s3.amazonaws.com/Images/Home_Page_Slide_Show_Pic_1.PNG"
+    SS2 = "https://qt-bucket.s3.amazonaws.com/Images/Home_Page_Slide_Show_Pic_2.PNG"
+    SS3 = "https://qt-bucket.s3.amazonaws.com/Images/Home_Page_Slide_Show_Pic_3.PNG"
+    SS4 = "https://qt-bucket.s3.amazonaws.com/Images/Home_Page_Slide_Show_Pic_4.PNG"
+    SS5 = "https://qt-bucket.s3.amazonaws.com/Images/Home_Page_Slide_Show_Pic_5.PNG"
+    SS6 = "https://qt-bucket.s3.amazonaws.com/Images/Home_Page_Slide_Show_Pic_6.PNG"
+
     return render(request, "Home_Page.html", {
-        'SS1': SS1,
-        'SS2': SS2,
-        'SS3': SS3,
+        "SS1": SS1,
+        "SS2": SS2,
+        "SS3": SS3,
+        "SS4": SS4,
+        "SS5": SS5,
+        "SS6": SS6,
     })
 
 def AboutUsPage(request):
     return render(request, "About_Us_Page.html", {
-        
+
     })
 
 def LocationsPage(request):
     Location = StoreLocations.objects.all().order_by('?')
+    Map_Access_Token = 'pk.pk.eyJ1IjoibmluamEwODE0IiwiYSI6ImNsbjBqcGpzcjFkc3YybHBoMGpzb3d6NDEifQ.Q327KcgWcaRFoAQSuuDmGQ.Q327KcgWcaRFoAQSuuDmGQ'
     return render(request, "Locations_Index_Page.html", {
-        "Locations": Location
+        "Locations": Location,
+        "Map_Access_Token": Map_Access_Token,
     })
 
 
 def ShowLocation(request, Location_ID):
     Location = StoreLocations.objects.get(pk=Location_ID)
-    
-    Map_Access_Token = 1 
-    
+
+    Map_Access_Token = 1
+
     return render(request, "Locations_Closer_View_Page.html", {
         "Location": Location
         })
@@ -182,10 +188,12 @@ def ProductSearchPage(request):
         Searched = request.POST['Searched']
         SearchedProducts = StoreProducts.objects.filter(Name__contains = Searched)
         SearchedBrands = StoreProducts.objects.filter(Brand__contains = Searched)
+        SearchedKeywords = StoreProducts.objects.filter(Category__contains = Searched)
         return render(request, "Product_Search_Result.html", {
             'Searched': Searched,
             'SearchProducts': SearchedProducts,
             'SearchedBrands': SearchedBrands,
+            'SearchedKeywords': SearchedKeywords,
             'Product': Product,
             })
     else:
@@ -234,12 +242,12 @@ def Services_Careers_Applying(request, Job_ID):
     if request.method == "POST":
         form = JobApplicatioNSubmissions(request.POST, request.FILES)
         if form.is_valid():
-            Product = form.save(commit=False)
-            Product.save()
+            Application = form.save(commit=False)
+            Application.save()
             messages.success(request,
                             f''' You Have Successfully Submitted Your Application for the Quansh Tech {Job.Title} Position! ''')
             return (redirect("Careers"))
-        
+
         else:
             form = JobApplicatioNSubmissions
             if 'submitted' in request.GET:
@@ -350,7 +358,7 @@ def AdminHumanResources(request):
     })
     
 def AdminCustomerReviews(request):
-    Reviews = CustomerReviews.objects.all()
+    Reviews = CustomerReviews.objects.order_by('-ShoppingDate')
     
     return render(request, "Admin_Dashboard_Shopping_Reviews_List.html", {
         "Reviews" : Reviews

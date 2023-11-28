@@ -1,17 +1,23 @@
-from tkinter import CASCADE
+from datetime import *
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import *
 from django.forms import CharField
+from storages.backends.s3boto3 import S3Boto3Storage
 
 # For Overloading the Preset Size of Images
 def ImageResize(Height, Width):
     return 0
 
 
+# class AWS_Images(S3Boto3Storage):
+#     location = "Images/"
+#     default_acl = "public-read"
+#     file_overwrite = False
+#     custom_domain = False
+
 class Pictures(models.Model):
     Name = models.CharField("Name of the Image Being Used", max_length=255)
-    Image = models.ImageField("The Image", null=True, blank=True, upload_to='images')
+    Image = models.ImageField("The Image", null=True, blank=True, upload_to='Images/') #storage=AWS_Images()
     Custom_File = models.FileField("Any File", null=True, blank=True)
     
     def __str__(self):
@@ -24,11 +30,10 @@ class CouponDiscount(models.Model):
     StartDate = models.DateTimeField("Start Date", null=True, blank=True)
     EndDate = models.DateTimeField("End Date", null=True, blank=True)
     Discount = models.FloatField("Discount Amount", blank=True)
-    Promo_Code_Image = models.ImageField("Promo Code Picture", null=True, blank=True, upload_to='images')
+    Promo_Code_Image = models.ImageField("Promo Code Picture", null=True, blank=True, upload_to='Images/') #storage=AWS_Images()
 
     def __str__(self):
         return self.CouponName
-
 
 class StoreProducts(models.Model):
     Name = models.CharField("Product Name", max_length=255)
@@ -45,11 +50,12 @@ class StoreProducts(models.Model):
     Key_Feat_5 = models.CharField("Key Prod Feat # 5", max_length=255, null=True, blank=True)
     Key_Feat_6 = models.CharField("Key Prod Feat # 6", max_length=255, null=True, blank=True)
     Key_Feat_7 = models.CharField("Key Prod Feat # 7", max_length=255, null=True, blank=True)
-    Key_Feat_8 = models.CharField("Key Prod Feat # 5", max_length=255, null=True, blank=True)
-    Key_Feat_9 = models.CharField("Key Prod Feat # 6", max_length=255, null=True, blank=True)
-    Key_Feat_10 = models.CharField("Key Prod Feat # 7", max_length=255, null=True, blank=True)
-    Picture = models.ImageField("Product Picture", null=True, blank=True, upload_to='images')
+    Key_Feat_8 = models.CharField("Key Prod Feat # 8", max_length=255, null=True, blank=True)
+    Key_Feat_9 = models.CharField("Key Prod Feat # 9", max_length=255, null=True, blank=True)
+    Key_Feat_10 = models.CharField("Key Prod Feat # 10", max_length=255, null=True, blank=True)
+    Picture = models.ImageField("Product Picture", null=True, blank=True, upload_to='Images/') #storage=AWS_Images()
     Coupon = models.ForeignKey(CouponDiscount, null=True, blank=True, on_delete=models.CASCADE)
+    Category = models.TextField("Product Classification's for Organization", null=True, blank=True)
     Discontinued = models.BooleanField("EOL Product", default=False)
     
     @property
@@ -69,7 +75,7 @@ class StoreLocations(models.Model):
     Phone = models.CharField("Location Phone Number", max_length=20)
     Opens = models.TimeField("Opening Time")
     Closes = models.TimeField("Closing Time")
-    Store_Image = models.ImageField("Picture of the Computer Store", null=True, blank=True, upload_to='images')    
+    Store_Image = models.ImageField("Picture of the Computer Store", null=True, blank=True, upload_to='Images/') #storage=AWS_Images()    
     
     @property
     def City_State_Zip(self):
@@ -138,6 +144,7 @@ class CustomerSupportTickets(models.Model):
         return f"{self.Email}'s Support Ticket"
     
 class FAQ(models.Model):
+    Question_Type = models.TextField("The Category this FAQ Tech Question Falls Under", blank=True, max_length=255)
     Question = models.TextField("Technical Question")
     Answer = models.TextField("Technical Answer to the Technical Question", blank=True)
     

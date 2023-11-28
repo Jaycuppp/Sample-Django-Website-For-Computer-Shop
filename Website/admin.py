@@ -1,4 +1,3 @@
-from click import Group
 from django.contrib import admin
 from .models import *
 from django.contrib.auth.models import Group
@@ -14,9 +13,9 @@ class AdminPictures(admin.ModelAdmin):
 class AdminProducts(admin.ModelAdmin):
     fields = ('Name', 'Brand', 'Price', 'UPC', 'SKU', 'Stock', 'Summary', 'Key_Feat_1',
             'Key_Feat_2', 'Key_Feat_3', 'Key_Feat_4', 'Key_Feat_5', 'Key_Feat_6', 'Key_Feat_7',
-            'Key_Feat_8', 'Key_Feat_9', 'Key_Feat_10', 'Picture', 'Coupon', 'Discontinued')
+            'Key_Feat_8', 'Key_Feat_9', 'Key_Feat_10', 'Picture', 'Coupon', 'Category', 'Discontinued')
     list_filter = ('Brand', 'Name', 'Stock', 'Coupon',)
-    list_display = ('Brand', 'Name', 'Price', 'Stock')
+    list_display = ('Brand', 'Name', 'Summary', 'Key_Feat_1', 'Category')
     ordering = ('Name',)
     search_fields = ('Name', 'Stock')
 
@@ -40,8 +39,8 @@ class AdminCustomerReviews(admin.ModelAdmin):
     
 @admin.register(FAQ)
 class AdminFAQ(admin.ModelAdmin):
-    fields = ('Question', 'Answer')
-    list_display = ('Question',)
+    fields = ('Question_Type', 'Question', 'Answer')
+    list_display = ('Question_Type', 'Question', 'Answer',)
     
 @admin.register(CustomerSupportTickets)
 class AdminCustomerSupportTickets(admin.ModelAdmin):
@@ -88,4 +87,5 @@ class AdminCurrentEmployees(admin.ModelAdmin):
     fields = ('First_Name', 'Last_Name', 'Job', 'Date_Of_Birth', 'Social_Security', 'Street_Address', 'City_Address', 'State_Address', 'W2_Tax_Information', 'Emergency_Contact', 'Employment_Contract')
     list_display = ('First_Name', 'Last_Name', 'Job',)
     ordering = ('First_Name',)
+
 
