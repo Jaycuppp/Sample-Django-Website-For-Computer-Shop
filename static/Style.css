@@ -1,5 +1,3 @@
-/* All Styles For When The Resolution > width 991px*/
-
 /* All Pages Styling */
 body {
     background-color: #FCEDDA;
@@ -20,6 +18,14 @@ th{
     text-align: center;
 }
 
+#Comment{
+    color: #CC313D;
+    font-weight: 700;
+    padding-top: 2%;
+    padding-left: 14%;
+    padding-right: 14%
+}
+
 /* NavBar Extension Page */
 
 /* Search NavBar */
@@ -35,104 +41,184 @@ th{
 #Home_Image_Button{
     /* color: #000000;
     background-color: #000000; */
-    margin-right: 100px;
-    margin-left: 200px
+    margin-right: 50px;
+    margin-left: 100px;
+
 }
 
 #Search_Bar_Button{
-    
 }
 
-#Search_Button{ 
+#Search_Button{
     background-color: #F7C5CC;
     font-weight: 700;
+    position: relative; left: 10px;
 }
 
 #Product_Search_Input_Bar  {
     /* color: #000000; */
     background-color: #F7C5CC;
     font-weight: 700;
-    width: 1000px;
 }
 
 #Shopping_Cart_Button {
     /* color: #000000; */
     color: #F7C5CC;
     font-weight: 700;
+    margin-right: 15px;
+    position: absolute; right: 5px;
 }
 
-
-/* New Styling for Search NavBar Extension on Smaller Resolutions */
-@media screen and (max-width: 1752px) {
-    #Shopping_Cart_Button{
-        height: 40px;
-        margin-top: -5px;
-    }
-}
-
-@media screen and (max-width: 1625px) {
-    #Home_Image_Button{
-        margin-right: 50px;
-        margin-left: 150px;
-    }
-
-    #Shopping_Cart_Button{
-        margin-top: 0.5px;
+/* Responsive Styling for the Search NavBar */
+@media screen and (max-width: 2500px) {
+    #Product_Search_Input_Bar{
+        width: 2000px;
     }
 }
 
-@media screen and (max-width: 1569px){
-    #Shopping_Cart_Button{
-        margin-top: -5px;
+@media screen and (max-width: 2400px) {
+    #Product_Search_Input_Bar{
+        width: 1900px;
     }
 }
 
-@media screen and (max-width: 1425px){
-    #Home_Image_Button{
-        margin-right: 50px;
-        margin-left: 100px;
+@media screen and (max-width: 2300px) {
+    #Product_Search_Input_Bar{
+        width: 1800px;
+    }
+}
+
+@media screen and (max-width: 2200px) {
+    #Product_Search_Input_Bar{
+        width: 1700px;
+    }
+}
+
+@media screen and (max-width: 2100px) {
+    #Product_Search_Input_Bar{
+        width: 1600px;
+    }
+}
+
+@media screen and (max-width: 2000px) {
+    #Product_Search_Input_Bar{
+        width: 1500px;
+    }
+}
+
+@media screen and (max-width: 1900px) {
+    #Product_Search_Input_Bar{
+        width: 1400px;
+    }
+}
+
+@media screen and (max-width: 1800px) {
+    #Product_Search_Input_Bar{
+        width: 1300px;
+    }
+}
+
+@media screen and (max-width: 1750px) {
+    #Product_Search_Input_Bar{
+        width: 1250px;
+    }
+}
+
+@media screen and (max-width: 1700px) {
+    #Product_Search_Input_Bar{
+        width: 1200px;
+    }
+}
+
+@media screen and (max-width: 1650px) {
+    #Product_Search_Input_Bar{
+        width: 1150px;
+    }
+}
+
+@media screen and (max-width: 1600px){
+    #Product_Search_Input_Bar{
+        width: 1100px;
+    }
+}
+
+@media screen and (max-width: 1550px){
+    #Product_Search_Input_Bar{
+        width: 1050px;
+    }
+}
+
+@media screen and (max-width: 1500px){
+    #Product_Search_Input_Bar{
+        width: 1000px;
+    }
+}
+
+@media screen and (max-width: 1450px){
+    #Product_Search_Input_Bar{
+        width: 950px;
     }
 }
 
 
-@media screen and (max-width: 1375px){
-    #Shopping_Cart_Button{
-        margin-top: 0px;
+@media screen and (max-width: 1400px){
+    #Product_Search_Input_Bar{
+        width: 900px;
+    }
+}
+
+@media screen and (max-width: 1350px){
+    #Product_Search_Input_Bar{
+        width: 850px;
+    }
+}
+
+@media screen and (max-width: 1300px){
+    #Product_Search_Input_Bar{
+        width: 800px;
     }
 
-    #Product_Search_Input_Bar  {
+}
+@media screen and (max-width: 1250px){
+    #Product_Search_Input_Bar{
+        width: 750px;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    #Product_Search_Input_Bar{
         width: 700px;
     }
 }
 
-@media screen and (max-width: 1219px){
-    #Shopping_Cart_Button{
-        margin-top: -5px;
-    }
-
-}
-
-@media screen and (max-width: 1075px){
-    #Shopping_Cart_Button{
-        margin-top: 0px;
-    }
-
-    #Product_Search_Input_Bar  {
-        width: 500px;
-    }
-
-}
-
-@media screen and (max-width: 1075px){
-    #Shopping_Cart_Button{
-        margin-top: -5px;
+@media screen and (max-width: 1150px){
+    #Product_Search_Input_Bar{
+        width: 650px;
     }
 }
 
-@media screen and (max-width: 991px) {
-
+@media screen and (max-width: 1100px){
+    #Product_Search_Input_Bar{
+        width: 600px;
+    }
 }
 
+@media screen and (max-width: 1050px){
+    #Product_Search_Input_Bar{
+        width: 550px;
+    }
+}
+
+@media screen and (max-width: 991px){
+    #Product_Search_Input_Bar{
+        margin-left: 187px;
+    }
+
+    #Home_Image_Button{
+        position: absolute;
+    }
+
+}
 
 /* Main NavBar */
 #Main_NavBar, #Account_DropDown_Options, #Business_Products_Services_DropDown_Options{
@@ -150,6 +236,38 @@ th{
     color: #1e6d5c;
     font-weight: 700;
 }
+
+/* Responsive Styling For Main Navbar */
+@media screen and (max-width: 1497px){
+    #Company_Phone{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1382px){
+    #Company_Email{
+        display: none;
+    }
+    
+    #Main_NavBar_Button{
+
+    }
+    #Account_DropDown_Options{
+
+    }
+}
+
+@media screen and (max-width: 1105px) {
+    #Main_NavBar_Button{
+        margin-top: -20px;
+        margin-bottom: -20px;
+    }
+}
+
+
+@media screen and (max-width: 991px) {
+}
+
 
 /* Home Page */
 #Business_Name_Quansh_Tech{
@@ -183,8 +301,9 @@ th{
     background-color: #000000; */
 }
 
-/* New Styling for HomePage on Smaller Resolutions */
-@media screen and (max-width: 560px) {
+
+/* Responsive Styling for HomePage */
+@media screen and (max-width: 1350px) {
     #Business_Name_Quansh_Tech{
     }
     
@@ -348,19 +467,24 @@ th{
     margin-bottom: 25px;
 }
 
+#All_Products_Menu{
+
+}
+
 #All_Products_Card{
-    width: 300px
+    width: 300px;
+    margin-bottom: 20px;
 }
 
 #All_Products_Image{
-    width: 260px;
+
 }
 
 #All_Products_Name_And_Brand{
     color: #525528;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 20px; 
+    margin-top: 20px;
     margin-bottom: 20px
 }
 
@@ -444,21 +568,52 @@ th{
     margin: auto; */
     width: 300px;
     margin-top: 2%;
-    margin-left: 32%;
+    margin-left: 27.5%;
 }
 
 #Single_Product_Name_And_Brand{
+    text-align: center;
     color: #2645f1;
-    margin-left: 30%; 
+    margin-left: 15%;
+    margin-right: 15%; 
     margin-top: 50px; 
     margin-bottom: 50px
 }
 
-#Single_Product_Description{
+#Single_Product_Summary_Header{
+    text-align: center;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-bottom: 5px;
+    color: #8d1f37;
+}
+
+#Single_Product_Summary{
     padding-left: 15%;
     padding-right: 15%;
     padding-bottom: 35px;
-    color: #452a57;
+    color: #298686;
+}
+
+
+#Single_Product_Key_Feature_Header{
+    text-align: center;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-bottom: 5px;
+    color: #8d1f37;
+}
+
+#Single_Product_Key_Feature_List{
+    list-style-type: "🌟 ";
+    padding-left: 17%;
+    padding-right: 15%;
+}
+
+#Single_Product_Key_Feature_List_Item{
+    padding-bottom: 5px;
+    color: #0f0633;
+
 }
 
 #Single_Product_Price_Stock{
@@ -1336,7 +1491,26 @@ th{
     margin-left: 7%
 }
 
-/* Error Page 404 For People Who Don't Have Credentials for Certain Web Pages */
+/* Product Search Result Page */
+#Product_Search_Result, #You_Searched_For{
+    text-align: center;
+    font-weight: 700;
+}
+
+#ProductName_Search_Result_List, #ProductBrand_Search_Result_List{
+    margin-left: 35%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 375px;
+}
+
+#Search_Result_Image{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+/* 404 Error Page */
 #Web_Page_Not_Found{
     text-align: center;
     color: #eb1b1b;
@@ -1347,6 +1521,7 @@ th{
 #Page_404_Error_Image{
     display: flex;
     margin: auto;
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
+    margin-bottom: 100px;
 }
