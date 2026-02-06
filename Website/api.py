@@ -9,7 +9,7 @@ class Home_Page_API(object):
             EndPoint = '''/v1/cryptocurrency/quotes/latest'''
 
             API_DOMAIN = f'''https://pro-api.coinmarketcap.com{EndPoint}'''
-            API_KEY = "Your Coin Market Cap API KEY "
+            #  API_KEY = " Your CoinMarket Cap API KEY "
 
             TEST_API_DOMAIN = f'''https://sandbox-api.coinmarketcap.com{EndPoint}'''
             TEST_API_KEY = "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c"
@@ -61,7 +61,7 @@ class Location_Index_Page_API(object):
         Country = 'USA'
         Fahrenheit = 'imperial'
         
-        Weather_API_Key = 'Your Open Weather API KEY'
+        # Weather_API_Key = 'Your Weather API KEY
         Weather_API_Domain = f'https://api.openweathermap.org/data/2.5/weather?q={City},{State},{Country}&appid={Weather_API_Key}'
 
 

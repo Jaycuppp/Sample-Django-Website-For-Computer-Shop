@@ -1,4 +1,7 @@
-{% load static %}
+{% extends "00Base.html" %}
+{% block content %}
+
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,80 +19,79 @@
         <header>
             <span id="Home_Page_Title"> <h1> Quansh Technology </h1> </span>
             {% include "Navbar.html"%}
-        </header>
+        </header> {% endcomment %}
 
-        <main> <br> <br>
-            {% comment %} Display Login / Logout Message {% endcomment %}
-            {% if messages %}
-                {% for message in messages %}
-                <span class="alert alert-warning" id="LogIn_LogOut_Alert" role="alert"> {{ message }} </span>
-                {% endfor %}
-            {% endif %}
+<main> <br> <br>
+    {% comment %} Display Login / Logout Message {% endcomment %}
+    {% comment %} {% if messages %}
+        {% for message in messages %}
+        <span class="alert alert-warning" id="LogIn_LogOut_Alert" role="alert"> {{ message }} </span>
+        {% endfor %}
+    {% endif %} {% endcomment %}
 
-            {% comment %} Carousel Image SlideShow {% endcomment %}
-            <div id="Picture_SlideShow" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active"> <img id="SS1" src="{{SS1}}" class="d-block w-100" alt="https://images.pexels.com/photos/6373758/pexels-photo-6373758.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
-                    <div class="carousel-item"> <img id="SS2" src="{{SS2}}" class="d-block w-100" alt="https://images.pexels.com/photos/1432675/pexels-photo-1432675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
-                    <div class="carousel-item"> <img id="SS3" src="{{SS3}}" class="d-block w-100" alt="https://images.pexels.com/photos/117729/pexels-photo-117729.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
-                    <div class="carousel-item"> <img id="SS4" src="{{SS4}}" class="d-block w-100" alt="https://images.pexels.com/photos/163140/technology-computer-motherboard-chips-163140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
-                    <div class="carousel-item"> <img id="SS5" src="{{SS5}}" class="d-block w-100" alt="https://images.pexels.com/photos/2643596/pexels-photo-2643596.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
-                    <div class="carousel-item"> <img id="SS6" src="{{SS6}}" class="d-block w-100" alt="https://images.pexels.com/photos/4316/technology-computer-chips-gigabyte.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
-                </div>
+    {% comment %} Carousel Image SlideShow {% endcomment %}
+    <div id="Picture_SlideShow" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active"> <img id="SS1" src="{{SS1}}" class="d-block w-100" alt="https://images.pexels.com/photos/6373758/pexels-photo-6373758.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
+            <div class="carousel-item"> <img id="SS2" src="{{SS2}}" class="d-block w-100" alt="https://images.pexels.com/photos/1432675/pexels-photo-1432675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
+            <div class="carousel-item"> <img id="SS3" src="{{SS3}}" class="d-block w-100" alt="https://images.pexels.com/photos/117729/pexels-photo-117729.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
+            <div class="carousel-item"> <img id="SS4" src="{{SS4}}" class="d-block w-100" alt="https://images.pexels.com/photos/163140/technology-computer-motherboard-chips-163140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
+            <div class="carousel-item"> <img id="SS5" src="{{SS5}}" class="d-block w-100" alt="https://images.pexels.com/photos/2643596/pexels-photo-2643596.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
+            <div class="carousel-item"> <img id="SS6" src="{{SS6}}" class="d-block w-100" alt="https://images.pexels.com/photos/4316/technology-computer-chips-gigabyte.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"> </div>
+        </div>
+    </div>
+
+    <div id="Crypto_Tracking" class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
+          <div class="card" id="BTC_Crypto_Card">
+            <img class="card-img-top" id="BTC_Logo_Pic" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png" alt="{{BTC_Pic.Image}}">
+            <div class="card-body">
+              <h5 class="card-title" id="BTC_Crypto_Price"> &#11088  &#8383; (Bitcoin) Price = <strong> &#36;{{BTC_PRICE}} USD </strong> </h5>
+              <p class="card-text"> Buy Bitcoin Here: </p>
             </div>
+          </div>
+        </div>
 
-            <div id="Crypto_Tracking" class="row row-cols-1 row-cols-md-4 g-4">
-                <div class="col">
-                  <div class="card" id="BTC_Crypto_Card">
-                    <img class="card-img-top" id="BTC_Logo_Pic" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png" alt="{{BTC_Pic.Image}}">
-                    <div class="card-body">
-                      <h5 class="card-title" id="BTC_Crypto_Price"> &#11088  &#8383; (Bitcoin) Price = <strong> &#36;{{BTC_PRICE}} USD </strong> </h5>
-                      <p class="card-text"> Buy Bitcoin Here: </p>
-                    </div>
-                  </div>
-                </div>
+        <div class="col">
+          <div class="card" id="ETH_Crypto_Card">
+            <img class="card-img-top" id="ETH_Logo_Pic" src="https://logowik.com/content/uploads/images/ethereum-eth7803.logowik.com.webp" alt="{{ETH_Pic.Image}}">
+            <div class="card-body">
+              <h5 class="card-title" id="ETH_Crypto_Price"> &#11088  &#208; (Etherium) Price = <strong> &#36;{{ETH_PRICE}} USD  </strong> </h5>
+              <p class="card-text"> Buy Etherium Here:  </p>
+            </div>
+          </div>
+        </div>
 
-                <div class="col">
-                  <div class="card" id="ETH_Crypto_Card">
-                    <img class="card-img-top" id="ETH_Logo_Pic" src="https://logowik.com/content/uploads/images/ethereum-eth7803.logowik.com.webp" alt="{{ETH_Pic.Image}}">
-                    <div class="card-body">
-                      <h5 class="card-title" id="ETH_Crypto_Price"> &#11088  &#208; (Etherium) Price = <strong> &#36;{{ETH_PRICE}} USD  </strong> </h5>
-                      <p class="card-text"> Buy Etherium Here:  </p>
-                    </div>
-                  </div>
-                </div>
+        <div class="col">
+          <div class="card" id="SOL_Crypto_Card">
+            <img class="card-img-top" id="SOL_Logo_Pic" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Solana_logo.png/252px-Solana_logo.png">
+            <div class="card-body">
+              <h5 class="card-title" id="SOL_Crypto_Price"> &#11088  &#208; (Solana) Price = <strong> &#36;{{SOL_PRICE}} USD  </strong> </h5>
+              <p class="card-text"> Buy Solana Here: </p>
+            </div>
+          </div>
+        </div>
 
-                <div class="col">
-                  <div class="card" id="SOL_Crypto_Card">
-                    <img class="card-img-top" id="SOL_Logo_Pic" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Solana_logo.png/252px-Solana_logo.png">
-                    <div class="card-body">
-                      <h5 class="card-title" id="SOL_Crypto_Price"> &#11088  &#208; (Solana) Price = <strong> &#36;{{SOL_PRICE}} USD  </strong> </h5>
-                      <p class="card-text"> Buy Solana Here: </p>
-                    </div>
-                  </div>
-                </div>
+        <div class="col" id="USDT_Crypto_Card">
+          <div class="card">
+            <img class="card-img-top" id="USDT_Logo_Pic" src="https://static-00.iconduck.com/assets.00/tether-cryptocurrency-icon-2048x2048-dp13oydi.png">
+            <div class="card-body">
+              <h5 class="card-title" id="USDT_Crypto_Price">&#11088  &#208; (Tether) Price = <strong> &#36;{{USDT_PRICE}} USD  </strong> </h5>
+              <p class="card-text"> Buy Tether Here: </p>
+            </div>
+          </div>
+        </div>
 
-                <div class="col" id="USDT_Crypto_Card">
-                  <div class="card">
-                    <img class="card-img-top" id="USDT_Logo_Pic" src="https://static-00.iconduck.com/assets.00/tether-cryptocurrency-icon-2048x2048-dp13oydi.png">
-                    <div class="card-body">
-                      <h5 class="card-title" id="USDT_Crypto_Price">&#11088  &#208; (Tether) Price = <strong> &#36;{{USDT_PRICE}} USD  </strong> </h5>
-                      <p class="card-text"> Buy Tether Here: </p>
-                    </div>
-                  </div>
-                </div>
+      </div>
 
-              </div>
+  {% if user.is_superuser or user.is_staff %}  
+    <h3 class="card-title" id="Comment"> &#11088 SlideShow For Latest IT News using API </h3>
+  {% endif %}
 
-          {% if user.is_superuser or user.is_staff %}  
-            <h3 class="card-title" id="Comment"> &#11088 SlideShow For Latest IT News using API </h3>
-          {% endif %}
+    {% include 'Home_Page_Toast1.html' %}
+</main>
 
-            {% include 'Home_Page_Toast1.html' %}
-
-        </main>
-
-        <footer>
+        {% comment %} <footer>
             <span> <a href="{% url 'HomePage' %}" class="btn btn-primary" id="Back_To_Top_Page_Button"> Back To Top </a> </span>
 
             <div id="Computer_Store_Contact_Info">
@@ -102,4 +104,6 @@
         </footer>
 
     </body>
-</html>
+</html> {% endcomment %}
+
+{% endblock %}

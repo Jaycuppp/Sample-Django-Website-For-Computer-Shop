@@ -1,4 +1,7 @@
-{% load static %}
+{% extends "00Base.html" %}
+{% block content %}
+
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,17 +18,29 @@
         <header> 
             <span id="Check_Out_Title"> <h1> Failed Paypal Payment </h1> </span>
             {% include "Navbar.html"%} <br>
-        </header>
+        </header> {% endcomment %}
 
-        <main>
-            {% csrf_token %}
-            <h3 id="Comment"> &#11088 Failed Payment Page </h3>
-            <span> Oh Now Payment Failed !!!</span>
-        </main>
+<main>
+    
+    <!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder"> Payment Failed </h1>
+                <p class="lead fw-normal text-white-50 mb-0"> Oh Now Payment Did Not Go Through :( </p>
+            </div>
+        </div>
+    </header>
 
-        <footer>
+    {% csrf_token %}
+
+</main>
+
+        {% comment %} <footer>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"> </script>
             <script type="text/javascript" src="{% static 'Script.js' %}"> </script>
         </footer>
     </body>
-</html>
+</html> {% endcomment %}
+
+{% endblock %}

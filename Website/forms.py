@@ -68,6 +68,37 @@ class ProductForm(ModelForm):
             'Key_Feat_10': forms.Textarea(attrs={'class':'form-control', 'id': 'Product_Form_Description', 'placeholder': 'Enter NEW Product Key Feature 10'}),
             }
         
+class Customer_Shipping_Form(forms.ModelForm):
+    Shipping_First_Name = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "First Name"}), required=False)
+    Shipping_Last_Name = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Last Name"}), required=False)
+    Shipping_Email = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Email Address"}), required=False)
+    Shipping_Address_Line_1 = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Address 1"}), required=False)
+    Shipping_Address_Line_2 = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Address 2"}), required=False)
+    Shipping_City = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "City"}), required=False)
+    Shipping_State = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "State"}), required=False)
+    Shipping_ZipCode = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Zipcode"}), required=False)
+    Shipping_Country = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Country"}), required=False)
+
+    class Meta:
+        model = Customer_Shipping
+        fields = ('Shipping_First_Name', 'Shipping_Last_Name', 'Shipping_Email', 'Shipping_Address_Line_1', 'Shipping_Address_Line_2', 'Shipping_City', 'Shipping_State', 'Shipping_ZipCode', 'Shipping_Country')
+        exclude = ('user',)        
+
+
+class OnlineOrderPayments(forms.Form):
+    Card_Holder_First_Name = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "First Name of Card Holder"}), required=False)
+    Card_Holder_Last_Name = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Lirst Name of Card Holder"}), required=False)
+    Card_Number = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Card Number"}), required=False)
+    Card_Expiration_Date = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': 'Card Expiration Date (mm/yy)'}), required=False)
+    Card_CVV = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Card CVV Code"}), required=False)
+    Card_Billing_Address1 = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Billing Address Line 1"}), required=False)
+    Card_Billing_Address2 = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Billing Address Line 2"}), required=False)
+    Card_Billing_City = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Billing Address City"}), required=False)
+    Card_Billing_State = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Billing Address State"}), required=False)
+    Card_Billing_Zipcode = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Billing Address Zipcode"}), required=False) 
+    Card_Billing_Country = forms.CharField(label="", widget=forms.TextInput(attrs={"class":"form-control", 'placeholder': "Billing Address Country"}), required=False)
+
+
 # class PayPalPayForm(PayPalPaymentsForm):
 #     def HTML_Sunmit_Elemet(self):
 #         return ''' <button type="submit"> Continue on PayPal website </button> '''

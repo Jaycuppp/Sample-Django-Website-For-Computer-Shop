@@ -1,5 +1,5 @@
 # Necessary Website creation Libraries
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, FileResponse, Http404
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, FileResponse, Http404, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.urls import reverse
@@ -12,7 +12,9 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 
 # For PDF support
-import csv, io
+
+#import i
+import csv
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
@@ -29,10 +31,16 @@ from paypal.standard.forms import PayPalPaymentsForm
 from paypal.standard.models import ST_PP_COMPLETED
 from paypal.standard.ipn.signals import valid_ipn_received
 
+# Connecting from other code files from the Customers Django App
+from Customers.forms import *
+from Customers.models import *
+from Customers.views import *
+
 # Connecting from other code files in same Django project
 from .models import *
 from .forms import *
 from .api import *
+from .cart import *
 
 def HomePage(request):
     # Slide Show Images Being Pulled From the AWS S3 QT Bucket
@@ -43,8 +51,8 @@ def HomePage(request):
     SS5 = "https://qt-bucket.s3.amazonaws.com/Images/Home_Page_Slide_Show_Pic_5.PNG"
     SS6 = "https://qt-bucket.s3.amazonaws.com/Images/Home_Page_Slide_Show_Pic_6.PNG"
     
-    BTC_Logo = Pictures.objects.get(pk=7)
-    ETH_Logo = Pictures.objects.get(pk=8)
+    #BTC_Logo = Pictures.objects.get(pk=7)
+    #ETH_Logo = Pictures.objects.get(pk=8)
     
 
     # For Fetching Crypto Data Using Coin Market Cap API
@@ -64,16 +72,8 @@ def HomePage(request):
     SOL_PRICE = round(Home_Page_API.Crypto_Pricing_Data(Coin_ID=Coin_Market_Cap_IDs["SOL"], Currency="USD"), 2)
 
     return render(request, "Home_Page.html", {
-        "SS1": SS1,
-        "SS2": SS2,
-        "SS3": SS3,
-        "SS4": SS4,
-        "SS5": SS5,
-        "SS6": SS6,
-        "BTC_PRICE": BTC_PRICE,
-        "ETH_PRICE": ETH_PRICE,
-        "USDT_PRICE": USDT_PRICE,
-        "SOL_PRICE": SOL_PRICE,
+        "SS1": SS1, "SS2": SS2, "SS3": SS3, "SS4": SS4, "SS5": SS5, "SS6": SS6, 
+        "BTC_PRICE": BTC_PRICE, "ETH_PRICE": ETH_PRICE, "USDT_PRICE": USDT_PRICE, "SOL_PRICE": SOL_PRICE,
     })
 
 def AboutUsPage(request):
@@ -168,14 +168,14 @@ def ProductsPage(request):
     Numbers = "h" * Products.paginator.num_pages
     
     # Querying Shop Cart Data only for the User
-    User_Shop_Cart = ShoppingCart.objects.filter(User_id=request.user.id)
-    Total_Price = sum(Item.Product.Price * Item.Amount for Item in User_Shop_Cart)
+    #User_Shop_Cart = ShoppingCart.objects.filter(User_id=request.user.id)
+    #Total_Price = sum(Item.Product.Price * Item.Amount for Item in User_Shop_Cart)
     
     return render(request, "Product_Menu_Page.html", {
         "PaginatedProducts": Products,
         "Numbers": Numbers,
-        "User_Cart" : User_Shop_Cart,
-        "Total_Price" : Total_Price,
+        #"User_Cart" : User_Shop_Cart,
+        #"Total_Price" : Total_Price,
     })
 
 
@@ -237,14 +237,14 @@ def ProductSearchPage(request):
     Product = StoreProducts.objects.all()
     if request.method == "POST":
         Searched = request.POST['Searched']
-        SearchedProducts = StoreProducts.objects.filter(Name__contains = Searched)
-        SearchedBrands = StoreProducts.objects.filter(Brand__contains = Searched)
-        SearchedKeywords = StoreProducts.objects.filter(Category__contains = Searched)
+        SearchedProducts = StoreProducts.objects.filter(Name__icontains = Searched)
+        SearchedBrands = StoreProducts.objects.filter(Brand__icontains = Searched)
+        # SearchedKeywords = StoreProducts.objects.filter(Category__icontains = Searched)
         return render(request, "Product_Search_Result.html", {
             'Searched': Searched,
             'SearchProducts': SearchedProducts,
             'SearchedBrands': SearchedBrands,
-            'SearchedKeywords': SearchedKeywords,
+            # 'SearchedKeywords': SearchedKeywords,
             'Product': Product,
             })
     else:
@@ -270,55 +270,75 @@ def AllPromotions(request):
 
 
 def ShopCart(request): 
-    # Control Flow For Only Allowing People With Accounts To Have Access To Shop
-    if request.user.is_authenticated:
-        
-        # All the Shop Cart Items for each specific User that is logged in
-        Items_On_Cart = ShoppingCart.objects.filter(User=request.user)
-        
-        # 1 Line Iteration of the Total Pricing of all the Items in the Shop Cart Container
-        Total_Price = round(sum(Item.Product.Price * Item.Amount for Item in Items_On_Cart), 2)
-        Total_Amount = (Item.Amount for Item in Items_On_Cart)
-        
-        return render(request, 'Shopping_Cart_Page.html', {
-            "CartedItems": Items_On_Cart,
-            "TotalPrice": Total_Price,
-            "TotalAmount": Total_Amount
-        })
-        
-    else:
-        messages.success(request, f"You Must Have an Account To Access the Shopping Cart")
-        return render(request, "User_Register.html", {})
+    cart = Cart(request) # Bring in the Cart class from cart.py file
     
+    cart_products = cart.view_cart #Get the Carted Products 
+    cart_quants = cart.cart_amounts #Get the Qty of each Carted Product
+    cart_total_price = cart.total_price
+    
+    
+    return render(request, 'Shopping_Cart_Page.html', {'Cart_Summary': cart_products, "Cart_Amount" : cart_quants, "Cart_Total_Price" : cart_total_price,})
+        
+
 # For adding item(s) onto the Shopping Cart 
-def ShopCart_Single_Add(request, Product_ID):
-    Product = StoreProducts.objects.get(id=Product_ID)
-    Carted_Item, Created = ShoppingCart.objects.get_or_create(Product=Product, User=request.user)
-    Carted_Item.Amount += 1
-    Carted_Item.save()
-    return redirect("ShoppingCart")
+def ShoppingCartAdd(request):
+    # Bring in the Cart class from cart.py file
+    cart = Cart(request)
+    #The Length of the current User Cookie Unique Shopping Cart
+    cart_count = cart.__len__()
 
-def ShopCart_Multi_Add(request, Product_ID):
-    Product = StoreProducts.objects.get(id=Product_ID)
-    Carted_Item, Created = ShoppingCart.objects.get_or_create(Product=Product, User=request.user)
-    # Carted_Item.Amount += 1
-    Carted_Item.save()
-    return redirect("ShoppingCart")
+    # Check to see if the user is in the POST method when viewing the website
+    if request.POST.get('action') == "post": #post action from the Ajax code
+    
+        product_id = int(request.POST.get("product_id")) #product_id from the Ajax code
+        product_qty = int(request.POST.get("product_qty")) #product_qty from the Ajax code
+        
+        #Query for product in the database
+        product = get_object_or_404(StoreProducts, pk=product_id)
+        
+    
+        #Save the user queried product to a Session
+        cart.add(product=product, quantity=product_qty)
 
-# For Removing item(s) from the Shopping Cart
-def ShopCart_Single_Delete(request, Product_ID):
-    Carted_Item = ShoppingCart.objects.get(id=Product_ID)
-    Carted_Item.Amount -= 1
-    Carted_Item.save()
-    return redirect("ShoppingCart")
+        # Returns a JSON resonse of the Product`s name in our database
+        #ProdNameresponse = JsonResponse({"Prod Name: ": product.Name})
+        CartCountResponse = JsonResponse({"Quantity": cart_count})
+        messages.success(request, "Item Has Been Added To The Cart!")
+    
+        return CartCountResponse
 
-# For Removing the Entire Product From the User`s Shopping Cart
-def ShopCart_Multi_Delete(request, Product_ID):
-    Carted_Item = ShoppingCart.objects.get(id=Product_ID)
-    Carted_Item.delete()
-    return redirect("ShoppingCart")
+# # For Removing item(s) from the Shopping Cart
+def ShoppingCartRemove(request):
+    cart = Cart(request) # Bring in the Cart class from cart.py file
+    
+    # Check to see if the user is in the POST method when viewing the website
+    if request.POST.get('action') == "post": #post action from the Ajax code
+    
+        product_id = str(request.POST.get("product_id")) #product_id from the Ajax code
+    
+        cart.delete(product=product_id)
+        response = JsonResponse({"prod":product_id})
+        messages.success(request, "Item Has Been Removed From Cart!")
+        return response
 
 
+# # For Removing item(s) from the Shopping Cart
+def ShoppingCartUpdate(request):
+    cart = Cart(request) # Bring in the Cart class from cart.py file
+    
+    # Check to see if the user is in the POST method when viewing the website
+    if request.POST.get('action') == "post": #post action from the Ajax code
+    
+        product_id = int(request.POST.get("product_id")) #product_id from the Ajax code
+        product_qty = int(request.POST.get("product_qty")) #product_qty from the Ajax code
+    
+        cart.update(product=product_id, quantity=product_qty)
+        response = JsonResponse({"qty":product_qty})
+        messages.success(request, "Cart Updated!")
+        return response
+    
+        
+        
 def PayPal_Successfull_Payment(request):
     return render(request, "PayPal_Payment_Success_Page.html", {})
 
@@ -332,43 +352,392 @@ def PayPal_IPN(request):
 
 
 def ShopCart_CheckOut(request):
-    # All the Shop Cart Items for each specific User that is logged in
-    Items_On_Cart = ShoppingCart.objects.filter(User=request.user)
     
-    # 1 Line Iteration of the Total Pricing of all the Items in the Shop Cart Container
-    Total_Price = round(sum(Item.Product.Price * Item.Amount for Item in Items_On_Cart), 2)
-    
-    Host = request.get_host()
-    
-    # Paypal Dictionary Key Value Pairs Below
-    # https://developer.paypal.com/api/nvp-soap/paypal-payments-standard/integration-guide/Appx-websitestandard-htmlvariables/
-    PayPal_Hash_Map = {
-        "business": settings.PAYPAL_RECEIVER_EMAIL, #The merchant account reciving patment
-        "amount": Total_Price,
-        "item_name": "Some Item Name(s)",
-        "invoice": uuid.uuid4(),
-        "notify_url": f"http://{Host}{reverse('paypal-ipn')}",
-        "return":  f"http://{Host}{reverse('PayPalPaymentSuccess')}",
-        "cancel_return": f"http://{Host}{reverse('PayPalPaymentFail')}",
-        #"rm": 2,
-        # "Custom": "Premium_Plan",
-    }
+    # Creating a Cart Instance to acquire the  
+    cart = Cart(request)
+    cart_products = cart.view_cart
+    cart_quantities = cart.cart_amounts
+    cart_total_price = cart.total_price
+        
+    if request.user.is_authenticated: #As long as a logged in user is making a web request
+        current_user_shipping = Customer_Shipping.objects.get(id=request.user.id) #Acquire the current logged in user`s shipping information
+        ShippingForm = Customer_Shipping_Form(request.POST or None, instance=current_user_shipping)
+        return render(request, "Shopping_Cart_Check_Out_Page.html", {"Cart_Summary": cart_products, "Cart_Amount" : cart_quantities, "Cart_Total_Price" : cart_total_price, "ShippingForm": ShippingForm,})
 
-    PayPalForm = PayPalPaymentsForm(initial=PayPal_Hash_Map)
+    else:
+        ShippingForm = Customer_Shipping_Form(request.POST or None)
+        return render(request, "Shopping_Cart_Check_Out_Page.html", {"Cart_Summary": cart_products, "Cart_Amount" : cart_quantities, "Cart_Total_Price" : cart_total_price, "ShippingForm": ShippingForm,})
+            
+def OnlineOrderShipped(request):
+    #if request.user.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated:
+        ShippedOrders = Online_Orders.objects.filter(Shipment_Released=True)
+
+        if request.POST: #As long as the web user hasn't filled out any form
+            Number = request.POST['Number']#Get the POST value from the Shipping_Status Hidden Input Field
+            Right_Now_Date = datetime.datetime.now()
+            ShippedOrders = Online_Orders.objects.filter(id=Number)
+            ShippedOrders.update(Shipment_Released=False, Shipment= Right_Now_Date) #Update that Single Order`s Shipping Status to TRUE
+            messages.success(request, "Shipping Status changed to ORDER SHIPMENT PENDING")
+            return redirect("HomePage")
+        
+        else:
+            return render(request, "Order_Shipped_Status_Page.html", {"Shipped": ShippedOrders, })
     
-    return render(request, "Shopping_Cart_Check_Out_Page.html", {
-        "Items": Items_On_Cart,
-        "Total_Price": Total_Price,
-        "PayPalButtons": PayPalForm,
-    })
+    else:
+        messages.success(request, "Access Denied!")
+        return redirect("HomePage")
+
+def OnlineOrderNotShipped(request):
+    if request.user.is_authenticated:
+        PendingOrders = Online_Orders.objects.filter(Shipment_Released=False)
+        
+        if request.POST: #As long as the web user hasn't filled out any form
+            Number = request.POST['Number']#Get the POST value from the Shipping_Status Hidden Input Field
+            Right_Now_Date = datetime.datetime.now()
+            PendingOrders = Online_Orders.objects.filter(id=Number)
+            PendingOrders.update(Shipment_Released=True, Shipment= Right_Now_Date) #Update that Single Order`s Shipping Status to TRUE
+            messages.success(request, "Shipping Status changed to ORDER HAS SHIPPED")  
+            return redirect("HomePage")
+        
+        else:
+            return render(request, "Order_Shipped_Not_Status_Page.html", {"Pending": PendingOrders, })
+
+    else:
+        messages.success(request, "Access Denied!")
+        return redirect("HomePage")
     
+def OnlineOrderProcessing(request):
+    if request.POST: #If the web user POSTED data over from the Billing Info Form
+        cart = Cart(request)
+        cart_products = cart.view_cart
+        cart_quantities = cart.cart_amounts
+        cart_total_price = cart.total_price()
+        
+        Billing_Form = OnlineOrderPayments(request.POST or None)
+        Processing_Session = request.session.get("Processing_Session")
+        
+        
+        First_Name = Processing_Session['Shipping_First_Name']
+        Last_Name = Processing_Session['Shipping_Last_Name']
+        Email = Processing_Session['Shipping_Email']
+        
+        Ship_Address = f'''{Processing_Session['Shipping_Address_Line_1']}\n{Processing_Session['Shipping_Address_Line_2']}\n{Processing_Session['Shipping_City']}\n{Processing_Session['Shipping_State']}\n{Processing_Session['Shipping_ZipCode']}\n{Processing_Session['Shipping_Country']}\n'''
+        Total_Amount = cart_total_price
+        
+        # Online Order Ticket Processing for a Logged In User
+        if request.user.is_authenticated: #If the web user is logged in
+            user = request.user #Save the Web user to database
+            Create_User_Order = Online_Orders(user=user, First_Name=First_Name, Last_Name=Last_Name, Email=Email, Full_Address=Ship_Address, Total_Amount=Total_Amount)
+            Create_User_Order.save()
+            
+            User_Order_ID = Create_User_Order.pk #Grabbing the Generate User_Order DB ID#
+            
+            for Product in cart_products():
+                Product_ID = Product.id #Secure the Product ID from the Carted Product(s)
+                
+                if Product.On_Sale:
+                    Price = Product.On_Sale #Secure the Product Sale Price from the Carted Product(s)
+                    
+                else:
+                    Price = Product.Price #Secure the Product Price from the Carted Product(s)
+                    
+                for key, val in cart_quantities().items():
+                    if int(key) == Product_ID:
+                        val #Carted Product Quantities Number Value
+                        #Based on finding all the information above, Create an Orderable Item DB Table
+                        Create_Orderable_Item = Orderable_Products(OrderID_id=User_Order_ID, Product_id=Product_ID, user_id=user.id, Quantity=val, Price=Price)    
+                        Create_Orderable_Item.save()
+                    
+            #Delete the Cart
+            for key in list(request.session.keys()):
+                if key == "session_key":
+                    del request.session[key]
+                    
+            #Remove Cart from the Database
+            LoggedInUser = WebsiteAccounts.objects.filter(Web_User__id=request.user.id)
+            LoggedInUser.update(Old_Cart="") #Replace current Key, Val pair with Nothing 
+                    
+            messages.success(request, "TEST Use LOG IN Order Has Been Placed!")
+            return redirect("HomePage")
+        
+        # Online Order Ticket Processing for a Non-Logged In User
+        else:
+            Create_User_Order = Online_Orders(First_Name=First_Name, Last_Name=Last_Name, Email=Email, Full_Address=Ship_Address, Total_Amount=Total_Amount)
+            Create_User_Order.save()
+            
+            User_Order_ID = Create_User_Order.pk #Grabbing the Generate User_Order DB ID#
+            
+            for Product in cart_products():
+                Product_ID = Product.id #Secure the Product ID from the Carted Product(s)
+                
+                if Product.On_Sale:
+                    Price = Product.On_Sale #Secure the Product Sale Price from the Carted Product(s)
+                    
+                else:
+                    Price = Product.Price #Secure the Product Price from the Carted Product(s)
+                    
+                for key, val in cart_quantities().items():
+                    if int(key) == Product_ID:
+                        val #Carted Product Quantities Number Value
+                        #Based on finding all the information above, Create an Orderable Item DB Table
+                        Create_Orderable_Item = Orderable_Products(OrderID_id=User_Order_ID, Product_id=Product_ID, user_id=user.id, Quantity=val, Price=Price)      
+                        Create_Orderable_Item.save()
+                    
+            #Delete the Cart
+            for key in list(request.session.keys()):
+                if key == "session_key":
+                    del request.session[key]
+            
+            messages.success(request, "TEST User LOG OUT Order Has Been Placed!")
+            return redirect("HomePage")
+
+    else:
+        messages.success(request, "TEST Access Denied!")
+        return redirect("HomePage")
+    
+def OnlineOrderSingle(request, PrimeKey):
+    if request.user.is_superuser:
+        SingleOrder = Online_Orders.objects.get(id=PrimeKey)
+        SingleOrderedProducts = Orderable_Products.objects.filter(OrderID=PrimeKey)
+        
+        if request.POST: #As long as the web user hasn't filled out any forms
+            ShippingStatus = request.POST['Shipping_Status'] #Get the POST value from the Shipping_Status Hidden Input Field
+            
+            if ShippingStatus == "true": #As long as the Ship Status field displays the value 'true'
+                SingleOrder = Online_Orders.objects.filter(id=PrimeKey) #Grbbing the Shipped Single Order
+                
+                Right_Now_Date = datetime.datetime.now()
+                
+                SingleOrder.update(Shipment_Released=True, Shipment=Right_Now_Date, ) #Update that Single Order`s Shipping Status to TRUE
+                messages.success(request, "Shipping Status changed to ORDER HAS SHIPPED")  
+                return redirect("HomePage")
+                
+            else: #As long as the Ship Status field displays the value 'false'
+                SingleOrder = Online_Orders.objects.filter(id=PrimeKey) #Grbbing the Shipped Single Order
+                SingleOrder.update(Shipment_Released=False) #Update that Single Order`s Shipping Status to FALSE
+                messages.success(request, "Shipping Status changed to ORDER AWAITING SHIPMENT")  
+                return redirect("HomePage") 
+            
+        return render(request, "Order_Single_Page.html", {"Order": SingleOrder, "OrderItem": SingleOrderedProducts,})
+    
+    else:
+        messages.success(request, "Access Denied!")
+        return redirect("HomePage")
+    
+    
+# def ShopCartBilling(request):
+#     if request.POST:  #If the web user POSTED data over from the Forms on the CheckOut Page
+#         cart = Cart(request)
+#         cart_products = cart.view_cart
+#         cart_quantities = cart.cart_amounts
+#         cart_total_price = cart.total_price()
+    
+#         #Creating a User Session For The Order Processing Logic
+#         Processing_Session = request.POST
+#         request.session["Processing_Session"] = Processing_Session
+        
+#         Billing_Form = OnlineOrderPayments(request.POST or None)
+        
+#         First_Name = Processing_Session['Shipping_First_Name']
+#         Last_Name = Processing_Session['Shipping_Last_Name']
+#         Email = Processing_Session['Shipping_Email']
+        
+#         Ship_Address = f'''{Processing_Session['Shipping_Address_Line_1']}\n{Processing_Session['Shipping_Address_Line_2']}\n{Processing_Session['Shipping_City']}\n{Processing_Session['Shipping_State']}\n{Processing_Session['Shipping_ZipCode']}\n{Processing_Session['Shipping_Country']}\n'''
+        
+#         Total_Amount = cart_total_price
+        
+#         #Acquire the Host Url
+#         Host = request.get_host()
+        
+#         InvoiceNUM = str(uuid.uuid4())
+        
+#         # Paypal Dictionary Key Value Pairs Below
+#         # https://developer.paypal.com/api/nvp-soap/paypal-payments-standard/integration-guide/Appx-websitestandard-htmlvariables/
+#         PayPal_Hash_Map = {
+#             "business": settings.PAYPAL_RECEIVER_EMAIL, #The merchant account reciving patment
+#             "amount": cart_total_price,
+#             "item_name": "Some Item Name(s)",
+#             "invoice": InvoiceNUM,
+#             "notify_url": f"http://{Host}{reverse('paypal-ipn')}",
+#             "return":  f"http://{Host}{reverse('PayPalPaymentSuccess')}",
+#             "cancel_return": f"http://{Host}{reverse('PayPalPaymentFail')}",
+#             #"rm": 2,
+#             # "Custom": "Premium_Plan",
+#         }
+
+#         PayPalForm = PayPalPaymentsForm(initial=PayPal_Hash_Map)
+            
+#         if request.user.is_authenticated: #If the web user is logged in
+#             Billing_Form = OnlineOrderPayments()
+#             user = request.user #Save the Web user to database
+            
+#             Create_User_Order = Online_Orders(user=user, First_Name=First_Name, Last_Name=Last_Name, Email=Email, Full_Address=Ship_Address, Total_Amount=Total_Amount, Invoice=InvoiceNUM)
+#             Create_User_Order.save()
+            
+#             User_Order_ID = Create_User_Order.pk #Grabbing the Generate User_Order DB ID#
+            
+#             for Product in cart_products():
+#                 Product_ID = Product.id #Secure the Product ID from the Carted Product(s)
+                
+#                 if Product.On_Sale:
+#                     Price = Product.On_Sale #Secure the Product Sale Price from the Carted Product(s)
+                    
+#                 else:
+#                     Price = Product.Price #Secure the Product Price from the Carted Product(s)
+                    
+#                 for key, val in cart_quantities().items():
+#                     if int(key) == Product_ID:
+#                         val #Carted Product Quantities Number Value
+#                         #Based on finding all the information above, Create an Orderable Item DB Table
+#                         Create_Orderable_Item = Orderable_Products(OrderID_id=User_Order_ID, Product_id=Product_ID, user_id=user.id, Quantity=val, Price=Price)    
+#                         Create_Orderable_Item.save()
+                    
+#                 #Remove Cart from the Database
+#                 LoggedInUser = WebsiteAccounts.objects.filter(Web_User__id=request.user.id)
+#                 LoggedInUser.update(Old_Cart="") #Replace current Key, Val pair with Nothing 
+                    
+#                 return render(request, "Shopping_Cart_Billing_Page.html", {"Cart_Summary": cart_products, "Cart_Amount" : cart_quantities, "Cart_Total_Price" : cart_total_price, "Billing_Form": Billing_Form, "PayPalForm": PayPalForm, "Shipping_Information": request.POST, })
+        
+#         else:
+#             Billing_Form = OnlineOrderPayments()
+            
+#             Create_User_Order = Online_Orders(First_Name=First_Name, Last_Name=Last_Name, Email=Email, Full_Address=Ship_Address, Total_Amount=Total_Amount, Invoice=InvoiceNUM)
+#             Create_User_Order.save()
+            
+#             User_Order_ID = Create_User_Order.pk #Grabbing the Generate User_Order DB ID#
+            
+#             for Product in cart_products():
+#                 Product_ID = Product.id #Secure the Product ID from the Carted Product(s)
+                
+#                 if Product.On_Sale:
+#                     Price = Product.On_Sale #Secure the Product Sale Price from the Carted Product(s)
+                    
+#                 else:
+#                     Price = Product.Price #Secure the Product Price from the Carted Product(s)
+                    
+#                 for key, val in cart_quantities().items():
+#                     if int(key) == Product_ID:
+#                         val #Carted Product Quantities Number Value
+#                         #Based on finding all the information above, Create an Orderable Item DB Table
+#                         Create_Orderable_Item = Orderable_Products(OrderID_id=User_Order_ID, Product_id=Product_ID, user_id=user.id, Quantity=val, Price=Price)      
+#                         Create_Orderable_Item.save()
+                        
+#                 return render(request, "Shopping_Cart_Billing_Page.html", {"Cart_Summary": cart_products, "Cart_Amount" : cart_quantities, "Cart_Total_Price" : cart_total_price, "Billing_Form": Billing_Form, "PayPalForm": PayPalForm, "Shipping_Information": request.POST, })
+    
+#     else:
+#         messages.success(request, "Access Denied!")
+#         return redirect("HomePage")
+        
+def ShopCartBilling(request):
+    if request.POST:  #If the web user POSTED data over from the Forms on the CheckOut Page
+        cart = Cart(request)
+        cart_products = cart.view_cart
+        cart_quantities = cart.cart_amounts
+        cart_total_price = cart.total_price()
+    
+        #Creating a User Session For The Order Processing Logic
+        Processing_Session = request.POST
+        request.session["Processing_Session"] = Processing_Session
+        
+        Billing_Form = OnlineOrderPayments(request.POST or None)
+        
+        First_Name = Processing_Session['Shipping_First_Name']
+        Last_Name = Processing_Session['Shipping_Last_Name']
+        Email = Processing_Session['Shipping_Email']
+        
+        Ship_Address = f'''{Processing_Session['Shipping_Address_Line_1']}\n{Processing_Session['Shipping_Address_Line_2']}\n{Processing_Session['Shipping_City']}\n{Processing_Session['Shipping_State']}\n{Processing_Session['Shipping_ZipCode']}\n{Processing_Session['Shipping_Country']}\n'''
+        
+        Total_Amount = cart_total_price
+        
+        #Acquire the Host Url
+        Host = request.get_host()
+        
+        InvoiceNUM = str(uuid.uuid4())
+        
+        # Paypal Dictionary Key Value Pairs Below
+        # https://developer.paypal.com/api/nvp-soap/paypal-payments-standard/integration-guide/Appx-websitestandard-htmlvariables/
+        PayPal_Hash_Map = {
+            "business": settings.PAYPAL_RECEIVER_EMAIL, #The merchant account reciving patment
+            "amount": cart_total_price,
+            "item_name": "Some Item Name(s)",
+            "invoice": InvoiceNUM,
+            "notify_url": f"http://{Host}{reverse('paypal-ipn')}",
+            "return":  f"http://{Host}{reverse('PayPalPaymentSuccess')}",
+            "cancel_return": f"http://{Host}{reverse('PayPalPaymentFail')}",
+            #"rm": 2,
+            # "Custom": "Premium_Plan",
+        }
+
+        PayPalForm = PayPalPaymentsForm(initial=PayPal_Hash_Map)
+            
+        # Online Order Ticket Processing for a Logged In User
+        if request.user.is_authenticated: #If the web user is logged in
+            user = request.user #Save the Web user to database
+            Create_User_Order = Online_Orders(user=user, First_Name=First_Name, Last_Name=Last_Name, Email=Email, Full_Address=Ship_Address, Total_Amount=Total_Amount, Invoice=InvoiceNUM)
+            Create_User_Order.save()
+            
+            User_Order_ID = Create_User_Order.pk #Grabbing the Generate User_Order DB ID#
+            
+            for Product in cart_products():
+                Product_ID = Product.id #Secure the Product ID from the Carted Product(s)
+                
+                if Product.On_Sale:
+                    Price = Product.On_Sale #Secure the Product Sale Price from the Carted Product(s)
+                    
+                else:
+                    Price = Product.Price #Secure the Product Price from the Carted Product(s)
+                    
+                for key, val in cart_quantities().items():
+                    if int(key) == Product_ID:
+                        val #Carted Product Quantities Number Value
+                        #Based on finding all the information above, Create an Orderable Item DB Table
+                        Create_Orderable_Item = Orderable_Products(OrderID_id=User_Order_ID, Product_id=Product_ID, user_id=user.id, Quantity=val, Price=Price)    
+                        Create_Orderable_Item.save()
+                    
+            #Delete the Cart
+            for key in list(request.session.keys()):
+                if key == "session_key":
+                    del request.session[key]
+                    
+            #Remove Cart from the Database
+            LoggedInUser = WebsiteAccounts.objects.filter(Web_User__id=request.user.id)
+            LoggedInUser.update(Old_Cart="") #Replace current Key, Val pair with Nothing 
+                    
+            return render(request, "Shopping_Cart_Billing_Page.html", {"Cart_Summary": cart_products, "Cart_Amount" : cart_quantities, "Cart_Total_Price" : cart_total_price, "Billing_Form": Billing_Form, "PayPalForm": PayPalForm, "Shipping_Information": request.POST, })
+        
+        # Online Order Ticket Processing for a Non-Logged In User
+        else:
+            Create_User_Order = Online_Orders(First_Name=First_Name, Last_Name=Last_Name, Email=Email, Full_Address=Ship_Address, Total_Amount=Total_Amount, Invoice=InvoiceNUM)
+            Create_User_Order.save()
+            
+            User_Order_ID = Create_User_Order.pk #Grabbing the Generate User_Order DB ID#
+            
+            for Product in cart_products():
+                Product_ID = Product.id #Secure the Product ID from the Carted Product(s)
+                
+                if Product.On_Sale:
+                    Price = Product.On_Sale #Secure the Product Sale Price from the Carted Product(s)
+                    
+                else:
+                    Price = Product.Price #Secure the Product Price from the Carted Product(s)
+                    
+                for key, val in cart_quantities().items():
+                    if int(key) == Product_ID:
+                        val #Carted Product Quantities Number Value
+                        #Based on finding all the information above, Create an Orderable Item DB Table
+                        Create_Orderable_Item = Orderable_Products(OrderID_id=User_Order_ID, Product_id=Product_ID, user_id=user.id, Quantity=val, Price=Price)      
+                        Create_Orderable_Item.save()
+                
+                return render(request, "Shopping_Cart_Billing_Page.html", {"Cart_Summary": cart_products, "Cart_Amount" : cart_quantities, "Cart_Total_Price" : cart_total_price, "Billing_Form": Billing_Form, "PayPalForm": PayPalForm, "Shipping_Information": request.POST, })
+    else:
+        messages.success(request, "Access Denied!")
+        return redirect("HomePage")
 
 def Services_TechConsultation(request):
     Testimonials = CustomerTestimonials.objects.all()
     
-    return render(request, "Services_Tech_Consultation_Page.html", {
-        "Testi": Testimonials
-    })
+    return render(request, "Services_Tech_Consultation_Page.html", {"Testi": Testimonials, })
     
 def Services_Careers(request):
     Jobs = Employment.objects.all().order_by("Title")
@@ -443,19 +812,12 @@ def AdminDashECommerce(request):
 
     Numbers = "h" * Products.paginator.num_pages
     
-    return render(request, "Admin_Dashboard_ECommerce_Page.html", {
-        "PaginatedProducts": Products,
-        "Numbers": Numbers,
-        "Promo": PromoCodes,
-        "AllProducts": AllProducts
-    })
+    return render(request, "Admin_Dashboard_ECommerce_Page.html", {"PaginatedProducts": Products, "Numbers": Numbers, "Promo": PromoCodes,"AllProducts": AllProducts, })
     
 def AdminDashRetailStores(request):
     Stores = StoreLocations.objects.all()
     
-    return render(request, "Admin_Dashboard_Retail_Stores_Page.html", {
-        "Store": Stores,
-    })
+    return render(request, "Admin_Dashboard_Retail_Stores_Page.html", {"Store": Stores,})
     
 def AdminDashCustomerSupport(request):
     Customer_Support_Tickets = CustomerSupportTickets.objects.all()
@@ -525,20 +887,9 @@ def CustomerReviewFormPage(request):
                     'submitted': submitted,
                     'CustomerReviews': Reviews })
     
-
-def AccountPage(request):
-    return render(request, "Account_My_Account_Page.html", {})
-
-def MySupport(request):
-    return render(request, "Account_My_Support_Page.html", {})
-
 def ReportsPage(request):
     return render(request, "Admin_Website_Reports_Page.html", {})
-
-def AccountReset(request):
-    return render(request, "User_Account_Reset_Page.html", {})
-
-
+    
 def ProductText(response):
     # Initializing the response Variable for a .TXT file
     response = HttpResponse(content_type='text/plain')

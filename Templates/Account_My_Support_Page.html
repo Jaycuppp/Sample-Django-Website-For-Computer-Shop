@@ -1,4 +1,7 @@
-{% load static %}
+{% extends "00Base.html" %}
+{% block content %}
+
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,17 +19,20 @@
         <header> 
             <span> <h1 id="My_Support_Title"> Welcome to the My Support Web Page </h1> </span>
             {% include "Navbar.html"%} <br>
-        </header>
+        </header> {% endcomment %}
 
-        <main>
-            <div>
-                <img id="Page_404_Error_Image" src="https://internetdevels.com/sites/default/files/public/blog_preview/404_page_cover.jpg" alt="">
-            </div>
-        </main>
+<main>
+    <div>
+        <img id="Page_404_Error_Image" src="https://internetdevels.com/sites/default/files/public/blog_preview/404_page_cover.jpg" alt="">
+    </div>
+</main>
 
+{% comment %} 
         <footer> 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"> </script>
             <script type="text/javascript" src="{% static 'Script.js' %}"> </script>
         </footer>
     </body>
-</html>
+</html> {% endcomment %}
+
+{% endblock %}

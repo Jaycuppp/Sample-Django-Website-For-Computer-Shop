@@ -1,5 +1,10 @@
-from django.urls import path, include
 from . import views
+
+from django.urls import path, include
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 urlpatterns = [
     path('', views.HomePage, name="HomePage"),
@@ -24,17 +29,19 @@ urlpatterns = [
     path('DeleteProduct/<Product_ID>', views.DeleteProduct, name="DeleteProduct"),
     path('ProductSearch', views.ProductSearchPage, name="ProductSearchResultPage"),
     path('ProductAdd', views.ProductAddPage, name="AddProductPage"),
-    path('Account/MyAccount', views.AccountPage, name="MyAccountPage"),
-    path('Account/MySupport', views.MySupport, name="MySupportPage"),
-    path('Account/Reset/UsernameOrPassword', views.AccountReset, name="AccountReset"),
     path('PreOrder', views.AllPreOrder, name="AllPreOrder"),
     path('Promotions', views.AllPromotions, name="AllOnPromo"),
     path('ShoppingCart', views.ShopCart, name="ShoppingCart"),
-    path('ShoppingCartAppendOne/<Product_ID>', views.ShopCart_Single_Add, name="AddToShopCart"),
-    path('ShoppingCartAppendAlot/<Product_ID>', views.ShopCart_Multi_Add, name="AddManyToShopCart"),
-    path('ShoppingCartRemoveOne/<Product_ID>', views.ShopCart_Single_Delete, name="RemoveFromShopCart"),
-    path('ShoppingCartRemoveAll/<Product_ID>', views.ShopCart_Multi_Delete, name="RemoveAllFromShopCart"),
+    path('ShoppingCartAdd', views.ShoppingCartAdd, name="AddToShopCart"),
+    path('ShoppingCartRemove', views.ShoppingCartRemove, name="RemoveFromShopCart"),
+    path('ShoppingCartUpdate', views.ShoppingCartUpdate, name="UpdateShopCart"),
     path('ShoppingCartCheckOut', views.ShopCart_CheckOut, name="CheckingOut"),
+    path('ShoppingCartBilling', views.ShopCartBilling, name="Billing"),
+    path("Order_Processing", views.OnlineOrderProcessing, name="ProcessOrder"),
+    path("Order_Single/<int:PrimeKey>", views.OnlineOrderSingle, name="OrderSingle"),
+    path("Order_Shipped", views.OnlineOrderShipped, name="OrderShipped"),
+    path("Order_Not_Shipped", views.OnlineOrderNotShipped, name="OrderNotShipped"),
+    path('paypal', include("paypal.standard.ipn.urls")),
     path('Payment-Success/', views.PayPal_Successfull_Payment, name='PayPalPaymentSuccess'),
     path('Payment-Failure/', views.PayPal_Failure_Payment, name='PayPalPaymentFail'),
     path('AdminDash/ECommerce', views.AdminDashECommerce, name="AdminDashECommerce"),

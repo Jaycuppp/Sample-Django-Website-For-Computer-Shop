@@ -1,4 +1,7 @@
-{% load static %}
+{% extends "00Base.html" %}
+{% block content %}
+
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,7 +18,7 @@
         <header> 
             <span id="Single_Product_Title"> <h1> Quansh Tech Product </h1> </span>
             {% include "Navbar.html"%} <br>
-        </header>
+        </header> {% endcomment %}
 
         <main>
             <div id="Product_Card">
@@ -100,14 +103,43 @@
                             </span>
 
                             <div>
-                                <span id="Single_Product_Common_Buttons">
+                                <div class="row justify-content-center">
+                                    <span class="col-md-3">  Amount To Buy: </span>
+
+                                    <span class="col-md-3">
+                                        <select class="form-select form-select-sm" id="Cart_Quant" aria-label="Small select example">
+                                            <option selected>Open this select menu</option>
+                                            <option value="1"> 1 </option>
+                                            <option value="2"> 2 </option>
+                                            <option value="3"> 3 </option>
+                                            <option value="4"> 4 </option>
+                                        </select>
+                                    </span>
+
+                                    <span class="col-md-7" id="All_Products_Common_Buttons"> 
+                                        {% if SingleProduct.Stock == 0 %}
+                                        <button type="button" value="{{SingleProduct.id}}" class="btn btn-primary" id="Add_To_Cart_Butt" style="margin-left: 100px;"> Add to Cart </button>
+                                          {% comment %} <a href="#" class="btn btn-dark" id="All_Products_PreOrder_Button"> Pre Order </a> {% endcomment %}
+                                          {% comment %} <button type="button" value="{{product.id}}" class="btn btn-primary" id="Add_To_Cart_Butt"> Pre Order </button> {% endcomment %}
+                                          
+                                        {% else %}
+                                        <button type="button" value="{{SingleProduct.id}}" class="btn btn-primary" id="Add_To_Cart_Butt" style="margin-left: 100px;"> Add to Cart </button>
+                                          {% comment %} <button type="button" value="{{product.id}}" class="btn btn-primary" id="Add_To_Cart_Butt"> Add to Cart </button> {% endcomment %}
+                                          {% comment %} <a href="" class="btn btn-dark" id="All_Products_Add_To_Cart_Button"> Add to cart </a> {% endcomment %}
+                                        {% endif %}
+                                    </span>
+                                </div>
+
+                                {% comment %} <span id="Single_Product_Common_Buttons">
                                     {% if SingleProduct.Stock == 0 %}
+                                    <a href="#" class="btn btn-dark" id="Single_Pre_Order_Button" style="left-margin: -10px;"> Pre Order </a>
                                     <a href="{% url 'ShoppingCart' %}" class="btn btn-dark" id="Single_Pre_Order_Button" style="left-margin: -10px;"> Pre Order </a>
                                     {% else %}
+                                    <a href="#"  class="btn btn-dark" id="Single_Add_To_Cart_Button"> Add to cart </a>
                                     <a href="{% url 'ShoppingCart' %}"  class="btn btn-dark" id="Single_Add_To_Cart_Button"> Add to cart </a>
                                     {% endif %}
                                     <a href="#" class="btn btn-dark" id="Single_Save_Item_Button"> Save Item </a> 
-                                </span>
+                                </span> {% endcomment %}
 
                                 <span id="Single_Product_Auth_Buttons">
                                 {% if user.is_authenticated %}
@@ -116,6 +148,7 @@
                                     <a href="{% url 'DeleteProduct' SingleProduct.id %}" class="btn btn-dark" id="Single_Delete_Button"> Delete </a>
                                     {% endif %}
                                 {% endif %}
+                                
                                 </span>
                             </div> 
                         </div>
@@ -124,9 +157,11 @@
             </div>
         </main>
 
-        <footer> 
+        {% comment %} <footer> 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"> </script>
             <script type="text/javascript" src="{% static 'Script.js' %}"> </script>
         </footer>
     </body>
-</html>
+</html> {% endcomment %}
+
+{% endblock %}

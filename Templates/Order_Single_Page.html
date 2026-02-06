@@ -1,0 +1,57 @@
+{% extends '00Base.html' %}
+
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder"> Online Order # {{Order.id}}  </h1>
+            <p class="lead fw-normal text-white-50 mb-0"> See below for more info </p>
+        </div>
+    </div>
+</header>
+
+<br> <br> <br> <br> <br>
+
+<div class="card">
+    <div class="card-header"> Order #{{Order.id}} - Total ${{Order.Total_Amount}}</div>
+    <div class="card-body">
+
+        {% comment %} <h5 class="card-title">Special title treatment</h5> {% endcomment %}
+        <p class="card-text"> Email Address: {{Order.Email}} </p>
+        {% if Order.Shipment_Released %}
+            <p class="card-text"> Date Shipped: {{Order.Shipment}} </p>
+        {% else %}
+            <p class="card-text"> Date Ordered: </p>
+        {% endif %}
+
+        <p class="card-text"> Recipent Name: {{Order.Shipping_Full_Name}} </p>
+
+        <p class="card-text"> Ship To Address: <pre>{{Order.Full_Address}}</pre> </p>
+        {% comment %} <a href="#" class="btn btn-primary"> Go somewhere</a> {% endcomment %}
+
+        {% for Item in OrderItems %}
+            Qty {{Item.Quantity}} * {{Item.Product}} = ${{Item.Price}} <br>
+        {% endfor %}
+
+        {% if not Order.Shipment_Released %}
+        <form method="POST"> 
+            {% csrf_token %} <input type="hidden", name="Shipping_Status", value="true"> </input>
+            <button type="submit" class="btn btn-success"> Mark If Order Shipped </button>
+        </form>
+    
+        {% else %}
+        <form method="POST"> 
+            {% csrf_token %} <input type="hidden", name="Shipping_Status", value="false"> </input>
+            <button type="submit" class="btn btn-danger"> Mark If Order Not Shipped </button>
+        </form>
+    
+        {% endif %}
+
+    </div>
+</div>
+
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
+
+{% endblock %}

@@ -17,9 +17,18 @@
       </li>
 
       <li class="nav-item" id="Shopping_Cart_Button">
-        <a class="nav-link active" id="Shopping_Cart_Button" aria-current="page" href= "{% url 'ShoppingCart' %}"  target="blank"> MyShopCart </a>
+        {% comment %} <a class="nav-link active" id="Shopping_Cart_Button" aria-current="page" href= "{% url 'ShoppingCart' %}"  target="blank"> MyShopCart </a> {% endcomment %}
       </li>
-      
+
+      <li class="nav-item" id="Shopping_Cart_Button">
+        <form class="d-flex">
+          <a class="btn btn-outline-dark" aria-current="page" role="button" href="{% url 'ShoppingCart' %}">
+              <i class="bi-cart-fill me-1"> </i> My Cart
+              <span class="badge bg-dark text-white ms-1 rounded-pill" id="Cart_Count"> {{ cart|length }} </span>
+          </a>
+        </form>
+      </li>
+
     </ul>
   </div>
 </nav>
@@ -88,12 +97,11 @@
           </div>
 
           <div class="dropdown">
-            <button class="btn dropdown-toggle" id="Main_NavBar_Button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Admin Dashboards </button>
+            <button class="btn dropdown-toggle" id="Main_NavBar_Button" type="button" data-bs-toggle="dropdown" aria-expanded="false"> Admin Dashboards </button>
             <ul class="dropdown-menu" id="Account_DropDown_Options">
 
               {% if user.is_superuser or user.is_staff %}
-              <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="https://qt-site.vercel.app/admin/" target="blank"> Website Admin </a> </li>
+              <li><a class="dropdown-item" id="NavBar_DropDown_Menu_Button" href="http://127.0.0.1:8000/admin/" target="blank"> Website Admin </a> </li>
               {% endif %}
 
               {% if user.is_superuser or user.is_staff or user.username == "QTMan" %}
@@ -142,8 +150,17 @@
             <a class="nav-link" id="Company_Phone" href="tel:818-364-2146"> 818-364-2146 </a>
           </li>
 
+          {% comment %} <li class="nav-item">
+            <form class="d-flex">
+              <a class="btn btn-outline-dark" aria-current="page" role="button" href="{% url 'ShoppingCart' %}">
+                  <i class="bi-cart-fill me-1"> </i> Cart
+                  <span class="badge bg-dark text-white ms-1 rounded-pill" id="Cart_Count"> {{ cart|length }} </span>
+              </a>
+            </form>
+          </li> {% endcomment %}
+
         </ul>
       </div>
     </div>
-  </nav>
+</nav>
 

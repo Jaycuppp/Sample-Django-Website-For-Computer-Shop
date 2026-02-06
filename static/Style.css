@@ -11,6 +11,10 @@ body {
     width: 100%; */
 }
 
+footer {
+    margin-top: 500px;
+}
+
 a {
     text-decoration: none;
 }
@@ -30,6 +34,12 @@ h1 {
     padding-top: 2%;
     padding-left: 14%;
     padding-right: 14%
+}
+
+/* Base Page */
+#QT_Title{
+    text-align: center;
+    font-weight: 700;
 }
 
 /* NavBar Extension Page */
@@ -381,14 +391,6 @@ h1 {
     width: 400px;
 }
 
-
-#USDT_Crypto_Price,
-#SOL_Crypto_Price,
-#ETH_Crypto_Price,
-#BTC_Crypto_Price {
-    color: #62024f;
-}
-
 #Weather_Card {
     width: 500px;
 }
@@ -413,12 +415,10 @@ h1 {
 #liveToastBtn {
     color: rgb(250, 255, 250);
     background-color: rgb(19, 86, 19);
-    background-color: rgb(51, 0, 52);
     text-align: center;
-    position: st;
     margin-top: 50px;
     margin-bottom: 100px;
-    margin-left: 93%;
+    margin-left: 45%;
 }
 
 #Back_To_Top_Page_Button {
@@ -460,7 +460,6 @@ h1 {
     padding-left: 20%;
     padding-right: 20%;
     padding-top: 33px;
-    padding-bottom: 250px;
 }
 
 #About_Introduction {
@@ -567,7 +566,6 @@ h1 {
 
 #About_Conclusion {
     padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 #Conclusion_Title {
@@ -852,11 +850,6 @@ h1 {
 #Promo_Product_Title {
     text-align: center;
     font-weight: 700;
-}
-
-#Product_Promotion_Header {
-    margin-left: 5%;
-    color: #bc5b00;
 }
 
 /* All Products Pre_Order Page */
@@ -1686,6 +1679,10 @@ h1 {
 /* Existing User Account Recovery Page */
 #Account_Recovery_Page_Title {}
 
+#Update_Password_Butt{
+    margin-left: 45%;
+}
+
 #Forgot_Password_Message {
     margin-left: 25%;
     margin-right: 25%;
@@ -1819,41 +1816,9 @@ h1 {
     margin-right: 75px;
 }
 
+/* # {} */
 
-/* Shopping Cart Check Out Page */
-#Check_Out_Title {}
-
-#PayPal_Buy_Button {
-    margin: auto;
-    margin-left: 25%;
-}
-
-/* Successful Payment Page */
-#Payment_Success_Title {}
-
-#Payment_Success_Body {
-    text-align: center;
-}
-
-#Payment_Success_Message {
-    font-weight: 700;
-}
-
-#Continue_Shopping_Button {
-    color: #f392f0;
-    background-color: #750879;
-    margin-top: 75px;
-}
-
-
-#Go_Back_Home_Button {
-    color: #001c37;
-    background-color: #007d84;
-    margin-top: 75px;
-}
-
-
-/* Failed Payment Page */
+/* Customer Check Out Page */
 
 /* My Support Page */
 #My_Support_Title {}

@@ -20,8 +20,13 @@
             {% include "Navbar.html"%} <br>
         </header>
         <main>
+
         {% if user.is_superuser %}
-            <a class="btn btn-success" id="Add_A_Product_Button" href="{% url 'AddProductPage' %}"> Add A New Product Here </a>
+            <span>
+                <a class="btn btn-success" id="Add_A_Product_Button" href="{% url 'AddProductPage' %}" target="blank"> Add A New Product Here </a>
+                <a class="btn btn-success" id="Add_A_Product_Button" href="{% url 'OrderShipped' %}" target="blank"> Shipped Online Orders </a>
+                <a class="btn btn-success" id="Add_A_Product_Button" href="{% url 'OrderNotShipped' %}" target="blank"> Online Orders Pending Shipment </a>
+            </span>
         {% endif %}
 
             <div id="Stats_Promos">                          

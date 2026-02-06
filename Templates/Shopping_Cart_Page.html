@@ -1,4 +1,7 @@
-{% load static %}
+{% extends "00Base.html" %}
+{% block content %}
+
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,11 +17,72 @@
     <body>
         <header> 
             <span id="Shopping_Cart_Title"> <h1> Shopping Cart Page </h1> </span>
-            {% include "Navbar.html"%} <br>
-        </header>
+            {% include "Navbar.html"%} <br> 
+        </header> {% endcomment %}
 
         <main>
-            <div id="Entire_Shop_Cart">
+            {% if Cart_Summary %}
+                {% for Prod in Cart_Summary%}
+                    <div class="card" style="width: 30rem; margin: auto;">
+                        {% comment %} {{Prod.Picture.url}} {% endcomment %}
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{Prod}} </h5>
+                            <p class="card-text">{{Prod.Summary}}</p>
+
+                            {% if Prod.On_Sale %}
+                                <!-- Sale badge-->
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem"> On Sale!</div>
+                            {% endif %}
+
+
+                            <div class="row justify-content-center">
+                                <span class="col-md-4"> Product Price : </span>
+
+                                {% if Prod.On_Sale %}
+                                    <span class="col-md-3"> <strike> ${{Prod.Price}} </strike> ${{ Prod.Sale_Price }} </span>
+                                {% else %}
+                                    <span class="col-md-3"> ${{Prod.Price}} </span>
+                                {% endif %}
+                            </div> <br> 
+                            
+                            <div class="row justify-content-center">
+                                <span class="col-md-4"> Amount to Buy : </span>
+                                <span class="col-md-3">
+                                    <!-- Cart Sumart Drop Down Menu -->
+                                    <select class="form-select form-select-sm" id="select{{Prod.id}}" aria-label="Small select example">
+                                        {% for key, value in Cart_Amount.items %}
+                                            {% if key == Prod.id|slugify %}
+                                                <option selected> {{ value }} </option>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <option value="1"> 1 </option>
+                                        <option value="2"> 2 </option>
+                                        <option value="3"> 3 </option>
+                                        <option value="4"> 4 </option>
+                                    </select>
+                                </span>
+                            </div> <br> 
+
+                            {% comment %} <a href="#" class="btn btn-primary" style="margin: auto;">Go somewhere</a> {% endcomment %}
+                            <span class="col-md-2" style="margin-left: 30%;">
+                                <button class="btn btn-secondary cart-update" type="button" data-index="{{Prod.id}}" > Update </button>
+                                <button class="btn btn-danger cart-remove" type="button" data-index="{{Prod.id}}"> Remove  </button>
+                            </span>
+                        </div>
+                    </div> <br> <br>
+                {% endfor %}
+                
+                <div style="margin: 50px; text-align: center;">
+                    <h3> Total Price: ${{Cart_Total_Price}} </h3>
+                    <a class="btn btn-outline-dark mt-auto" href="{% url 'CheckingOut'%}"> Checkout Order </a>
+                </div>
+
+            {% else %} 
+                <br> <br> <br> <h1 style="text-align: center;"> Your Cart Is Empty </h1> <br> <br> <br>
+            {% endif %}
+
+            {% comment %} <div id="Entire_Shop_Cart">
                 <h2 id="Cart_Owner"> {{user.username}}`s Shopping Cart </h2> 
                 <span id="Shopping_Cart_Header"> 
                     {% if user.is_superuser or user.is_staff %}
@@ -66,12 +130,14 @@
                         </div>
                     </div>
                 {% endfor %}
-            <div>
+            <div> {% endcomment %}
         </main>
 
-        <footer>
+        {% comment %} <footer>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"> </script>
             <script type="text/javascript" src="{% static 'Script.js' %}"> </script>
         </footer>
     </body>
-</html>
+</html> {% endcomment %}
+
+{% endblock %}

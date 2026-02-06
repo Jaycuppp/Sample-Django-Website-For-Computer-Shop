@@ -1,4 +1,5 @@
-import os
+import os, #dj_database_url, environ
+
 from pathlib import Path
 from django.conf.global_settings import MEDIA_URL, MEDIA_ROOT
 
@@ -27,7 +28,8 @@ SECRET_KEY = 'Any Key You Want'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1',]
+Prod_Env = 'Any Port You Want'
+ALLOWED_HOSTS = ['127.0.0.1', Prod_Env]
 
 
 # Application definition
@@ -39,8 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Djang Web Apps
     'Website.apps.WebsiteConfig',
-    'Customers.apps.CustomersConfig',
+    'Customers.apps.ProductsConfig',
+
+    # Extra Django Lib Imports
     'import_export',
     'storages',
     'paypal.standard.ipn',
@@ -84,7 +90,7 @@ WSGI_APPLICATION = 'ComputerStore.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 #Vercel Serverless PostGress DB URL
-DATABASE_URL="DATABASE_URL"
+DATABASE_URL= "REAL DATABASE URL"
 
 DATABASES = {
 # SQLite3 Database
@@ -98,18 +104,10 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 
@@ -117,11 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_TZ = True
 
 

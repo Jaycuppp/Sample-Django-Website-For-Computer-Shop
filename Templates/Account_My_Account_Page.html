@@ -1,4 +1,8 @@
-{% load static %}
+{% extends "00Base.html" %}
+{% block content %}
+
+
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,17 +20,44 @@
         <header> 
             <span> <h1 id="My_Account_Title"> Welcome to the My Account Web Page </h1> </span>
             {% include "Navbar.html"%} <br>
-        </header>
+        </header> {% endcomment %}
 
-        <main>
-            <div>
-                <img id="Page_404_Error_Image" src="https://internetdevels.com/sites/default/files/public/blog_preview/404_page_cover.jpg" alt="">
-            </div>
-        </main>
+<main>
+    <div style="margin: 100px;"> 
+        <h3 id="Create_Account_Message"> Update Your Account Info Below </h3>
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded" id="Account_Registration">      
+                <form action="{% url 'MyAccountPage' %}" method=POST id="Registration_Form">
+                    <div> {% csrf_token %} {{ Form.as_p }} </div>
+                    <button type="submit" value="Submit" class="btn btn-primary" id="Account_Registration_Submit_Button"> Update </button>
+                </form>
+        </div>
+    </div>
 
-        <footer> 
+    <div style="margin: 100px;"> 
+        <h3 id="Create_Account_Message"> Update Account Shipping Information Below </h3>
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded" id="Account_Registration">
+            <a class="btn btn-primary" href="{% url 'MyAccountProfileUpdate' %}" role="button" id="Update_Password_Butt"> Update Ship To Info </a> 
+        </div>
+    </div>
+
+
+    <div style="margin: 100px;"> 
+        <h3 id="Create_Account_Message"> Change Account Password Below </h3>
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded" id="Account_Registration">
+            <a class="btn btn-primary" href="{% url 'MyAccountPasswordReset' %}" role="button" id="Update_Password_Butt"> Update Password </a> 
+        </div>
+    </div>
+
+    {% comment %} <div>
+        <img id="Page_404_Error_Image" src="https://internetdevels.com/sites/default/files/public/blog_preview/404_page_cover.jpg" alt="">
+    </div> {% endcomment %}
+</main>
+
+        {% comment %} <footer> 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"> </script>
             <script type="text/javascript" src="{% static 'Script.js' %}"> </script>
         </footer>
     </body>
-</html>
+</html> {% endcomment %}
+
+{% endblock %}

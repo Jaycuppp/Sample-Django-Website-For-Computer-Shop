@@ -1,8 +1,10 @@
-from datetime import *
-from django_resized import ResizedImageField
-from django.db import models
+import datetime, uuid
 from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
 from django.forms import CharField
+from django_resized import ResizedImageField
 from storages.backends.s3boto3 import S3Boto3Storage
 
 from .api import *
@@ -24,6 +26,9 @@ class Pictures(models.Model):
     Image = ResizedImageField("The Image", size=[400, 400], null=True, blank=True, upload_to='Images/') #storage=AWS_Images()
     Custom_File = models.FileField("Any File", null=True, blank=True)
     
+    class Meta:
+        verbose_name_plural = "Digital Images"
+    
     def __str__(self):
         return self.Name
 
@@ -35,18 +40,106 @@ class CouponDiscount(models.Model):
     EndDate = models.DateTimeField("When The Coupon Ends", null=True, blank=True)
     Discount = models.FloatField("Discount Amount", blank=True)
     Promo_Code_Image = models.ImageField("Promo Code Picture", null=True, blank=True, upload_to='Images/') #storage=AWS_Images()
+    
+    
+    class Meta:
+        verbose_name_plural = "Product Discount Coupon"
 
     def __str__(self):
         return self.CouponName
+    
+class Customer(models.Model):
+    First_Name = models.CharField(max_length=255)
+    Last_Name = models.CharField(max_length=255)
+    Phone_Number = models.CharField(max_length=20)
+    Email_Address = models.EmailField(max_length=100)
+    Username = models.CharField(max_length=50)
+    Password = models.CharField(max_length=50)
+    
+    class Meta:
+        verbose_name_plural = "Customer"
+    
+    def __str__(self):
+        return f'''{self.First_Name} {self.Last_Name}'''
+    
+    
+class Customer_Shipping(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    Shipping_First_Name = models.CharField(max_length=255, null=True, blank=True)
+    Shipping_Last_Name = models.CharField(max_length=255, null=True, blank=True)
+    Shipping_Email = models.CharField(max_length=255, null=True, blank=True)
+    Shipping_Address_Line_1 = models.CharField(max_length=255, null=True, blank=True)
+    Shipping_Address_Line_2 = models.CharField(max_length=255, null=True, blank=True)
+    Shipping_City = models.CharField(max_length=255, null=True, blank=True)
+    Shipping_State = models.CharField(max_length=255, null=True, blank=True)
+    Shipping_ZipCode = models.CharField(max_length=255, null=True, blank=True)
+    Shipping_Country = models.CharField(max_length=255, null=True, blank=True)
+    
+    @property
+    def Shipping_Full_Name(self):
+        return f"{self.Shipping_First_Name} {self.Shipping_Last_Name}"
+    
+    class Meta:
+        verbose_name_plural = "Customer Shipping"
+        
+    def __str__(self) -> str:
+        return f"Customer`s Shipping Address, ID: {self.id}"
+
+#Function for Creating a Default Customer Shipping DataSet when a new Web User Account is Created
+def Creating_New_Customer_Shipping(sender, instance, created, **kwargs):
+    if created:
+        Cus_Shipping = Customer_Shipping(user=instance)
+        Cus_Shipping.save()
+    
+
+class WebsiteAccounts(models.Model):
+    Web_User = models.OneToOneField(User, on_delete=models.CASCADE)
+    Modify_Date = models.DateTimeField(User, auto_now_add=True)
+    Phone_Number = models.CharField("Account`s Phone Number", max_length=50, blank=True)
+    Address1 = models.CharField("Account`s Address Line 1", max_length=50, blank=True)
+    Address2 = models.CharField("Account`s Address Line 2", max_length=50, blank=True)
+    City = models.CharField("Account`s Adress City", max_length=50, blank=True)
+    State = models.CharField("Account`s Adress State", max_length=50, blank=True)
+    ZipCode = models.CharField("Account`s Adress Zipcode", max_length=50, blank=True)
+    Country = models.CharField("Account`s Adress Country", max_length=50, blank=True)
+    Old_Cart = models.CharField("Old Shopping Cart Key Value Pair", max_length=200, blank=True)
+    
+    class Meta:
+        verbose_name_plural = "Online Website Accounts"
+
+    def __str__(self) -> str:
+        return f''' {self.Web_User}'''
+    
+#Function for Creating a User Profile when a new Web User Account is Created
+def Creating_New_Profile(sender, instance, created, **kwargs):
+    if created:
+        Web_User = WebsiteAccounts(Web_User=instance)
+        Web_User.save()
+
+# Helps automatically create a WebSiteAccount Profile Object once the Web Account is created
+post_save.connect(Creating_New_Profile, sender=User)
+
+class Category(models.Model):
+    Name = models.CharField(max_length=255, default="")
+    
+    class Meta:
+        verbose_name_plural = "Product Category"
+    
+    def __str__(self):
+        return self.Name
 
 class StoreProducts(models.Model):
     Name = models.CharField("Product Name", max_length=255)
     Brand = models.CharField("Product Brand", max_length=999, null=True, blank=True)
-    Price = models.FloatField("Product Price")
+    Category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    Price = models.DecimalField("Selling Price", default=0, decimal_places=2, max_digits=14)
+    On_Sale = models.BooleanField("Is product on Sale?", default=False)
+    Sale_Price = models.DecimalField("On Sale Price", default=0, decimal_places=2, max_digits=14)
     SKU = models.CharField("Product SKU", max_length=255, null=True, blank=True)
     UPC = models.CharField("Product UPC", max_length=255, null=True, blank=True)
-    Stock = models.IntegerField("Product Stock", null=True, blank=True)
-    Summary = models.TextField("Product Summary", max_length=1000, null=True, blank=True)
+    Serial = models.CharField("Product Serial Number", max_length=50, blank=True, null=True)
+    Stock = models.IntegerField("Product Stock", null=True, blank=True, default=0)
+    Summary = models.TextField("Product Summary", max_length=1000, null=True, blank=True, default="")
     Key_Feat_1 = models.CharField("Key Prod Feat # 1", max_length=255, null=True, blank=True)
     Key_Feat_2 = models.CharField("Key Prod Feat # 2", max_length=255, null=True, blank=True)
     Key_Feat_3 = models.CharField("Key Prod Feat # 3", max_length=255, null=True, blank=True)
@@ -60,23 +153,94 @@ class StoreProducts(models.Model):
     Picture = models.ImageField("Product Picture", null=True, blank=True, upload_to='Images/') #storage=AWS_Images()
     Spec_Sheet = models.ImageField("Specification Sheet", null=True, blank=True, upload_to='Images/')
     Coupon = models.ForeignKey(CouponDiscount, null=True, blank=True, on_delete=models.CASCADE)
-    Category = models.TextField("Product Classification's for Organization", null=True, blank=True)
     Discontinued = models.BooleanField("EOL Product", default=False)
+    
+
+    class Meta:
+        verbose_name_plural = "Product"
     
     def __str__(self):
         return f"{self.Brand} {self.Name}"
+
+
+# class ShoppingCart(models.Model):
+#     User = models.ForeignKey(User, on_delete=models.CASCADE)
+#     Product = models.ForeignKey(StoreProducts, null=True, blank=False, on_delete=models.CASCADE)
+#     Amount = models.IntegerField(default=0)
+#     Added_To_Cart = models.DateTimeField("Date of Product(s) added to Shop Cart", null=True, blank=True)  #auto_now_add=True
+#     Payment_Date = models.DateTimeField("Payment Submission Date", null=True, blank=True) #auto_now_add=True
+#     Payment_Status = models.CharField("Current Status of the Payment", max_length=255, blank=True)
+#     Payment_Made = models.BooleanField("Has the Customer Made the Payment", default=False)
     
-class ShoppingCart(models.Model):
-    User = models.ForeignKey(User, on_delete=models.CASCADE)
-    Product = models.ForeignKey(StoreProducts, null=True, blank=False, on_delete=models.CASCADE)
-    Amount = models.IntegerField(default=0)
-    Added_To_Cart = models.DateTimeField("Date of Product(s) added to Shop Cart", null=True, blank=True)  #auto_now_add=True
-    Payment_Date = models.DateTimeField("Payment Submission Date", null=True, blank=True) #auto_now_add=True
-    Payment_Status = models.CharField("Current Status of the Payment", max_length=255, blank=True)
-    Payment_Made = models.BooleanField("Has the Customer Made the Payment", default=False)
+#     def __str__(self):
+#         return f'''{self.User}`s Online Shopping Cart'''
+
+class Order(models.Model):
+    Order_Number = models.CharField("Unique Order Number", max_length=255, default=uuid.uuid4)
+    Product = models.ForeignKey(StoreProducts, on_delete=models.CASCADE)
+    Customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    Quantity = models.IntegerField(default=1)
+    Address = models.CharField("Address to Ship the Order to", max_length=100, default="", blank=True, null=True)
+    Email = models.EmailField("Order Reciever`s Contact Email Address", max_length=100, blank=True, null=True)
+    Phone = models.CharField("Order Reciever`s Contact Phone Number", max_length=50, default="", blank=True, null=True)
+    Date = models.DateField("Date of Placing the Order", default=datetime.datetime.today)
+    Status = models.BooleanField("Has Order Been Shipped?", default=False)
+    
+    class Meta:
+        verbose_name_plural = "Customer Orders"
     
     def __str__(self):
-        return f'''{self.User}`s Online Shopping Cart'''
+        return f"{self.Customer}`s Order with Order Number {self.Order_Number}"
+
+
+class Online_Orders(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    First_Name = models.CharField(max_length=255, null=True, blank=True)
+    Last_Name = models.CharField(max_length=255, null=True, blank=True)
+    Email = models.EmailField(max_length=255, null=True, blank=True)
+    Full_Address = models.TextField(max_length=255, null=True, blank=True)
+    Total_Amount = models.DecimalField(max_digits=14, decimal_places=2, null=True, blank=True)
+    Shipment_Released = models.BooleanField("Has the Order Shipped?", default=False)
+    Shipment = models.DateTimeField("Order Shipment Date", default=datetime.datetime.now())
+    Invoice = models.CharField(max_length=255, null=True, blank=True)
+    Paid = models.BooleanField("Has the Order Been Paid?", default=False)
+    
+    @property
+    def Shipping_Full_Name(self):
+        return f"{self.First_Name} {self.Last_Name}"
+    
+    @property
+    def OnlineOrderNumber(self):
+        return f"Online Order Number: {self.id}"
+    
+    class Meta:
+        verbose_name_plural = "Online Customer Orders"
+        
+    def __str__(self) -> str:
+        return f"Order ID:{self.id}"
+    
+@receiver(pre_save, sender=Online_Orders)
+def OO_Shipment_Date_Update(sender, instance, **kwargs):
+    if instance.pk:
+        Present_Time_And_Date = datetime.datetime.now()
+        Objectt = sender._default_manager.get(pk=instance.pk) #Acquiring the Sender Class Instance for the Online Orders Sender
+        if instance.Shipment_Released and not Objectt.Shipment_Released: #As long as the current instance is marked as Shipped
+            instance.Shipment = Present_Time_And_Date #Set the DateTime of whatever the Present Date & Time is 
+
+    
+class Orderable_Products(models.Model):
+    OrderID = models.ForeignKey(Online_Orders, on_delete=models.CASCADE, null=True)
+    Product = models.ForeignKey(StoreProducts, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    Quantity = models.PositiveBigIntegerField(default=1)
+    Price = models.DecimalField(max_digits=14, decimal_places=2, null=True, blank=True)
+    
+    class Meta:
+        verbose_name_plural = "Orderable Products"
+    
+    def __str__(self) -> str:
+        return f"Order Product ID: {self.id}"
+    
     
 # class PayPalPayment(models.Model):
 #     User = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -86,6 +250,7 @@ class ShoppingCart(models.Model):
     
 #     def __str__(self):
 #         f''' {User.username}'s Payment Status '''
+    
     
 class StoreLocations(models.Model):
     Street = models.CharField("Location Street Address", max_length=500)
@@ -142,7 +307,7 @@ class CustomerSupportTickets(models.Model):
     Email = models.EmailField("Customer Email")
     Inquiry = models.TextField("Customer Technical Question(s)", blank=True)
     Answered = models.BooleanField("Has Support Ticket Been Answered", default=False)
-    Submission_Time = models.DateTimeField(auto_now_add=True)
+    Submission = models.DateTimeField(default=datetime.datetime.now())
     
     # @property
     # def TimeOfSubmission(self):
@@ -167,6 +332,7 @@ class CustomerSupportTickets(models.Model):
     
     def __str__(self):
         return f"{self.Email}'s Support Ticket"
+    
     
 class FAQ(models.Model):
     Question_Type = models.TextField("The Category this FAQ Tech Question Falls Under", blank=True, max_length=255)
@@ -255,6 +421,7 @@ class JobApplications(models.Model):
     Email_Address = models.EmailField("Applicant's Email Address", max_length=255)
     Resume = models.FileField("Applicant's Resume", blank=True)
     Cover_Letter = models.FileField("Applicant's Cover Letter", blank=True)
+    Submission = models.DateTimeField(default=datetime.datetime.now())
     
     def __str__(self):
         return f"{self.First_Name}'s Job Application"

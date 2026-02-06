@@ -1,4 +1,7 @@
-{% load static %}
+{% extends "00Base.html" %}
+{% block content %}
+
+{% comment %} {% load static %}
 <!DOCTYPE html>
 
 {% if user.is_superuser%}
@@ -17,7 +20,7 @@
         <header> 
             <span id="Lab_Title"> <h1> Quansh Tech Laboratory </h1> </span>
             {% include "Navbar.html"%}
-        </header>
+        </header> {% endcomment %}
 
         <main>
             <h2 id="Lab_Greetings"> Welcome Scientists & Engineers to the Quansh Tech Lab </h2>
@@ -30,7 +33,7 @@
 
         </main>
 
-        <footer> 
+        {% comment %} <footer> 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"> </script>
             <script type="text/javascript" src="{% static 'Script.js' %}"> </script>
         </footer>
@@ -41,4 +44,6 @@
 
     {% include '404_Error_Page.html' %}
 
-{% endif %}
+{% endif %} {% endcomment %}
+
+{% endblock %}

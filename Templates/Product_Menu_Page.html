@@ -1,4 +1,7 @@
-{% load static %}
+{% extends "00Base.html" %}
+{% block content %}
+
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,7 +19,7 @@
     </header>
       <span id="Product_Menu_Title"> <h1> Quansh Tech Products </h1> </span>
       {% include "Navbar.html"%} <br>
-    <header>
+    <header> {% endcomment %}
 
     <main>
       {% comment %} Display Login / Logout Message {% endcomment %}
@@ -97,19 +100,24 @@
                           <a href="{% url 'ShowProductPage' product.id %}" class="btn btn-dark" id="All_Products_View_Item_Button"> View Item </a>
 
                           {% if product.Stock == 0 and user.is_authenticated %}
-                            <a href="" class="btn btn-dark" id="All_Products_PreOrder_Button"> Pre Order </a>
+                          {% comment %} <button type="button" value="{{product.id}}" class="btn btn-primary" id="Add_To_Cart_Butt"> Pre Order </button> {% endcomment %}
                             {% include 'Shopping_Cart_Side.html' %}
 
                           {% elif product.Stock == 0  %}
-                            <a href="" class="btn btn-dark" id="All_Products_PreOrder_Button"> Pre Order </a>
+                            {% comment %} <a href="#" class="btn btn-dark" id="All_Products_PreOrder_Button"> Pre Order </a> {% endcomment %}
+                            {% comment %} <button type="button" value="{{product.id}}" class="btn btn-primary" id="Add_To_Cart_Butt"> Pre Order </button> {% endcomment %}
                             {% include 'Shopping_Cart_Side.html' %}
                             
                           {% elif user.is_authenticated %}
-                            <a href="{% url 'AddToShopCart' product.id %}"  class="btn btn-dark" id="All_Products_Add_To_Cart_Button"> Add to cart </a>
+                          {% comment %} <a href="#"  class="btn btn-dark" id="All_Products_Add_To_Cart_Button"> Add to cart </a>  {% endcomment %}
+                          {% comment %} <button type="button" value="{{product.id}}" class="btn btn-primary" id="Add_To_Cart_Butt"> Add to Cart </button> {% endcomment %}
+                            {% comment %} <a href="{% url 'AddToShopCart' product.id %}"  class="btn btn-dark" id="All_Products_Add_To_Cart_Button"> Add to cart </a> {% endcomment %}
                             {% include 'Shopping_Cart_Side.html' %}
 
                           {% else %}
-                            <a href="" class="btn btn-dark" id="All_Products_Add_To_Cart_Button"> Add to cart </a>
+                            {% comment %} <a href="#" class="btn btn-dark" id="All_Products_Add_To_Cart_Button"> Add to cart </a> {% endcomment %}
+                            {% comment %} <button type="button" value="{{product.id}}" class="btn btn-primary" id="Add_To_Cart_Butt"> Add to Cart </button> {% endcomment %}
+                            {% comment %} <a href="" class="btn btn-dark" id="All_Products_Add_To_Cart_Button"> Add to cart </a> {% endcomment %}
                             {% include 'Shopping_Cart_Side.html' %}
                           {% endif %}
 
@@ -129,9 +137,33 @@
               </div>
           </div>
       </div> <br>
+
+      {% comment %} Below Page NavBar {% endcomment %}
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if PaginatedProducts.has_previous %}
+            <li class="page-item"> <a href="?page=1" class="page-link"> &laquo First </a> </li>
+            <li class="page-item"> <a href="?page={{PaginatedProducts.previous_page_number}}" class="page-link"> Previous </a> </li>
+          {% endif %}
+
+          {% for iter in Numbers %}
+            {% if iter == Numbers %}
+              <li class="page-item active"> <a href="?page={{forloop.counter}}" class="page-link" id="Total_Pages"> {{ forloop.counter }} </a> </li>
+            {% else %}
+              <li class="page-item"> <a href="?page={{forloop.counter}}" class="page-link" id="Total_Pages"> {{ forloop.counter }} </a> </li>
+            {% endif %}
+          {% endfor %}
+
+          {% if PaginatedProducts.has_next %}
+            <li class="page-item"> <a href="?page={{PaginatedProducts.next_page_number}}" class="page-link"> Next  </a> </li>
+            <li class="page-item"> <a href="?page={{PaginatedProducts.paginator.num_pages}}" class="page-link"> Last &raquo </a> </li>
+          {% endif %}
+        </ul>
+      </nav>
+
     </main>
 
-      <footer>
+      {% comment %} <footer>
         <nav aria-label="Page navigation example" id="Bottom_Product_Page_Selector">
           <ul class="pagination justify-content-center">
             {% if PaginatedProducts.has_previous %}
@@ -155,4 +187,6 @@
       </footer>
     </div>
   </body>
-</html>
+</html> {% endcomment %}
+
+{% endblock %}

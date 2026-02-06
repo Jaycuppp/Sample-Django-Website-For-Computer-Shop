@@ -1,0 +1,31 @@
+
+{% extends '00Base.html' %}
+{% block content %}
+
+    <!-- Header-->
+    {% comment %} <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder"> Update Profile  </h1>
+                <p class="lead fw-normal text-white-50 mb-0"> Add, Change, or Remove Your Account Profile below </p>
+            </div>
+        </div>
+    </header> {% endcomment %}
+
+
+    <div style="margin: 100px;"> 
+        <h3 id="Create_Account_Message"> Your Current Ship To Information </h3>
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded" id="Account_Registration">      
+                <form action="{% url 'MyAccountProfileUpdate' %}" method=POST id="Registration_Form">
+                    <h3 id="Create_Account_Message"> Billing Information </h3>
+                    <div> {% csrf_token %} {{ Form.as_p }} </div>
+
+                    <h3 id="Create_Account_Message"> Shipping Information </h3>
+                    <div> {% csrf_token %} {{ ShippingForm.as_p }} </div>
+
+                    <button type="submit" value="Submit" class="btn btn-primary" id="Account_Registration_Submit_Button"> Update </button>
+                </form>
+        </div>
+    </div>
+    
+{% endblock %}

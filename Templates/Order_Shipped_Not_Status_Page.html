@@ -1,0 +1,47 @@
+{% extends '00Base.html' %}
+
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder"> Orders Not Yet Shipped </h1>
+            <p class="lead fw-normal text-white-50 mb-0"> See below for more info </p>
+        </div>
+    </div>
+</header>
+
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col"> Order Number </th>
+            <th scope="col"> Total Order Amount ($) </th>
+            <th scope="col"> Customer Email </th>
+            <th scope="col"> Date Order Was Placed </th>
+            <th scope="col"> Change Shipping Status </th>
+        </tr>
+    </thead>
+
+    {% for POrder in Pending %}
+    <tbody>
+        <tr>
+            <td> <a href="{% url "OrderSingle" POrder.id %}"> {{POrder.id}} <a> </td>
+            <td> ${{POrder.Total_Amount }} </td>
+            <td> {{POrder.Email }} </td>
+            <td> {{POrder.Shipment }} </td>
+            <td>
+                <form method="POST">{% csrf_token %} 
+                    <input type="hidden" name="Shipping_Status" value="true"> </input>
+                    <input type="hidden" name="Number" value="{{POrder.id}}"> </input>
+                    <button type="submit" class="btn btn-success btn-sm"> Mark if Shipped </button>
+                </form> 
+            </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+<br> <br> <br> <h1 style="text-align: center;">  yoyoyo  </h1> <br> <br> <br>
+
+{% endblock %}

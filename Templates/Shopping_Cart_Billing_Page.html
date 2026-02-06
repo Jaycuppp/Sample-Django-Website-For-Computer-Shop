@@ -1,0 +1,73 @@
+{% extends '00Base.html' %}
+{% block content %}
+
+<main>
+    <div class="container" style="margin: 100px;">
+        <div class="row">
+            <div class="col-md6 offset-md-3">
+
+                {% comment %} Online Order Summary Info Box {% endcomment %}
+                <div class="card">
+                    <div class="card-header"> Order Summary </div>
+                    <div class="card-body">
+                        {% comment %} <h5 class="card-title">Special title treatment</h5> {% endcomment %}
+                        {% comment %} <p class="card-text"> YOYOYO </p> {% endcomment %}
+                        {% comment %} <a href="#" class="btn btn-primary">Go somewhere</a> {% endcomment %}
+
+                        {% for Prod in Cart_Summary%}
+
+                            {{Prod.Name}}
+
+                            {% if Prod.On_Sale %}
+                                <span class="col-md-3"> ${{ Prod.Sale_Price }} </span>
+                            {% else %}
+                                <span class="col-md-3"> ${{Prod.Price}} </span>
+                            {% endif %} <br> <br>
+
+                            <small> Quantity: 
+                            {% for key, value in Cart_Amount.items %} {% comment %} Looping through the Key Value Pair of the Carted Items {% endcomment %}
+                                {% if key == Prod.id|slugify %} {% comment %} If the iteration Key matches the Carted Product {% endcomment %}
+                                    {{ value }} {% comment %} Then return the Quantity Value of the Carted Product(s) {% endcomment %}
+                                {% endif %}
+                            {% endfor %} </small> <br> <br>
+
+                        {% endfor %}
+
+                        Total: ${{Cart_Total_Price}}
+                        <br> <br> <a class="btn btn-outline-dark mt-auto" href="{% url 'ShoppingCart'%}"> Update Carted Items </a> <br> <br>
+                    </div>
+                </div> 
+
+                <br> <br> <br>
+
+                {% comment %} Shipping Information Box {% endcomment %}
+                <div class="card">
+                    <div class="card-header"> Order Shipping Information </div>
+                    <div class="card-body">
+                        <p> First Name: {{ Shipping_Information.Shipping_First_Name }} </p>
+                        <p> Last Name: {{ Shipping_Information.Shipping_Last_Name }} </p>
+                        <p> Email Address: {{ Shipping_Information.Shipping_Email }} </p>
+                        <p> Shipping Region: {{ Shipping_Information.Shipping_Country }} </p>
+                        <p> Shipping Adress: {{ Shipping_Information.Shipping_Address_Line_1 }} {{ Shipping_Information.Shipping_Address_Line_2 }} {{ Shipping_Information.Shipping_City }}, {{ Shipping_Information.Shipping_State }} {{ Shipping_Information.Shipping_ZipCode }}</p>
+                        <a class="btn btn-outline-dark mt-auto" href="{% url 'CheckingOut'%}"> Update Above Shipping Info </a> 
+                    </div>
+                </div>
+
+                <br> <br> <br> <center> {{PayPalForm.render}} </center> <br> <br> <br>
+
+                <div class="card">
+                    <div class="card-header"> Billing Information </div>
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'ProcessOrder'%}">
+                            {% csrf_token %} {{ Billing_Form.as_p }}
+                            <button class="btn btn-outline-dark mt-auto" type="submit" style="width: 160px;"> Make Payment </button>
+                        </form>
+
+                    </div> <br>  
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
